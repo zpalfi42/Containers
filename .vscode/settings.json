@@ -65,7 +65,9 @@
 		"type_traits": "cpp",
 		"typeinfo": "cpp",
 		"utility": "cpp",
-		"__memory": "cpp"
+		"__memory": "cpp",
+		"compare": "cpp",
+		"ranges": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }

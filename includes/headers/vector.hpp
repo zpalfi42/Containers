@@ -10,6 +10,23 @@
 namespace ft
 {
 
+	const                         /* this is a const object...     */
+	class nullptr_t
+	{
+	public:
+		template<class T>          /* convertible to any type       */
+		operator T*() const        /* of null non-member            */
+			{ return 0; }           /* pointer...                    */
+
+		template<class C, class T> /* or any type of null           */
+			operator T C::*() const /* member pointer...             */
+			{ return 0; }   
+
+	private:
+		void operator&() const;    /* Can't take address of nullptr */
+
+	} nullptr_t = {}; 
+
 	template < class T, class Alloc = std::allocator<T> >
 	class vector
 	{
@@ -32,8 +49,8 @@ namespace ft
 
 			explicit 	vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
 
-			template <class InputIterator>
-			vector( InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
+			template<typename InputIterator>
+			explicit vector( InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 			{
 				(void) first;
 				(void) last;
@@ -51,12 +68,12 @@ namespace ft
 	};
 
 	template < class T, class Alloc>
-	ft::vector<T, Alloc>::vector( const allocator_type& alloc): _alloc(alloc), _start(nullptr), _end(nullptr), _capacity(nullptr)
+	ft::vector<T, Alloc>::vector( const allocator_type& alloc): _alloc(alloc), _start(ft::nullptr_t), _end(ft::nullptr_t), _capacity(ft::nullptr_t)
 	{
 	}
 
 	template < class T, class Alloc>
-	ft::vector<T, Alloc>::vector( size_type n, const value_type& val, const allocator_type& alloc ): _alloc(alloc), _start(nullptr), _end(nullptr), _capacity(nullptr)
+	ft::vector<T, Alloc>::vector( size_type n, const value_type& val, const allocator_type& alloc ): _alloc(alloc), _start(ft::nullptr_t), _end(ft::nullptr_t), _capacity(ft::nullptr_t)
 	{
 		std::cout << "HOLA1" << std::endl;
 		this->_start = _alloc.allocate(n);
@@ -64,6 +81,15 @@ namespace ft
 			this->_alloc.construct(this->_start + i, val);
 		this->_capacity = this->_start + n;
 		this->_end = this->_start + n;
+	}
+
+	template<class T, class Alloc> 
+	template< typename InputIterator >
+	ft::vector<T, Alloc>( InputIterator first, InputIterator last, const allocator_type& alloc)
+	{
+		(void) first;
+		(void) last;
+		(void) alloc;
 	}
 
 }
