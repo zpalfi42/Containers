@@ -67,7 +67,8 @@
 		"utility": "cpp",
 		"__memory": "cpp",
 		"compare": "cpp",
-		"ranges": "cpp"
+		"ranges": "cpp",
+		"*.ipp": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }
