@@ -9,6 +9,16 @@
 
 namespace ft
 {
+	template< class InputIterator >
+	size_t	distance( InputIterator first, InputIterator last )
+	{
+		size_t	result = 0;
+
+		while ((first + result) != last)
+			result++;
+		return (result);
+	}
+
 	template < class T, class Alloc = std::allocator<T> >
 	class vector
 	{

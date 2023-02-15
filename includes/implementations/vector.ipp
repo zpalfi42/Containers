@@ -23,13 +23,14 @@ template< typename T, typename Alloc >
 template< typename InputIterator >
 ft::vector<T, Alloc>::vector(InputIterator first, InputIterator last, const allocator_type& alloc, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*): _alloc(alloc), _start(ft::nullptr_t), _end(ft::nullptr_t), _capacity(ft::nullptr_t)
 {
-	long	fl = last - first;
+	long	fl = ft::distance(first, last);
 
 	this->_start = this->_alloc.allocate(fl);
 	for (long i = 0; i < fl; i++)
 		this->_alloc.construct(this->_start + i, *(first + i));
-	this->_capacity = this->_start + (fl);
-	this->_end = this->_start + (fl);
+	this->_capacity = this->_start + (fl) - 1;
+	this->_end = this->_start + (fl) - 1;
+	std::cout << *(this->_end) << std::endl;
 }
 
 
@@ -140,9 +141,8 @@ void		ft::vector<T, Alloc>::resize(size_type n, value_type val)
 			this->_alloc.destroy(this->_start + i);
 			this->_end = this->_start + i;
 			if (i == 0)
-				break ;
+				return ;
 		}
-		return ;
 	}
 	if (n > sc * 2)
 		this->reserve(n);
@@ -163,14 +163,11 @@ void	ft::vector<T, Alloc>::shrink_to_fit( void )
 		return ;
 	pointer	np = this->_alloc.allocate(se);
 	for (size_type i = 0; i <= se; i++)
-	{
 		this->_alloc.construct(np + i, *(this->_start + i));
-		this->_end = np + i;
-	}
-
 	this->clear();
 	this->_alloc.deallocate(this->_start, sc);
 	
+	this->_end = np + se;
 	this->_start = np;
 	this->_capacity = this->_end;
 }
@@ -251,20 +248,20 @@ template< class T, class Alloc>
 template< class InputIterator >
 void	ft::vector<T, Alloc>::assign(InputIterator first, InputIterator last)
 {
-	if (last - first > this->_capacity - this->_start)
+	size_type	fl = ft::distance(first, last);
+	size_type	sc = this->_capacity - this->_start;
+	// size_type	se = this->_end - this->_start;
+
+	if (fl > sc)
 	{
-		pointer	np = this->_alloc.allocate(last - first);
-		for (size_type i = 0; i < last - first; i++)
-		{
+		pointer	np = this->_alloc.allocate(fl);
+		for (size_type i = 0; i < fl; i++)
 			this->_alloc.construct(np + i, *(first + i));
-			this->_end = np + i;
-		}
-		for (size_type i = 0; i < this->capacity - this->_start; i++)
-		{
-			this->alloc.destroy(this->_start + i);
-		}
-		
 		this->clear();
+		this->_alloc.deallocate(this->_start, sc);
+		
+		this->_end = np + fl - 1;
+		this->_start = np;
 	}
 }
 
@@ -274,9 +271,8 @@ void	ft::vector<T, Alloc>::clear( void )
 	size_type	se = this->_end - this->_start;
 
 	for (size_type i = 0; i < se; i++)
-	{
 		this->_alloc.destroy(this->_start + i);
-	}
+	this->_end = this->_start;
 }
 
 #endif

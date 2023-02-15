@@ -68,7 +68,14 @@
 		"__memory": "cpp",
 		"compare": "cpp",
 		"ranges": "cpp",
-		"*.ipp": "cpp"
+		"*.ipp": "cpp",
+		"*.tcc": "cpp",
+		"clocale": "cpp",
+		"concepts": "cpp",
+		"memory_resource": "cpp",
+		"numeric": "cpp",
+		"random": "cpp",
+		"numbers": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }
