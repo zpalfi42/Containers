@@ -2,6 +2,7 @@
 # define ITERATOR_HPP
 
 # include <iostream>
+# include <nullptr_t.hpp>
 
 /**
  * Iterators have some special things:
@@ -69,15 +70,24 @@ namespace	ft
 	};
 
 	template <class T>
-	class random_access_iterator: public ft::iterator<ft::random_access_iterator_tag, T, T, T*, T&>
+	class random_access_iterator: public ft::iterator<ft::random_access_iterator_tag, T>
 	{
 	public:
 
-		typedef	typename	ft::iterator<ft::random_access_iterator_tag, T, T, T*, T&>	base;
-		typedef	typename	base::pointer												pointer;
+		typedef	typename	ft::iterator<ft::random_access_iterator_tag, T>	base;
+		typedef	typename	base::poiner									pointer;
 
-		random_access_iterator( void );
-		random_access_iterator( const random_access_iterator &r );
+		random_access_iterator( void ): _ptr(ft::nullptr_t)
+		{
+		};
+
+		random_access_iterator( pointer ptr ): _ptr(ptr)
+		{
+		};
+
+		random_access_iterator( const random_access_iterator &r ): _ptr(r.ptr)
+		{
+		};
 
 		random_access_iterator	&operator=( const random_access_iterator &r );
 		random_access_iterator	&operator+( const random_access_iterator &r ) const ;

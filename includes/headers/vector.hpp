@@ -49,10 +49,10 @@ namespace ft
 			typedef	std::size_t							size_type;
 
 			/** @typedef iterator is the type of ft::iterator with value_type and difference_type passed as parameter to its template. */
-			typedef	std::iterator<value_type, difference_type>	iterator;
+			typedef	std::iterator<std::random_access_iterator_tag, value_type>	iterator;
 
 			/** @typedef const iterator is the type of ft::iterator with value_type and difference_type passed as parameter to its template. */
-			typedef	std::iterator<value_type, difference_type>	const_iterator;
+			typedef	std::iterator<std::random_access_iterator_tag, value_type>	const_iterator;
 
 			/** @typedef reverse_iterator is the type of ft::reverse_iterator with iterator passed as parameter to its template. */
 			typedef	std::reverse_iterator<iterator>		reverse_iterator;
@@ -122,6 +122,22 @@ namespace ft
 			 * @return vector& 
 			 */
 			vector			&operator=( const vector &x );
+
+			iterator	begin( void );
+
+			const_iterator	begin( void ) const;
+
+			iterator	end( void );
+			 
+			const_iterator	end( void ) const;
+
+			reverse_iterator	rbegin( void );
+
+			const_reverse_iterator	rbegin( void ) const;
+
+			reverse_iterator	rend( void );
+
+			const_reverse_iterator	rend( void ) const;
 
 			/**
 			 * @brief Returns the number of elements in the vector. This is the number of actual objects held in the vector, which is not necessarily equal to its storage capacity.
@@ -289,7 +305,7 @@ namespace ft
 			 * @param last 
 			 */
 			template< class InputIterator>
-			void	assign(InputIterator first, InputIterator last);
+			void	assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0);
 
 			/**
 			 * @brief Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly. The new contents are n elements, each initialized to a copy of val.
@@ -301,6 +317,17 @@ namespace ft
 			 */
 			void	assign(size_type n, const value_type &val);
 
+			void	push_back( const value_type &val );
+
+			void	pop_back( void );
+
+			iterator	insert( iterator position, const value_type &val );
+
+			void	insert( iterator position, size_type n, const value_type &val);
+
+			template< class InputIterator >
+			void	insert( iterator position, InputIterator first, InputIterator last);
+
 			/**
 			 * @brief Removes all elements from the vector (which are destroyed), leaving the container with a size of 0. A reallocation is not guaranteed to happen, and the 
 			 * vector capacity is not guaranteed to change due to calling this function.
@@ -310,7 +337,7 @@ namespace ft
 
 		private:
 			allocator_type	_alloc;
-			pointer			_start;
+			pointer			_begin;
 			pointer			_end;
 			pointer			_capacity;
 	};
