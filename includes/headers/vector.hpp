@@ -6,6 +6,7 @@
 # include <enable_if.hpp>
 # include <is_integral.hpp>
 # include <nullptr_t.hpp>
+# include <iterator.hpp>
 
 namespace ft
 {
@@ -49,10 +50,10 @@ namespace ft
 			typedef	std::size_t							size_type;
 
 			/** @typedef iterator is the type of ft::iterator with value_type and difference_type passed as parameter to its template. */
-			typedef	std::iterator<std::random_access_iterator_tag, value_type>	iterator;
+			typedef	ft::random_access_iterator<T>	iterator;
 
 			/** @typedef const iterator is the type of ft::iterator with value_type and difference_type passed as parameter to its template. */
-			typedef	std::iterator<std::random_access_iterator_tag, value_type>	const_iterator;
+			typedef	ft::random_access_iterator<T>	const_iterator;
 
 			/** @typedef reverse_iterator is the type of ft::reverse_iterator with iterator passed as parameter to its template. */
 			typedef	std::reverse_iterator<iterator>		reverse_iterator;
@@ -123,21 +124,25 @@ namespace ft
 			 */
 			vector			&operator=( const vector &x );
 
-			iterator	begin( void );
+			iterator	begin( void )
+			{
+				iterator	it(this->_begin);
+				return (it);
+			};
 
-			const_iterator	begin( void ) const;
+			// const_iterator	begin( void ) const;
 
-			iterator	end( void );
+			// iterator	end( void );
 			 
-			const_iterator	end( void ) const;
+			// const_iterator	end( void ) const;
 
-			reverse_iterator	rbegin( void );
+			// reverse_iterator	rbegin( void );
 
-			const_reverse_iterator	rbegin( void ) const;
+			// const_reverse_iterator	rbegin( void ) const;
 
-			reverse_iterator	rend( void );
+			// reverse_iterator	rend( void );
 
-			const_reverse_iterator	rend( void ) const;
+			// const_reverse_iterator	rend( void ) const;
 
 			/**
 			 * @brief Returns the number of elements in the vector. This is the number of actual objects held in the vector, which is not necessarily equal to its storage capacity.
