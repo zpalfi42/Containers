@@ -72,61 +72,51 @@ namespace	ft
 	template <class T>
 	class random_access_iterator: public ft::iterator<ft::random_access_iterator_tag, T>
 	{
-	public:
+		public:
 
-		typedef	typename	ft::iterator<ft::random_access_iterator_tag, T>	base;
-		typedef	typename	base::pointer									pointer;
-		typedef	typename	base::reference									reference;
-		typedef	typename	base::difference_type							difference_type;
+			typedef	typename	ft::iterator<ft::random_access_iterator_tag, T>	base;
+			typedef	typename	base::pointer									pointer;
+			typedef	typename	base::reference									reference;
+			typedef	typename	base::difference_type							difference_type;
 
-	private:
-		pointer	_ptr;
+		private:
+			pointer	_ptr;
 
-	public:
+		public:
 
-		random_access_iterator( void );
+			random_access_iterator( void );
+			random_access_iterator( pointer ptr );
+			random_access_iterator( const random_access_iterator &r );
 
-		random_access_iterator( pointer ptr );
+			virtual ~random_access_iterator(){};
 
-		random_access_iterator( const random_access_iterator &r );
+			reference				operator[]( difference_type n );
+			reference				operator*( void );
+			pointer					operator->( void );
 
-		virtual ~random_access_iterator(){};
+			difference_type			operator-( const random_access_iterator &r ) const;
 
-		reference	operator[]( difference_type n );
-		reference	operator*( void );
+			random_access_iterator	&operator=( const random_access_iterator &r );
+			random_access_iterator	&operator+=( difference_type n );
+			random_access_iterator	&operator-=( difference_type n);
+			random_access_iterator	&operator++( void );
+			random_access_iterator	&operator--( void );
 
-		pointer	operator->( void );
-
-		random_access_iterator	&operator=( const random_access_iterator &r );
-
-		difference_type	operator-( const random_access_iterator &r ) const;
-
-		random_access_iterator	&operator++( void );
-
-		random_access_iterator	operator++( int );
-
-		random_access_iterator	&operator--( void );
-		random_access_iterator	operator--( int );
-
-		random_access_iterator	operator+( difference_type n ) const;
-		random_access_iterator	operator-( difference_type n ) const;
-		random_access_iterator	&operator+=( difference_type n );
-		random_access_iterator	&operator-=( difference_type n);
-		
-		bool	operator==( const random_access_iterator &r ) const ;
-		bool	operator!=( const random_access_iterator &r ) const ;
-		bool	operator<( const random_access_iterator &r ) const ;
-		bool	operator>( const random_access_iterator &r ) const ;
-		bool	operator<=( const random_access_iterator &r ) const;
-		bool	operator>=( const random_access_iterator &r ) const;
-
+			random_access_iterator	operator+( difference_type n ) const;
+			random_access_iterator	operator-( difference_type n ) const;
+			random_access_iterator	operator++( int );
+			random_access_iterator	operator--( int );
+			
+			bool					operator==( const random_access_iterator &r ) const ;
+			bool					operator!=( const random_access_iterator &r ) const ;
+			bool					operator<( const random_access_iterator &r ) const ;
+			bool					operator>( const random_access_iterator &r ) const ;
+			bool					operator<=( const random_access_iterator &r ) const;
+			bool					operator>=( const random_access_iterator &r ) const;
 	};
 
 	template< class T >
-	ft::random_access_iterator<T>	operator+( typename ft::random_access_iterator<T>::difference_type n, const ft::random_access_iterator<T> &r )
-	{
-		return (r + n);
-	};
+	ft::random_access_iterator<T>	operator+( typename ft::random_access_iterator<T>::difference_type n, const ft::random_access_iterator<T> &r );
 	
 	class bidirectional_iterator: public ft::iterator<ft::bidirectional_iterator_tag, int, int, int*, int&>
 	{
