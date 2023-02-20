@@ -78,12 +78,12 @@ ft::vector<T, Alloc>	&ft::vector<T, Alloc>::operator=( const ft::vector<T, Alloc
 	return (*this);
 }
 
-// template< class T, class Alloc >
-// typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::begin( void )
-// {
-// 	iterator	it(this->_begin);
-// 	return (iterator(it));
-// }
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::begin( void )
+{
+	iterator	it(this->_begin);
+	return (iterator(it));
+}
 
 // template< class T, class Alloc >
 // typename ft::vector<T, Alloc>::const_iterator	ft::vector<T, Alloc>::begin( void ) const
@@ -91,11 +91,11 @@ ft::vector<T, Alloc>	&ft::vector<T, Alloc>::operator=( const ft::vector<T, Alloc
 // 	return (const_iterator(this->_begin));
 // }
 
-// template< class T, class Alloc >
-// typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::end( void )
-// {
-// 	return (iterator(this->_end));
-// }
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::end( void )
+{
+	return (iterator(this->_end));
+}
 
 // template< class T, class Alloc >
 // typename ft::vector<T, Alloc>::const_iterator	ft::vector<T, Alloc>::end( void ) const
@@ -167,13 +167,13 @@ void	ft::vector<T, Alloc>::reserve(size_type n)
 	for (size_type i = 0; i < se; i++)
 	{
 		this->_alloc.construct(np + i, *(this->_begin + i));
-		this->_end = np + i;
 	}
 
 	this->clear();
 	this->_alloc.deallocate(this->_begin, sc);
 	
 	this->_begin = np;
+	this->_end = this->_begin + se;
 	this->_capacity = this->_begin + n;
 }
 
@@ -340,10 +340,10 @@ void	ft::vector<T, Alloc>::assign(size_type n, const value_type &val)
 template< class T, class Alloc >
 void	ft::vector<T, Alloc>::push_back( const value_type &val )
 {
-	if (this->_end == this->_capacity)
-		this->reserve((this->capacity() * 2));
 	if (this->capacity() == 0)
 		this->reserve(1);
+	if (this->_end == this->_capacity)
+		this->reserve((this->capacity() * 2));
 	this->_alloc.construct(this->_end, val);
 	this->_end++;
 }

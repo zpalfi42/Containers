@@ -95,18 +95,32 @@ namespace	ft
 		{
 		};
 
+		virtual ~random_access_iterator()
+		{
+		};
+
+		T	&operator[]( difference_type n )
+		{
+			return (*(this->_ptr + n));
+		};
+		
+		T	&operator*( void )
+		{
+			return (*(this->_ptr));
+		};
+
+		pointer	operator->( void )
+		{
+			return (&(*(this->_ptr)));
+		};
+
 		random_access_iterator	&operator=( const random_access_iterator &r )
 		{
 			if (this != &r)
 			{
 				this->_ptr = r._ptr;
 			}
-			return (this);
-		};
-
-		difference_type	operator+( const random_access_iterator &r ) const 
-		{
-			return (this->_ptr + r._ptr);
+			return (*this);
 		};
 
 		difference_type	operator-( const random_access_iterator &r ) const
@@ -114,31 +128,28 @@ namespace	ft
 			return (this->_ptr - r._ptr);
 		};
 
-		virtual ~random_access_iterator()
-		{
-
-		};
-
 		random_access_iterator	&operator++( void )
 		{
 			this->_ptr++;
-			return (this);
+			return (*this);
 		};
+
 		random_access_iterator	operator++( int )
 		{
-			random_access_iterator	r(*this);
-			r->_ptr += 1;
+			random_access_iterator	r = *this;
+			this->_ptr++;
 			return (r);
 		};
+
 		random_access_iterator	&operator--( void )
 		{
 			this->_ptr--;
-			return (this);
+			return (*this);
 		};
 		random_access_iterator	operator--( int )
 		{
 			random_access_iterator	r = *this;
-			r->_ptr -= 1;
+			this->_ptr--;
 			return (r);
 		};
 
@@ -155,12 +166,12 @@ namespace	ft
 		random_access_iterator	&operator+=( difference_type n )
 		{
 			this->_ptr += n;
-			return (this);
+			return (*this);
 		};
 		random_access_iterator	&operator-=( difference_type n)
 		{
 			this->_ptr -= n;
-			return (this);
+			return (*this);
 		};
 		
 		bool	operator==( const random_access_iterator &r ) const 
@@ -200,18 +211,12 @@ namespace	ft
 			return (false);
 		};
 
-		T	&operator[]( difference_type n )
-		{
-			return (*(this->_ptr + n));
-		};
-		T	&operator*( void )
-		{
-			return (*(this->_ptr));
-		};
-		pointer	operator->( void )
-		{
-			return (&(this->operator*()));
-		};
+	};
+
+	template< class T >
+	ft::random_access_iterator<T>	operator+( typename ft::random_access_iterator<T>::difference_type n, const ft::random_access_iterator<T> &r )
+	{
+		return (r + n);
 	};
 	
 	class bidirectional_iterator: public ft::iterator<ft::bidirectional_iterator_tag, int, int, int*, int&>

@@ -124,15 +124,11 @@ namespace ft
 			 */
 			vector			&operator=( const vector &x );
 
-			iterator	begin( void )
-			{
-				iterator	it(this->_begin);
-				return (it);
-			};
+			iterator	begin( void );
 
 			// const_iterator	begin( void ) const;
 
-			// iterator	end( void );
+			iterator	end( void );
 			 
 			// const_iterator	end( void ) const;
 
