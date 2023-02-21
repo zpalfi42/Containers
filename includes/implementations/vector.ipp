@@ -357,17 +357,89 @@ void	ft::vector<T, Alloc>::pop_back( void )
 	this->_end--;
 }
 
-// template< class T, class Alloc >
-// ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert( iterator position, const value_type &val )
-// {
-// 	if (position == this->_end)
-// 	{
-// 		push_back(val);
-// 		return (ft::vector<int>::iterator	it = this->_end);
-// 	}
-// 	pointer np = this->_alloc.allocate(this->capacity());
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert( iterator position, const value_type &val )
+{
+	ft::vector<T>::iterator	it = this->begin();
+	ft::vector<T>::iterator	end	= this->end();
+	int	i = position - it;
 
-// }
+	if (position < it || it > end)
+		throw(std::logic_error("Error: vector"));
+	if (this->capacity() == this->size())
+		this->reserve(this->capacity() * 2);
+
+	pointer	paux = this->_begin + i;
+	it += i;
+
+	value_type	aux;
+	value_type	value = val;
+	while (it != end)
+	{
+		aux = *paux;
+		this->_alloc.destroy(paux);
+		this->_alloc.construct(paux, value);
+		value = aux;
+		it++;
+		paux++;
+	}
+	this->_alloc.construct(paux, value);
+	this->_end++;
+	return (position);
+}
+
+template< class T, class Alloc >
+void	ft::vector<T, Alloc>::insert( iterator position, size_type n, const value_type &val)
+{
+	ft::vector<T>::iterator	it = this->begin();
+	ft::vector<T>::iterator	end	= this->end();
+	size_t	j = position - it;
+
+	if (position < it || it > end)
+		throw(std::logic_error("Error: vector"));
+	
+	while (this->capacity() - this->size() < n)
+		this->reserve(this->capacity() * 2);
+	
+	pointer	np = this->_alloc.allocate(this->capacity());
+	for (size_t i = 0; i < j; i++)
+		this->_alloc.construct((np + i), *(it + i));
+	for (size_t i = 0; i < n; i++)
+		this->_alloc.construct((np + j + i), val);
+	for (size_t i = 0; i < (size_t)(end - it - j); i++)
+		this->_alloc.construct((np + j + n + i), *(it + i + j));
+	
+	this->_begin = np;
+	this->_end = np + (end - it) + n;
+	
+}
+
+template< class T, class Alloc>
+template< class InputIterator >
+void	ft::vector<T, Alloc>::insert( iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type *)
+{
+	ft::vector<T>::iterator	it = this->begin();
+	ft::vector<T>::iterator	end	= this->end();
+	size_t	j = position - it;
+	size_t	n = last - first;
+
+	if (position < it || it > end)
+		throw(std::logic_error("Error: vector"));
+	
+	while (this->capacity() - this->size() < n)
+		this->reserve(this->capacity() * 2);
+	
+	pointer	np = this->_alloc.allocate(this->capacity());
+	for (size_t i = 0; i < j; i++)
+		this->_alloc.construct((np + i), *(it + i));
+	for (size_t i = 0; i < n; i++)
+		this->_alloc.construct((np + j + i), *(first + i));
+	for (size_t i = 0; i < (size_t)(end - it - j); i++)
+		this->_alloc.construct((np + j + n + i), *(it + i + j));
+	
+	this->_begin = np;
+	this->_end = np + (end - it) + n;
+}
 
 template< class T, class Alloc >
 void	ft::vector<T, Alloc>::clear( void )
@@ -377,6 +449,21 @@ void	ft::vector<T, Alloc>::clear( void )
 	for (size_type i = 0; i <= se; i++)
 		this->_alloc.destroy(this->_begin + i);
 	this->_end = this->_begin;
+}
+
+template < class T, class Alloc >
+typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator position)
+{
+	ft::vector<T>::iterator	it = this->begin();
+	ft::vector<T>::iterator	end = this->end();
+
+	
+}
+
+template < class T, class Alloc >
+typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator first, iterator last)
+{
+
 }
 
 #endif

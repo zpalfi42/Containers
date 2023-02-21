@@ -318,6 +318,11 @@ namespace ft
 			 */
 			void	assign(size_type n, const value_type &val);
 
+			/**
+			 * @brief HOLA
+			 * 
+			 * @param val 
+			 */
 			void	push_back( const value_type &val );
 
 			void	pop_back( void );
@@ -327,7 +332,11 @@ namespace ft
 			void	insert( iterator position, size_type n, const value_type &val);
 
 			template< class InputIterator >
-			void	insert( iterator position, InputIterator first, InputIterator last);
+			void	insert( iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0 );
+
+			iterator	erase(iterator position);
+
+			iterator	erase(iterator first, iterator last);
 
 			/**
 			 * @brief Removes all elements from the vector (which are destroyed), leaving the container with a size of 0. A reallocation is not guaranteed to happen, and the 

@@ -411,4 +411,21 @@ int main( void )
 	iterators_test();
 	vectors_test();
 
+	ft::vector<int>	v;
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		v.push_back(i);
+	}
+
+	ft::vector<int> vv(10, 42);
+
+	v.insert((v.begin() + 3), vv.begin(), vv.end());
+
+	for (long i = 0; i < (v.end() - v.begin()); i++)
+	{
+		std::cout << v[i] << " ";
+	}
+	std::cout << std::endl;
+	
 }
