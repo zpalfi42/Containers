@@ -7,6 +7,7 @@
 # include <is_integral.hpp>
 # include <nullptr_t.hpp>
 # include <iterator.hpp>
+# include <lexicalographical_compare.hpp>
 
 namespace ft
 {
@@ -56,10 +57,10 @@ namespace ft
 			typedef	ft::random_access_iterator<T>	const_iterator;
 
 			/** @typedef reverse_iterator is the type of ft::reverse_iterator with iterator passed as parameter to its template. */
-			typedef	std::reverse_iterator<iterator>		reverse_iterator;
+			typedef	ft::reverse_iterator<iterator>		reverse_iterator;
 
 			/** @typedef const_reverse_iterator is the type of ft::reverse_iterator with iterator passed as parameter to its template. */
-			typedef	std::reverse_iterator<iterator>		const_reverse_iterator;
+			typedef	ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 			/**
 			 * @brief Empty container constructor (default constructor):
@@ -126,19 +127,19 @@ namespace ft
 
 			iterator	begin( void );
 
-			// const_iterator	begin( void ) const;
+			const_iterator	begin( void ) const;
 
 			iterator	end( void );
 			 
-			// const_iterator	end( void ) const;
+			const_iterator	end( void ) const;
 
-			// reverse_iterator	rbegin( void );
+			reverse_iterator	rbegin( void );
 
-			// const_reverse_iterator	rbegin( void ) const;
+			const_reverse_iterator	rbegin( void ) const;
 
-			// reverse_iterator	rend( void );
+			reverse_iterator	rend( void );
 
-			// const_reverse_iterator	rend( void ) const;
+			const_reverse_iterator	rend( void ) const;
 
 			/**
 			 * @brief Returns the number of elements in the vector. This is the number of actual objects held in the vector, which is not necessarily equal to its storage capacity.
@@ -338,6 +339,8 @@ namespace ft
 
 			iterator	erase(iterator first, iterator last);
 
+			void		swap( vector &x );
+
 			/**
 			 * @brief Removes all elements from the vector (which are destroyed), leaving the container with a size of 0. A reallocation is not guaranteed to happen, and the 
 			 * vector capacity is not guaranteed to change due to calling this function.
@@ -351,6 +354,49 @@ namespace ft
 			pointer			_end;
 			pointer			_capacity;
 	};
+
+	template< class T, class Alloc>
+	bool	operator==( const ft::vector<T, Alloc> &lhs, const ft::vector<T, Alloc> &rhs)
+	{
+		if (lhs.size() != rhs.size() || lhs.capacity() != rhs.capacity())
+			return (false);
+		for (size_t i = 0; i < lhs.size(); i++)
+		{
+			if (lhs[i] != rhs[i])
+				return (false);
+		}
+		return (true);
+	}
+
+	template< class T, class Alloc>
+	bool	operator!=( const ft::vector<T, Alloc> &lhs, const ft::vector<T, Alloc> &rhs)
+	{
+		return (!(lhs == rhs));
+	}
+
+	template< class T, class Alloc>
+	bool	operator<( const ft::vector<T, Alloc> &lhs, const ft::vector<T, Alloc> &rhs)
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template< class T, class Alloc>
+	bool	operator>( const ft::vector<T, Alloc> &lhs, const ft::vector<T, Alloc> &rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template< class T, class Alloc>
+	bool	operator<=( const ft::vector<T, Alloc> &lhs, const ft::vector<T, Alloc> &rhs)
+	{
+		return (!(lhs > rhs));
+	}
+
+	template< class T, class Alloc>
+	bool	operator>=( const ft::vector<T, Alloc> &lhs, const ft::vector<T, Alloc> &rhs)
+	{
+		return (!(lhs < rhs));
+	}
 }
 
 # include	<vector.ipp>

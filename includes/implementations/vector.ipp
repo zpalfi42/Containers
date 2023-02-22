@@ -81,15 +81,14 @@ ft::vector<T, Alloc>	&ft::vector<T, Alloc>::operator=( const ft::vector<T, Alloc
 template< class T, class Alloc >
 typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::begin( void )
 {
-	iterator	it(this->_begin);
-	return (iterator(it));
+	return (iterator(this->_begin));
 }
 
-// template< class T, class Alloc >
-// typename ft::vector<T, Alloc>::const_iterator	ft::vector<T, Alloc>::begin( void ) const
-// {
-// 	return (const_iterator(this->_begin));
-// }
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::const_iterator	ft::vector<T, Alloc>::begin( void ) const
+{
+	return (const_iterator(this->_begin));
+}
 
 template< class T, class Alloc >
 typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::end( void )
@@ -97,35 +96,35 @@ typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::end( void )
 	return (iterator(this->_end));
 }
 
-// template< class T, class Alloc >
-// typename ft::vector<T, Alloc>::const_iterator	ft::vector<T, Alloc>::end( void ) const
-// {
-// 	return (const_iterator(this->_end));
-// }
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::const_iterator	ft::vector<T, Alloc>::end( void ) const
+{
+	return (const_iterator(this->_end));
+}
 
-// template< class T, class Alloc >
-// typename ft::vector<T, Alloc>::reverse_iterator	ft::vector<T, Alloc>::rbegin( void )
-// {
-// 	return (reverse_iterator(this->_begin));
-// }
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::reverse_iterator	ft::vector<T, Alloc>::rbegin( void )
+{
+	return (reverse_iterator(this->_end));
+}
 
-// template< class T, class Alloc >
-// typename ft::vector<T, Alloc>::const_reverse_iterator	ft::vector<T, Alloc>::rbegin( void ) const
-// {
-// 	return (const_reverse_iterator(this->_begin));
-// }
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::const_reverse_iterator	ft::vector<T, Alloc>::rbegin( void ) const
+{
+	return (const_reverse_iterator(this->_end));
+}
 
-// template< class T, class Alloc >
-// typename ft::vector<T, Alloc>::reverse_iterator	ft::vector<T, Alloc>::rend( void )
-// {
-// 	return (reverse_iterator(this->_end));
-// }
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::reverse_iterator	ft::vector<T, Alloc>::rend( void )
+{
+	return (reverse_iterator(this->_begin));
+}
 
-// template< class T, class Alloc >
-// typename ft::vector<T, Alloc>::const_reverse_iterator	ft::vector<T, Alloc>::rend( void ) const
-// {
-// 	return (const_reverse_iterator(this->_end));
-// }
+template< class T, class Alloc >
+typename ft::vector<T, Alloc>::const_reverse_iterator	ft::vector<T, Alloc>::rend( void ) const
+{
+	return (const_reverse_iterator(this->_begin));
+}
 
 
 template< class T, class Alloc >
@@ -360,11 +359,11 @@ void	ft::vector<T, Alloc>::pop_back( void )
 template< class T, class Alloc >
 typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert( iterator position, const value_type &val )
 {
-	ft::vector<T>::iterator	it = this->begin();
-	ft::vector<T>::iterator	end	= this->end();
+	typename ft::vector<T>::iterator	it = this->begin();
+	typename ft::vector<T>::iterator	end	= this->end();
 	int	i = position - it;
 
-	if (position < it || it > end)
+	if (position < it || it >= end)
 		throw(std::logic_error("Error: vector"));
 	if (this->capacity() == this->size())
 		this->reserve(this->capacity() * 2);
@@ -391,17 +390,18 @@ typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert( iterator p
 template< class T, class Alloc >
 void	ft::vector<T, Alloc>::insert( iterator position, size_type n, const value_type &val)
 {
-	ft::vector<T>::iterator	it = this->begin();
-	ft::vector<T>::iterator	end	= this->end();
+	typename ft::vector<T>::iterator	it = this->begin();
+	typename ft::vector<T>::iterator	end	= this->end();
 	size_t	j = position - it;
 
-	if (position < it || it > end)
+	if (position < it || position >= end)
 		throw(std::logic_error("Error: vector"));
+
+	int	a = this->capacity();
+	while (a - this->size() < n)
+		a *= 2;
 	
-	while (this->capacity() - this->size() < n)
-		this->reserve(this->capacity() * 2);
-	
-	pointer	np = this->_alloc.allocate(this->capacity());
+	pointer	np = this->_alloc.allocate(a);
 	for (size_t i = 0; i < j; i++)
 		this->_alloc.construct((np + i), *(it + i));
 	for (size_t i = 0; i < n; i++)
@@ -409,7 +409,11 @@ void	ft::vector<T, Alloc>::insert( iterator position, size_type n, const value_t
 	for (size_t i = 0; i < (size_t)(end - it - j); i++)
 		this->_alloc.construct((np + j + n + i), *(it + i + j));
 	
+	this->clear();
+	this->_alloc.deallocate(this->_begin, this->capacity());
+
 	this->_begin = np;
+	this->_capacity = np + a;
 	this->_end = np + (end - it) + n;
 	
 }
@@ -418,18 +422,19 @@ template< class T, class Alloc>
 template< class InputIterator >
 void	ft::vector<T, Alloc>::insert( iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type *)
 {
-	ft::vector<T>::iterator	it = this->begin();
-	ft::vector<T>::iterator	end	= this->end();
+	typename ft::vector<T>::iterator	it = this->begin();
+	typename ft::vector<T>::iterator	end	= this->end();
 	size_t	j = position - it;
 	size_t	n = last - first;
 
-	if (position < it || it > end)
+	if (position < it || position >= end)
 		throw(std::logic_error("Error: vector"));
 	
-	while (this->capacity() - this->size() < n)
-		this->reserve(this->capacity() * 2);
-	
-	pointer	np = this->_alloc.allocate(this->capacity());
+	int	a = this->capacity();
+	while (a - this->size() < n)
+		a *= 2;
+
+	pointer	np = this->_alloc.allocate(a);
 	for (size_t i = 0; i < j; i++)
 		this->_alloc.construct((np + i), *(it + i));
 	for (size_t i = 0; i < n; i++)
@@ -437,8 +442,78 @@ void	ft::vector<T, Alloc>::insert( iterator position, InputIterator first, Input
 	for (size_t i = 0; i < (size_t)(end - it - j); i++)
 		this->_alloc.construct((np + j + n + i), *(it + i + j));
 	
+	this->clear();
+	this->_alloc.deallocate(this->_begin, this->capacity());
+
 	this->_begin = np;
+	this->_capacity = np + a;
 	this->_end = np + (end - it) + n;
+}
+
+template < class T, class Alloc >
+typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator position)
+{
+	typename ft::vector<T>::iterator	it = this->begin();
+	typename ft::vector<T>::iterator	end = this->end();
+
+	if (position < it || position >= end)
+		throw(std::logic_error("Error: vector"));
+	
+	pointer	p = &(*position);
+
+	for (long i = 0; i < end - position - 1; i++)
+	{
+		this->_alloc.destroy(p + i);
+		this->_alloc.construct(p + i, *(p + i + 1));
+	}
+	this->_alloc.destroy(this->_end);
+	this->_end--;
+	return (position);
+}
+
+template < class T, class Alloc >
+typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator first, iterator last)
+{
+	typename ft::vector<T>::iterator	it = this->begin();
+	typename ft::vector<T>::iterator	end = this->end();
+
+	if (first < it || first >= end || last < it || last >= end)
+		throw(std::logic_error("Error: vector"));
+	
+	pointer	p = &(*first);
+	pointer	l = &(*last);
+
+	int i = 0;
+	while ((first + i) != end)
+	{
+		this->_alloc.destroy(p + i);
+		if ((last + i) < end)
+		{
+			this->_alloc.construct(p + i, *(l + i));
+			this->_end = p + i + 1;
+		}
+		i++;
+	}
+
+	return (first);
+}
+
+template< class T, class Alloc >
+void		ft::vector<T, Alloc>::swap( vector &x )
+{
+	pointer			cpyBegin = x._begin;
+	pointer			cpyEnd = x._end;
+	pointer			cpyCapacity = x._capacity;
+	allocator_type	cpyAlloc = x._alloc;
+
+	x._begin = this->_begin;
+	x._end = this->_end;
+	x._capacity = this->_capacity;
+	x._alloc = this->_alloc;
+	this->_begin = cpyBegin;
+	this->_end = cpyEnd;
+	this->_capacity = cpyCapacity;
+	this->_alloc = cpyAlloc;
 }
 
 template< class T, class Alloc >
@@ -449,21 +524,6 @@ void	ft::vector<T, Alloc>::clear( void )
 	for (size_type i = 0; i <= se; i++)
 		this->_alloc.destroy(this->_begin + i);
 	this->_end = this->_begin;
-}
-
-template < class T, class Alloc >
-typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator position)
-{
-	ft::vector<T>::iterator	it = this->begin();
-	ft::vector<T>::iterator	end = this->end();
-
-	
-}
-
-template < class T, class Alloc >
-typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator first, iterator last)
-{
-
 }
 
 #endif
