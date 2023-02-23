@@ -158,10 +158,4 @@ bool	ft::random_access_iterator<T>::operator>=( const ft::random_access_iterator
 	return (false);
 };
 
-template< class T >
-ft::random_access_iterator<T>	operator+( typename ft::random_access_iterator<T>::difference_type n, const ft::random_access_iterator<T> &r )
-{
-	return (r + n);
-};
-
 #endif

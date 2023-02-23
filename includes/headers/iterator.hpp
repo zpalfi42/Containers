@@ -123,7 +123,10 @@ namespace	ft
 	};
 
 	template< class T >
-	ft::random_access_iterator<T>	operator+( typename ft::random_access_iterator<T>::difference_type n, const ft::random_access_iterator<T> &r );
+	ft::random_access_iterator<T>	operator+( typename ft::random_access_iterator<T>::difference_type n, const ft::random_access_iterator<T> &r )
+	{
+		return (r + n);
+	};
 	
 	template< class Iter >
 	class reverse_iterator

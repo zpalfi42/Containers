@@ -66,7 +66,8 @@ ft::vector<T, Alloc>	&ft::vector<T, Alloc>::operator=( const ft::vector<T, Alloc
 		long	xse = x._end - x._begin;
 
 		this->clear();
-		this->_alloc.deallocate(this->_begin, tsc);
+		if (tsc)
+			this->_alloc.deallocate(this->_begin, tsc);
 
 		this->_alloc = x._alloc;
 		this->_begin = this->_alloc.allocate(xsc);
@@ -161,16 +162,12 @@ void	ft::vector<T, Alloc>::reserve(size_type n)
 
 	if (n < sc)
 		return ;
-
 	pointer	np = this->_alloc.allocate(n);
 	for (size_type i = 0; i < se; i++)
-	{
 		this->_alloc.construct(np + i, *(this->_begin + i));
-	}
-
 	this->clear();
-	this->_alloc.deallocate(this->_begin, sc);
-	
+	if (sc)
+		this->_alloc.deallocate(this->_begin, sc);
 	this->_begin = np;
 	this->_end = this->_begin + se;
 	this->_capacity = this->_begin + n;
@@ -210,7 +207,8 @@ void	ft::vector<T, Alloc>::shrink_to_fit( void )
 	for (size_type i = 0; i < se; i++)
 		this->_alloc.construct(np + i, *(this->_begin + i));
 	this->clear();
-	this->_alloc.deallocate(this->_begin, sc);
+	if (sc)
+		this->_alloc.deallocate(this->_begin, sc);
 	
 	this->_end = np + se;
 	this->_begin = np;
@@ -300,7 +298,8 @@ void	ft::vector<T, Alloc>::assign(InputIterator first, InputIterator last, typen
 	this->clear();
 	if (fl > sc)
 	{
-		this->_alloc.deallocate(this->_begin, sc);
+		if (sc)
+			this->_alloc.deallocate(this->_begin, sc);
 		pointer	np = this->_alloc.allocate(fl);
 		for (size_type i = 0; i < fl; i++)
 			this->_alloc.construct(np + i, *(first + i));
@@ -327,7 +326,8 @@ void	ft::vector<T, Alloc>::assign(size_type n, const value_type &val)
 		this->_end = this->_begin + n;
 		return ;
 	}
-	this->_alloc.deallocate(this->_begin, sc);
+	if (sc)
+		this->_alloc.deallocate(this->_begin, sc);
 	pointer	np = this->_alloc.allocate(n);
 	for (size_type i = 0; i < n; i++)
 		this->_alloc.construct(np + i, val);
@@ -339,7 +339,7 @@ void	ft::vector<T, Alloc>::assign(size_type n, const value_type &val)
 template< class T, class Alloc >
 void	ft::vector<T, Alloc>::push_back( const value_type &val )
 {
-	if (this->capacity() == 0)
+	if (this->_capacity == this->_end)
 		this->reserve(1);
 	if (this->_end == this->_capacity)
 		this->reserve((this->capacity() * 2));
@@ -410,7 +410,8 @@ void	ft::vector<T, Alloc>::insert( iterator position, size_type n, const value_t
 		this->_alloc.construct((np + j + n + i), *(it + i + j));
 	
 	this->clear();
-	this->_alloc.deallocate(this->_begin, this->capacity());
+	if (this->capacity())
+		this->_alloc.deallocate(this->_begin, this->capacity());
 
 	this->_begin = np;
 	this->_capacity = np + a;
@@ -443,7 +444,8 @@ void	ft::vector<T, Alloc>::insert( iterator position, InputIterator first, Input
 		this->_alloc.construct((np + j + n + i), *(it + i + j));
 	
 	this->clear();
-	this->_alloc.deallocate(this->_begin, this->capacity());
+	if (this->capacity())
+		this->_alloc.deallocate(this->_begin, this->capacity());
 
 	this->_begin = np;
 	this->_capacity = np + a;
@@ -521,7 +523,7 @@ void	ft::vector<T, Alloc>::clear( void )
 {
 	size_type	se = this->_end - this->_begin;
 
-	for (size_type i = 0; i <= se; i++)
+	for (size_type i = 0; i < se; i++)
 		this->_alloc.destroy(this->_begin + i);
 	this->_end = this->_begin;
 }

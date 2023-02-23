@@ -10,6 +10,12 @@
 #define WHITE	"\033[1;37m"
 #define GREEN	"\033[1;32m"
 
+#include <sstream>
+
+#define SSTR( x ) static_cast< std::ostringstream & >( \
+        ( std::ostringstream() << std::dec << x ) ).str()
+
+
 void	iterators_test( void )
 {
 	std::cout << RED << "  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--." << RESET << std::endl;
@@ -31,52 +37,75 @@ void	iterators_test( void )
 	std::vector<int>	v;
 	ft::vector<int>		v1;
 
+	std::vector<std::string>	s;
+	ft::vector<std::string>		s1;
+
 	for (size_t i = 0; i < 100; i++)
 	{
 		v.push_back(i);
 		v1.push_back(i);
+
+		s.push_back( SSTR( i ) );
+		s1.push_back( SSTR( i ) );
 	}
 	
 	std::vector<int>::iterator	it = v.begin();
 	ft::vector<int>::iterator	it1 = v1.begin();
+	std::vector<int>::iterator	end = v.end();
+	ft::vector<int>::iterator	end1 = v1.end();
+
+	std::vector<std::string>::iterator	sit = s.begin();
+	ft::vector<std::string>::iterator	sit1 = s1.begin();
+	std::vector<std::string>::iterator	send = s.end();
+	ft::vector<std::string>::iterator	send1 = s1.end();
 
 	bool b = true;
 
+	std::cout << WHITE << "Operator+ tests: ";
+	usleep(244242);
+	for (size_t i = 0; (it + i) != end; i++)
 	{
-		std::cout << WHITE << "Operator+ tests: ";
-		usleep(424242);
-		for (size_t i = 0; i < 100; i++)
+		if (*(it + i) != *(it1 + i) || (it1 + i) == end1)
 		{
-			if (*(it + i) != *(it1 + i))
-			{
-				std::cout << RED << "FAIL" << RESET << std::endl;
-				b = false;
-			}
+			std::cout << RED << "FAIL " << RESET << *(it + i) << " != " << *(it1 + i) << std::endl;
+			b = false;
+
 		}
-		if (b)
-			std::cout << GREEN << "SUCCESS" << RESET << std::endl;
-		usleep(424242);
-		std::cout << WHITE << "+operator tests: ";
-		usleep(424242);
-		for (size_t i = 0; i < 100; i++)
-		{
-			if (*(it + i) != *(it1 + i))
-			{
-				std::cout << RED << "FAIL" << RESET << std::endl;
-				b = false;
-			}
-		}
-		if (b)
-			std::cout << GREEN << "SUCCESS" << RESET << std::endl;
 	}
+	if (b)
+		std::cout << GREEN << "✅ ";
+	b = true;
+	for (size_t i = 0; (sit + i) != send; i++)
+	{
+		if (*(sit + i) != *(sit1 + i) || (sit1 + i) == send1)
+		{
+			std::cout << RED << "FAIL" << RESET << std::endl;
+			b = false;
+		}
+	}
+	if (b)
+		std::cout << GREEN << "✅" << RESET << std::endl;
+	usleep(244242);
+	std::cout << WHITE << "+operator tests: ";
+	usleep(244242);
+	for (size_t i = 0; (i + it) != end; i++)
+	{
+		if (*(i + it) != *(i + it1) || (i + it1) == end1)
+		{
+			std::cout << RED << "FAIL" << RESET << std::endl;
+			b = false;
+		}
+	}
+	if (b)
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.end();
 	it1 = v1.end();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator- tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*(it - i) != *(it1 - i))
@@ -87,15 +116,15 @@ void	iterators_test( void )
 		}
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.begin();
 	it1 = v1.begin();
 	
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator++ tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -108,12 +137,12 @@ void	iterators_test( void )
 		it1++;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator-- tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -126,14 +155,14 @@ void	iterators_test( void )
 		it1--;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	b = true;
 	it = v.begin();
 	it1 = v1.begin();
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "++operator tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -146,12 +175,12 @@ void	iterators_test( void )
 		++it1;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "--operator tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -164,15 +193,15 @@ void	iterators_test( void )
 		--it1;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.begin();
 	it1 = v1.begin();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator+= tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -185,15 +214,15 @@ void	iterators_test( void )
 		it1 += 1;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.end();
 	it1 = v1.end();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator-= tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -206,25 +235,25 @@ void	iterators_test( void )
 		it1 -= 1;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	std::vector<int>::iterator	itt = v.end();
 	ft::vector<int>::iterator	itt1 = v1.end();
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator-(it) tests: ";
-	usleep(424242);
+	usleep(244242);
 	if ((itt - it) != (itt1 - it1))
 		std::cout << "FAIL ";
 	else
-		std::cout << GREEN << "SUCCESS " << RESET;
+		std::cout << GREEN << "✅ " << RESET;
 
 	itt--;
 	itt1--;
 	if ((itt - it) != (itt1 - it1))
 		std::cout << "FAIL ";
 	else
-		std::cout << GREEN << "SUCCESS " << RESET;
+		std::cout << GREEN << "✅ " << RESET;
 
 	itt -= 42;
 	itt1 -= 42;
@@ -233,15 +262,15 @@ void	iterators_test( void )
 	if ((itt - it) != (itt1 - it1))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.begin();
 	it1 = v1.begin();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator[] tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (it[i] != it1[i])
@@ -252,15 +281,15 @@ void	iterators_test( void )
 		}
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.begin();
 	it1 = v1.begin();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator* tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -273,7 +302,7 @@ void	iterators_test( void )
 		it1++;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.begin();
 	itt = v.end();
@@ -283,53 +312,53 @@ void	iterators_test( void )
 	itt1 = v1.end();
 	ft::vector<int>::iterator	ittt1 = v1.begin();
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator== tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it == itt) != (it1 == itt1)) || ((it == ittt) != (it1 == ittt1)) || ((++it == ittt) != (++it1 == ittt1)) || ((--it == ittt) != (--it1 == ittt1)) || ((it++ == ittt) != (it1++ == ittt1)) || ((it-- == ittt) != (it1-- == ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator!= tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it != itt) != (it1 != itt1)) || ((it != ittt) != (it1 != ittt1)) || ((++it != ittt) != (++it1 != ittt1)) || ((--it != ittt) != (--it1 != ittt1)) || ((it++ != ittt) != (it1++ != ittt1)) || ((it-- != ittt) != (it1-- != ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator< tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it < itt) != (it1 < itt1)) || ((it < ittt) != (it1 < ittt1)) || ((++it < ittt) != (++it1 < ittt1)) || ((--it < ittt) != (--it1 < ittt1)) || ((it++ < ittt) != (it1++ < ittt1)) || ((it-- < ittt) != (it1-- < ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator<= tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it <= itt) != (it1 <= itt1)) || ((it <= ittt) != (it1 <= ittt1)) || ((++it <= ittt) != (++it1 <= ittt1)) || ((--it <= ittt) != (--it1 <= ittt1)) || ((it++ <= ittt) != (it1++ <= ittt1)) || ((it-- <= ittt) != (it1-- <= ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 	
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator> tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it > itt) != (it1 > itt1)) || ((it > ittt) != (it1 > ittt1)) || ((++it > ittt) != (++it1 > ittt1)) || ((--it > ittt) != (--it1 > ittt1)) || ((it++ > ittt) != (it1++ > ittt1)) || ((it-- > ittt) != (it1-- > ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator>= tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it >= itt) != (it1 >= itt1)) || ((it >= ittt) != (it1 >= ittt1)) || ((++it >= ittt) != (++it1 >= ittt1)) || ((--it >= ittt) != (--it1 >= ittt1)) || ((it++ >= ittt) != (it1++ >= ittt1)) || ((it-- >= ittt) != (it1-- >= ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	std::vector<int>::iterator	aux;
 	ft::vector<int>::iterator	aux1;
@@ -337,13 +366,13 @@ void	iterators_test( void )
 	aux = v.begin();
 	aux1 = v1.begin();
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator= tests: ";
-	usleep(424242);
+	usleep(244242);
 	if ((aux == it) != (aux1 == it1))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 	
 	std::cout << std::endl << std::endl;
 }
@@ -354,12 +383,12 @@ void	reverse_iterator_tests( void )
 	std::cout << RESET << ":::::." << RED << "\\" <<RESET << ":::::::." << RED << "\\" << RESET<< "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << std::endl;
 	std::cout << RED << "'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `" << RESET << std::endl;
 
-	std::cout << RED << "       _____ _                 _                   _            _   " << std::endl;
-	std::cout << "      |_   _| |               | |                 | |          | |  " << std::endl;
-	std::cout << "        | | | |_ ___ _ __ __ _| |_ ___  _ __ ___  | |_ ___  ___| |_ " << std::endl;
-	std::cout << "        | | | __/ _ \\ '__/ _` | __/ _ \\| '__/ __| | __/ _ \\/ __| __|" << std::endl;
-	std::cout << "       _| |_| ||  __/ | | (_| | || (_) | |  \\__ \\ | ||  __/\\__ \\ |_ " << std::endl;
-	std::cout << "      |_____|\\__\\___|_|  \\__,_|\\__\\___/|_|  |___/  \\__\\___||___/\\__|" << RESET << std::endl << std::endl;
+	std::cout << RED << "  _____      _____ _                 _                   _            _   " << std::endl;
+	std::cout << " |  __ \\    |_   _| |               | |                 | |          | |  " << std::endl;
+	std::cout << " | |__) |     | | | |_ ___ _ __ __ _| |_ ___  _ __ ___  | |_ ___  ___| |_ " << std::endl;
+	std::cout << " |  _  /      | | | __/ _ \\ '__/ _` | __/ _ \\| '__/ __| | __/ _ \\/ __| __|" << std::endl;
+	std::cout << " | | \\ \\ _   _| |_| ||  __/ | | (_| | || (_) | |  \\__ \\ | ||  __/\\__ \\ |_ " << std::endl;
+	std::cout << " |_|  \\_(_) |_____|\\__\\___|_|  \\__,_|\\__\\___/|_|  |___/  \\__\\___||___/\\__|" << RESET << std::endl << std::endl;
 
 	std::cout << RED << "  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--." << RESET << std::endl;
 	std::cout << RESET << ":::::." << RED << "\\" <<RESET << ":::::::." << RED << "\\" << RESET<< "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << std::endl;
@@ -380,9 +409,9 @@ void	reverse_iterator_tests( void )
 
 	bool b = true;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "Operator+ tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*(it + i) != *(it1 + i))
@@ -392,11 +421,11 @@ void	reverse_iterator_tests( void )
 		}
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 	
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "+operator tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*(it + i) != *(it1 + i))
@@ -406,15 +435,15 @@ void	reverse_iterator_tests( void )
 		}
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.rend();
 	it1 = v1.rend();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator- tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 1; i < 100; i++)
 	{
 		if (*(it - i) != *(it1 - i))
@@ -425,15 +454,15 @@ void	reverse_iterator_tests( void )
 		}
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.rbegin();
 	it1 = v1.rbegin();
 	
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator++ tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -446,13 +475,13 @@ void	reverse_iterator_tests( void )
 		it1++;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 	it--;
 	it1--;
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator-- tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -465,14 +494,14 @@ void	reverse_iterator_tests( void )
 		it1--;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	b = true;
 	it = v.rbegin();
 	it1 = v1.rbegin();
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "++operator tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -485,14 +514,14 @@ void	reverse_iterator_tests( void )
 		++it1;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it--;
 	it1--;
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "--operator tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 1; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -505,15 +534,15 @@ void	reverse_iterator_tests( void )
 		--it1;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.rbegin();
 	it1 = v1.rbegin();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator+= tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -526,7 +555,7 @@ void	reverse_iterator_tests( void )
 		it1 += 1;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.rend();
 	it1 = v1.rend();
@@ -534,9 +563,9 @@ void	reverse_iterator_tests( void )
 	b = true;
 	it--;
 	it1--;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator-= tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -549,18 +578,18 @@ void	reverse_iterator_tests( void )
 		it1 -= 1;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	std::vector<int>::reverse_iterator	itt = v.rbegin();
 	ft::vector<int>::reverse_iterator	itt1 = v1.rbegin();
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator-(it) tests: ";
-	usleep(424242);
+	usleep(244242);
 	if ((itt - it) != (itt1 - it1))
 		std::cout << "FAIL ";
 	else
-		std::cout << GREEN << "SUCCESS " << RESET;
+		std::cout << GREEN << "✅ " << RESET;
 
 	itt--;
 	itt1--;
@@ -568,7 +597,7 @@ void	reverse_iterator_tests( void )
 	if ((itt - it) != (itt1 - it1))
 		std::cout << "FAIL ";
 	else
-		std::cout << GREEN << "SUCCESS " << RESET;
+		std::cout << GREEN << "✅ " << RESET;
 
 	itt -= 42;
 	itt1 -= 42;
@@ -578,15 +607,15 @@ void	reverse_iterator_tests( void )
 	if ((itt - it) != (itt1 - it1))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.rbegin();
 	it1 = v1.rbegin();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator[] tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (it[i] != it1[i])
@@ -597,15 +626,15 @@ void	reverse_iterator_tests( void )
 		}
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.rbegin();
 	it1 = v1.rbegin();
 
 	b = true;
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator* tests: ";
-	usleep(424242);
+	usleep(244242);
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (*it != *it1)
@@ -618,7 +647,7 @@ void	reverse_iterator_tests( void )
 		it1++;
 	}
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	it = v.rbegin();
 	itt = v.rend();
@@ -628,53 +657,53 @@ void	reverse_iterator_tests( void )
 	itt1 = v1.rend();
 	ft::vector<int>::reverse_iterator	ittt1 = v1.rbegin();
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator== tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it == itt) != (it1 == itt1)) || ((it == ittt) != (it1 == ittt1)) || ((++it == ittt) != (++it1 == ittt1)) || ((--it == ittt) != (--it1 == ittt1)) || ((it++ == ittt) != (it1++ == ittt1)) || ((it-- == ittt) != (it1-- == ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator!= tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it != itt) != (it1 != itt1)) || ((it != ittt) != (it1 != ittt1)) || ((++it != ittt) != (++it1 != ittt1)) || ((--it != ittt) != (--it1 != ittt1)) || ((it++ != ittt) != (it1++ != ittt1)) || ((it-- != ittt) != (it1-- != ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator< tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it < itt) != (it1 < itt1)) || ((it < ittt) != (it1 < ittt1)) || ((++it < ittt) != (++it1 < ittt1)) || ((--it < ittt) != (--it1 < ittt1)) || ((it++ < ittt) != (it1++ < ittt1)) || ((it-- < ittt) != (it1-- < ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator<= tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it <= itt) != (it1 <= itt1)) || ((it <= ittt) != (it1 <= ittt1)) || ((++it <= ittt) != (++it1 <= ittt1)) || ((--it <= ittt) != (--it1 <= ittt1)) || ((it++ <= ittt) != (it1++ <= ittt1)) || ((it-- <= ittt) != (it1-- <= ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 	
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator> tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it > itt) != (it1 > itt1)) || ((it > ittt) != (it1 > ittt1)) || ((++it > ittt) != (++it1 > ittt1)) || ((--it > ittt) != (--it1 > ittt1)) || ((it++ > ittt) != (it1++ > ittt1)) || ((it-- > ittt) != (it1-- > ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator>= tests: ";
-	usleep(424242);
+	usleep(244242);
 	if (((it >= itt) != (it1 >= itt1)) || ((it >= ittt) != (it1 >= ittt1)) || ((++it >= ittt) != (++it1 >= ittt1)) || ((--it >= ittt) != (--it1 >= ittt1)) || ((it++ >= ittt) != (it1++ >= ittt1)) || ((it-- >= ittt) != (it1-- >= ittt1)))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 
 	std::vector<int>::reverse_iterator	aux;
 	ft::vector<int>::reverse_iterator	aux1;
@@ -682,23 +711,23 @@ void	reverse_iterator_tests( void )
 	aux = v.rbegin();
 	aux1 = v1.rbegin();
 
-	usleep(424242);
+	usleep(244242);
 	std::cout << WHITE << "operator= tests: ";
-	usleep(424242);
+	usleep(244242);
 	if ((aux == it) != (aux1 == it1))
 		std::cout << RED << "FAIL" << RESET << std::endl;
 	else
-		std::cout << GREEN << "SUCCESS" << RESET << std::endl;
+		std::cout << GREEN << "✅ " << RESET << std::endl;
 	
 	std::cout << std::endl << std::endl;
 }
 
 void	printCase( std::string s, bool b , bool endl)
 {
-	usleep(424242);
+	usleep(244242);
 	std::cout << s;
 	if (b)
-		std::cout << GREEN << "SUCCESS" << RESET;
+		std::cout << GREEN << "✅ " << RESET;
 	else
 		std::cout << RED << "FAIL" << RESET;
 
