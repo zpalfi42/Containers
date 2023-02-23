@@ -25,11 +25,14 @@ ft::vector<T, Alloc>::vector(InputIterator first, InputIterator last, const allo
 {
 	long	fl = ft::distance(first, last);
 
-	this->_begin = this->_alloc.allocate(fl);
-	for (long i = 0; i <= fl; i++)
-		this->_alloc.construct(this->_begin + i, *(first + i));
-	this->_capacity = this->_begin + fl;
-	this->_end = this->_begin + fl;
+	if (fl)
+	{
+		this->_begin = this->_alloc.allocate(fl);
+		for (long i = 0; (first + i) != last; i++)
+			this->_alloc.construct(this->_begin + i, *(first + i));
+		this->_capacity = this->_begin + fl;
+		this->_end = this->_begin + fl;
+	}
 }
 
 
@@ -127,7 +130,6 @@ typename ft::vector<T, Alloc>::const_reverse_iterator	ft::vector<T, Alloc>::rend
 	return (const_reverse_iterator(this->_begin));
 }
 
-
 template< class T, class Alloc >
 typename ft::vector<T, Alloc>::size_type	ft::vector<T, Alloc>::size( void ) const
 {
@@ -186,10 +188,8 @@ void		ft::vector<T, Alloc>::resize(size_type n, value_type val)
 		this->_end = this->_begin + n;
 		return ;
 	}
-	if (n > sc * 2)
-		this->reserve(n);
 	else if (n > sc)
-		this->reserve(sc * 2);
+		this->reserve(n);
 	for (size_type i = se; i < n; i++)
 		this->_alloc.construct(this->_begin + i, val);
 	this->_end = this->_begin + n;
