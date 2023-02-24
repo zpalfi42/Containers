@@ -65,7 +65,7 @@ ft::vector<T, Alloc>	&ft::vector<T, Alloc>::operator=( const ft::vector<T, Alloc
 	if (this != &x)
 	{
 		long	tsc = this->_capacity - this->_begin;
-		long	xsc = x._capacity - x._begin;
+		// long	xsc = x._capacity - x._begin;
 		long	xse = x._end - x._begin;
 
 		this->clear();
@@ -73,10 +73,10 @@ ft::vector<T, Alloc>	&ft::vector<T, Alloc>::operator=( const ft::vector<T, Alloc
 			this->_alloc.deallocate(this->_begin, tsc);
 
 		this->_alloc = x._alloc;
-		this->_begin = this->_alloc.allocate(xsc);
+		this->_begin = this->_alloc.allocate(xse);
 		for (long i = 0; i < xse; i++)
 			this->_alloc.construct(this->_begin + i, *(x._begin + i));
-		this->_capacity = this->_begin + xsc;
+		this->_capacity = this->_begin + xse;
 		this->_end = this->_begin + xse;
 	}
 	return (*this);
@@ -339,7 +339,7 @@ void	ft::vector<T, Alloc>::assign(size_type n, const value_type &val)
 template< class T, class Alloc >
 void	ft::vector<T, Alloc>::push_back( const value_type &val )
 {
-	if (this->_capacity == this->_end)
+	if (this->capacity() == 0)
 		this->reserve(1);
 	if (this->_end == this->_capacity)
 		this->reserve((this->capacity() * 2));

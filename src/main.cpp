@@ -2540,7 +2540,7 @@ void	reverse_iterator_tests( void )
 
 void	printCase( std::string s, bool b , bool endl)
 {
-	usleep(244242);
+	usleep(4242);
 	std::cout << s;
 	if (b)
 		std::cout << GREEN << "✅ " << RESET;
@@ -2996,7 +2996,7 @@ void	vectors_test( void )
 	printCase("", res, true);
 
 	res = (v.back() == v1.back());
-	printCase("\033[1;37mfront() tests: ", res, false);
+	printCase("\033[1;37mback() tests: ", res, false);
 	res = (iv.back() == iv1.back());
 	printCase("", res, false);
 	res = (sv.back() == sv1.back());
@@ -3006,6 +3006,125 @@ void	vectors_test( void )
 	res = (itev.back() == itev1.back());
 	printCase("", res, false);
 	res = (eitev.back() == eitev1.back());
+	printCase("", res, true);
+
+	v.assign(10, 42);
+	v1.assign(10, 42);
+	iv.assign(10, 42);
+	iv1.assign(10, 42);
+	sv.assign(10, "42");
+	sv1.assign(10, "42");
+	ov.assign(10, 42);
+	ov1.assign(10, 42);
+	itev.assign(10, 42);
+	itev1.assign(10, 42);
+	eitev.assign(10, 42);
+	eitev1.assign(10, 42);
+
+	res = (v.size() == v1.size() && v.capacity() == v1.capacity() && v.front() == v1.front() && v.back() == v1.back() && v[6] == v1[6]);
+	printCase("\033[1;37mFill assign tests: ", res, false);
+	res = (iv.size() == iv1.size() && iv.capacity() == iv1.capacity() && iv.front() == iv1.front() && iv.back() == iv1.back() && iv[6] == iv1[6]);
+	printCase("", res, false);
+	res = (sv.size() == sv1.size() && sv.capacity() == sv1.capacity() && sv.front() == sv1.front() && sv.back() == sv1.back() && sv[6] == sv1[6]);
+	printCase("", res, false);
+	res = (ov.size() == ov1.size() && ov.capacity() == ov1.capacity() && ov.front() == ov1.front() && ov.back() == ov1.back() && ov[6] == ov1[6]);
+	printCase("", res, false);
+	res = (itev.size() == itev1.size() && itev.capacity() == itev1.capacity() && itev.front() == itev1.front() && itev.back() == itev1.back() && itev[6] == itev1[6]);
+	printCase("", res, false);
+	res = (eitev.size() == eitev1.size() && eitev.capacity() == eitev1.capacity() && eitev.front() == eitev1.front() && eitev.back() == eitev1.back() && eitev[6] == eitev1[6]);
+	printCase("", res, true);
+
+	equalsv = sv;
+	equalsv1 = sv1;
+
+	// std::cout << sv.size() << "=" << sv1.size() << " | " << sv.capacity() << "=" << sv1.capacity() << " | " << sv.front() << "=" << sv1.front() << " | " << sv.back() << "=" << sv1.back() << " | " << sv[6] << "=" << sv1[6] << std::endl;
+	it = v.begin();
+	end = v.end();
+	it1 = v1.begin();
+	end1 = v1.end();
+
+	std::vector<std::string>::iterator	sit = equalsv.begin();
+	std::vector<std::string>::iterator	send = equalsv.end();
+	ft::vector<std::string>::iterator	sit1 = equalsv1.begin();
+	ft::vector<std::string>::iterator	send1 = equalsv1.end();
+
+	v.assign(it + 1, end - 3);
+	v1.assign(it1 + 1, end1 - 3);
+	iv.assign(it + 1, end - 3);
+	iv1.assign(it1 + 1, end1 - 3);
+	sv.assign(sit + 1, send - 3);
+	sv1.assign(sit1 + 1, send1 - 3);
+	ov.assign(it + 1, end - 3);
+	ov1.assign(it1 + 1, end1 - 3);
+	itev.assign(it + 1, end - 3);
+	itev1.assign(it1 + 1, end1 - 3);
+	eitev.assign(it + 1, end - 3);
+	eitev1.assign(it1 + 1, end1 - 3);
+
+	res = (v.size() == v1.size() && v.capacity() == v1.capacity() && v.front() == v1.front() && v.back() == v1.back() && v[6] == v1[6]);
+	printCase("\033[1;37mRange assign tests: ", res, false);
+	res = (iv.size() == iv1.size() && iv.capacity() == iv1.capacity() && iv.front() == iv1.front() && iv.back() == iv1.back() && iv[6] == iv1[6]);
+	printCase("", res, false);
+	res = (sv.size() == sv1.size() && sv.capacity() == sv1.capacity() && sv.front() == sv1.front() && sv.back() == sv1.back() && sv[6] == sv1[6]);
+	printCase("", res, false);
+	res = (ov.size() == ov1.size() && ov.capacity() == ov1.capacity() && ov.front() == ov1.front() && ov.back() == ov1.back() && ov[6] == ov1[6]);
+	printCase("", res, false);
+	res = (itev.size() == itev1.size() && itev.capacity() == itev1.capacity() && itev.front() == itev1.front() && itev.back() == itev1.back() && itev[6] == itev1[6]);
+	printCase("", res, false);
+	res = (eitev.size() == eitev1.size() && eitev.capacity() == eitev1.capacity() && eitev.front() == eitev1.front() && eitev.back() == eitev1.back() && eitev[6] == eitev1[6]);
+	printCase("", res, true);
+
+	
+
+	v.clear();
+	v1.clear();
+	equalsv.clear();
+	equalsv1.clear();
+	ov.resize(1);
+	ov1.resize(1);
+
+	v.push_back(42);
+	v1.push_back(42);
+	equalsv.push_back("42");
+	equalsv1.push_back("42");
+	ov.push_back(42);
+	ov1.push_back(42);
+	iv.push_back(42);
+	iv1.push_back(42);
+	sv.push_back("42");
+	sv1.push_back("42");
+
+	// std::cout << equalsv.size() << " = " << equalsv1.size() << " | " << equalsv.capacity() << " = " << equalsv1.capacity() << std::endl;
+
+	res = (v.size() == v1.size() && v.capacity() == v1.capacity() && v.front() == v1.front() && v.back() == v1.back() && v[6] == v1[6]);
+	printCase("\033[1;37mpush_back() tests: ", res, false);
+	res = (iv.size() == iv1.size() && iv.capacity() == iv1.capacity() && iv.front() == iv1.front() && iv.back() == iv1.back() && iv[6] == iv1[6]);
+	printCase("", res, false);
+	res = (sv.size() == sv1.size() && sv.capacity() == sv1.capacity() && sv.front() == sv1.front() && sv.back() == sv1.back() && sv[6] == sv1[6]);
+	printCase("", res, false);
+	res = (ov.size() == ov1.size() && ov.capacity() == ov1.capacity() && ov.front() == ov1.front() && ov.back() == ov1.back() && ov[6] == ov1[6]);
+	printCase("", res, false);
+	res = (equalsv.size() == equalsv1.size() && equalsv.capacity() == equalsv1.capacity() && equalsv.front() == equalsv1.front() && equalsv.back() == equalsv1.back() && equalsv[6] == equalsv1[6]);
+	printCase("", res, true);
+
+	v.pop_back();
+	v1.pop_back();
+	equalsv.pop_back();
+	equalsv1.pop_back();
+	ov.pop_back();
+	ov1.pop_back();
+	iv.pop_back();
+	iv1.pop_back();
+	sv.pop_back();
+	sv1.pop_back();
+
+	res = (v.size() == v1.size() && v.capacity() == v1.capacity() && v.front() == v1.front() && v.back() == v1.back() && v[6] == v1[6]);
+	printCase("\033[1;37mpop_back() tests: ", res, false);
+	res = (iv.size() == iv1.size() && iv.capacity() == iv1.capacity() && iv.front() == iv1.front() && iv.back() == iv1.back() && iv[6] == iv1[6]);
+	printCase("", res, false);
+	res = (sv.size() == sv1.size() && sv.capacity() == sv1.capacity() && sv.front() == sv1.front() && sv.back() == sv1.back() && sv[6] == sv1[6]);
+	printCase("", res, false);
+	res = (ov.size() == ov1.size() && ov.capacity() == ov1.capacity() && ov.front() == ov1.front() && ov.back() == ov1.back() && ov[6] == ov1[6]);
 	printCase("", res, true);
 
 	// std::cout << v.size() << " " << v.capacity() << " " << v.front() << " " << v.back() << " " << v[9] << std::endl;
