@@ -125,6 +125,8 @@ namespace ft
 			 */
 			vector			&operator=( const vector &x );
 
+			allocator_type	get_allocator( void );
+
 			iterator	begin( void );
 
 			const_iterator	begin( void ) const;
@@ -319,11 +321,6 @@ namespace ft
 			 */
 			void	assign(size_type n, const value_type &val);
 
-			/**
-			 * @brief HOLA
-			 * 
-			 * @param val 
-			 */
 			void	push_back( const value_type &val );
 
 			void	pop_back( void );

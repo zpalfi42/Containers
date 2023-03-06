@@ -14,6 +14,8 @@ IMPS		=	$(shell find $(IMPS_DIR) -type f -name "*.ipp")
 HDRS		= 	$(shell find $(HDRS_DIR) -type f -name "*.hpp")
 
 SRC			=	main.cpp   \
+				iteratorsTest.cpp \
+				riteratorsTest.cpp \
 
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
