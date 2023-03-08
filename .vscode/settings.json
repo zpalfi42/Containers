@@ -80,7 +80,8 @@
 		"set": "cpp",
 		"iomanip": "cpp",
 		"queue": "cpp",
-		"filesystem": "cpp"
+		"filesystem": "cpp",
+		"fstream": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled",
 	"C_Cpp.intelliSenseEngineFallback": "enabled"
