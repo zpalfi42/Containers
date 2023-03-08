@@ -55,26 +55,6 @@ void	iteratorsTest( void )
 
 	ov.push_back(42);
 	ov1.push_back(42);
-	
-	std::vector<int>::iterator	it = v.begin();
-	std::vector<int>::iterator	end = v.end();
-	ft::vector<int>::iterator	it1 = v1.begin();
-	ft::vector<int>::iterator	end1 = v1.end();
-
-	std::vector<std::string>::iterator	sit = s.begin();
-	std::vector<std::string>::iterator	send = s.end();
-	ft::vector<std::string>::iterator	sit1 = s1.begin();
-	ft::vector<std::string>::iterator	send1 = s1.end();
-
-	std::vector<int>::iterator	oit = ov.begin();
-	std::vector<int>::iterator	oend = ov.end();
-	ft::vector<int>::iterator	oit1 = ov1.begin();
-	ft::vector<int>::iterator	oend1 = ov1.end();
-
-	std::vector<int>::iterator	eit = ev.begin();
-	std::vector<int>::iterator	eend = ev.end();
-	ft::vector<int>::iterator	eit1 = ev1.begin();
-	ft::vector<int>::iterator	eend1 = ev1.end();
 
 	/**
 	 * 
@@ -82,9 +62,29 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "Operator+ tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "Operator+: \t\t\t";
+		usleep(4242);
 
 		/**
 		 * Test operator+ with vectors full of ints.
@@ -155,9 +155,29 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator+(size_t + iter) tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "operator+(size_t + iter): \t";
+		usleep(4242);
 
 		/**
 		 * Test operator+ with vectors full of ints.
@@ -226,16 +246,30 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
 
-		usleep(244242);
-		std::cout << WHITE << "operator- tests: ";
-		usleep(244242);
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "operator-: \t\t\t";
+		usleep(4242);
 
 		/**
 		 * Test operator- with vectors full of ints.
 		 */
 		b = true;
-		for (size_t i = 0; (end - i) != it; i++)
+		for (size_t i = 1; (end - i) != it; i++)
 		{
 			if (*(end - i) != *(end1 - i) || (end1 - i) == it1)
 			{
@@ -250,7 +284,7 @@ void	iteratorsTest( void )
 		 * Test operator- with vectors full of std::strings.
 		 */
 		b = true;
-		for (size_t i = 0; (send - i) != sit; i++)
+		for (size_t i = 1; (send - i) != sit; i++)
 		{
 			if (*(send - i) != *(send1 - i) || (send1 - i) == sit1)
 			{
@@ -265,7 +299,7 @@ void	iteratorsTest( void )
 		 * Test operator- with vectors with only one int.
 		 */
 		b = true;
-		for (size_t i = 0; (oend - i) != oit; i++)
+		for (size_t i = 1; (oend - i) != oit; i++)
 		{
 			if (*(oend - i) != *(oend1 - i) || (oend1 - i) == oit1)
 			{
@@ -274,22 +308,7 @@ void	iteratorsTest( void )
 			}
 		}
 		if (b && (oend - oit) == (oend1 - oit1))
-			std::cout << GREEN << "✅ ";
-
-		/**
-		 * Test operator- with empty vector.
-		 */
-		b = true;
-		for (size_t i = 0; (eend - i) != eit; i++)
-		{
-			if (*(eend - i) != *(eend1 - i) || (eend1 - i) == eit1)
-			{
-				std::cout << "FAIL" << std::endl;
-				b = false;
-			}
-		}
-		if (b && (eend - eit) == (eend1 - eit1))
-			std::cout << GREEN << "✅" << std::endl;
+			std::cout << GREEN << "✅ " << std::endl;
 	}
 
 	/**
@@ -298,9 +317,29 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{	
-		usleep(244242);
-		std::cout << WHITE << "operator++ tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "operator++: \t\t\t";
+		usleep(4242);
 
 		b = true;
 		n = (end - it);
@@ -363,31 +402,34 @@ void	iteratorsTest( void )
 			std::cout << GREEN << "✅" << std::endl;
 	}
 
-	it = v.begin();
-	it1 = v1.begin();
-
-	sit = s.begin();
-	sit1 = s1.begin();
-
-	oit = ov.begin();
-	oit1 = ov1.begin();
-
-	eit = ev.begin();
-	eit1 = ev1.begin();
-
 	/**
 	 * 
 	 * @brief In this section it will perform multiple testes to ensure that the operator-- works as expected.
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator-- tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end() - 1;
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end() - 1;
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end() - 1;
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end() - 1;
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end() - 1;
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end() - 1;
+
+		usleep(4242);
+		std::cout << WHITE << "operator--: \t\t\t";
+		usleep(4242);
 
 		b = true;
 		n = end - it;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0; end != it - 1; i++)
 		{
 			if (*end != *end1)
 			{
@@ -402,7 +444,7 @@ void	iteratorsTest( void )
 
 		b = true;
 		n = send - sit;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0;send != sit - 1; i++)
 		{
 			if (*send != *send1)
 			{
@@ -417,7 +459,7 @@ void	iteratorsTest( void )
 
 		b = true;
 		n = oend - oit;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0; i < n && oend != oit; i++)
 		{
 			if (*oend != *oend1)
 			{
@@ -428,35 +470,8 @@ void	iteratorsTest( void )
 			oend1--;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
-
-		b = true;
-		n = eend - eit;
-		for (size_t i = 0; i < n; i++)
-		{
-			if (*eend != *eend1)
-			{
-				std::cout << "FAIL" << std::endl;
-				b = false;
-			}
-			eend--;
-			eend1--;
-		}
-		if (b)
-			std::cout << GREEN << "✅" << std::endl;
+			std::cout << GREEN << "✅ " << std::endl;
 	}
-
-	end = v.end();
-	end1 = v1.end();
-
-	send = s.end();
-	send1 = s1.end();
-
-	oend = ov.end();
-	oend1 = ov1.end();
-
-	eit = ev.end();
-	eit1 = ev1.end();
 
 	/**
 	 * 
@@ -464,9 +479,29 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "++operator tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "++operator: \t\t\t";
+		usleep(4242);
 
 		b = true;
 		n = end - it;
@@ -529,31 +564,34 @@ void	iteratorsTest( void )
 			std::cout << GREEN << "✅" << std::endl;
 	}
 
-	it = v.begin();
-	it1 = v1.begin();
-
-	sit = s.begin();
-	sit1 = s1.begin();
-
-	oit = ov.begin();
-	oit1 = ov1.begin();
-
-	eit = ev.begin();
-	eit1 = ev1.begin();
-
 	/**
 	 * 
 	 * @brief In this section it will perform multiple testes to ensure that the --operator works as expected.
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "--operator tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end() - 1;
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end() - 1;
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end() - 1;
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end() - 1;
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end() - 1;
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end() - 1;
+
+		usleep(4242);
+		std::cout << WHITE << "--operator: \t\t\t";
+		usleep(4242);
 
 		b = true;
 		n = end - it;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0; end != it - 1; i++)
 		{
 			if (*end != *end1)
 			{
@@ -568,7 +606,7 @@ void	iteratorsTest( void )
 
 		b = true;
 		n = send - sit;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0; send != sit - 1; i++)
 		{
 			if (*send != *send1)
 			{
@@ -583,7 +621,7 @@ void	iteratorsTest( void )
 
 		b = true;
 		n = oend - oit;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0; oend != oit - 1; i++)
 		{
 			if (*oend != *oend1)
 			{
@@ -594,35 +632,8 @@ void	iteratorsTest( void )
 			--oend1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
-
-		b = true;
-		n = eend - eit;
-		for (size_t i = 0; i < n; i++)
-		{
-			if (*eend != *eend1)
-			{
-				std::cout << "FAIL " << std::endl;
-				b = false;
-			}
-			--eend;
-			--eend1;
-		}
-		if (b)
 			std::cout << GREEN << "✅ " << std::endl;
 	}
-
-	end = v.end();
-	end1 = v1.end();
-
-	send = s.end();
-	send1 = s1.end();
-
-	oend = ov.end();
-	oend1 = ov1.end();
-
-	eit = ev.end();
-	eit1 = ev1.end();
 
 	/**
 	 * 
@@ -630,9 +641,29 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator+= tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "operator+=: \t\t\t";
+		usleep(4242);
 
 		b = true;
 		n = (end - it);
@@ -694,18 +725,6 @@ void	iteratorsTest( void )
 		if (b)
 			std::cout << GREEN << "✅" << std::endl;
 	}
-	
-	it = v.begin();
-	it1 = v1.begin();
-
-	sit = s.begin();
-	sit1 = s1.begin();
-
-	oit = ov.begin();
-	oit1 = ov1.begin();
-
-	eit = ev.begin();
-	eit1 = ev1.begin();
 
 	/**
 	 * 
@@ -713,13 +732,29 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator-= tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end() - 1;
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end() - 1;
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end() - 1;
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end() - 1;
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end() - 1;
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end() - 1;
+
+
+		usleep(4242);
+		std::cout << WHITE << "operator-=: \t\t\t";
+		usleep(4242);
 
 		b = true;
 		n = end - it;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0; end != it - 1; i++)
 		{
 			if (*end != *end1)
 			{
@@ -734,7 +769,7 @@ void	iteratorsTest( void )
 
 		b = true;
 		n = send - sit;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0; send != sit - 1; i++)
 		{
 			if (*send != *send1)
 			{
@@ -749,7 +784,7 @@ void	iteratorsTest( void )
 
 		b = true;
 		n = oend - oit;
-		for (size_t i = 0; i < n; i++)
+		for (size_t i = 0; oend != oit - 1; i++)
 		{
 			if (*oend != *oend1)
 			{
@@ -760,35 +795,8 @@ void	iteratorsTest( void )
 			oend1 -= 1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
-
-		b = true;
-		n = eend - eit;
-		for (size_t i = 0; i < n; i++)
-		{
-			if (*eend != *eend1)
-			{
-				std::cout << "FAIL " << std::endl;
-				b = false;
-			}
-			eend -= 1;
-			eend1 -= 1;
-		}
-		if (b)
 			std::cout << GREEN << "✅" << std::endl;
 	}
-
-	end = v.end();
-	end1 = v1.end();
-
-	send = s.end();
-	send1 = s1.end();
-
-	oend = ov.end();
-	oend1 = ov1.end();
-
-	eit = ev.end();
-	eit1 = ev1.end();
 
 	/**
 	 * 
@@ -796,9 +804,14 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator-(it) tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "operator-(it): \t\t\t";
+		usleep(4242);
 
 		if ((end - it) != (end1 - it1))
 			std::cout << "FAIL ";
@@ -822,39 +835,35 @@ void	iteratorsTest( void )
 			std::cout << GREEN << "✅ " << RESET << std::endl;
 	}
 
-	it = v.begin();
-	it1 = v1.begin();
-
-	sit = s.begin();
-	sit1 = s1.begin();
-
-	oit = ov.begin();
-	oit1 = ov1.begin();
-
-	eit = ev.begin();
-	eit1 = ev1.begin();
-
-	end = v.end();
-	end1 = v1.end();
-
-	send = s.end();
-	send1 = s1.end();
-
-	oend = ov.end();
-	oend1 = ov1.end();
-
-	eit = ev.end();
-	eit1 = ev1.end();
-
 	/**
 	 * 
 	 * @brief In this section it will perform multiple testes to ensure that the operator[] works as expected.
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator[] tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "operator[]: \t\t\t";
+		usleep(4242);
 
 		b = true;
 		n = end - it;
@@ -915,9 +924,29 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator* tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		usleep(4242);
+		std::cout << WHITE << "operator*: \t\t\t";
+		usleep(4242);
 
 		b = true;
 		n = end - it;
@@ -980,31 +1009,7 @@ void	iteratorsTest( void )
 			std::cout << GREEN << "✅" << std::endl;
 	}
 
-	it = v.begin();
-	it1 = v1.begin();
-
-	sit = s.begin();
-	sit1 = s1.begin();
-
-	oit = ov.begin();
-	oit1 = ov1.begin();
-
-	eit = ev.begin();
-	eit1 = ev1.begin();
-
-	std::vector<int>::iterator	aux = v.begin();
-	ft::vector<int>::iterator	aux1 = v1.begin();
-
-	std::vector<std::string>::iterator	saux = s.begin();
-	ft::vector<std::string>::iterator	saux1 = s1.begin();
-
-	std::vector<int>::iterator	oaux = ov.begin();
-	ft::vector<int>::iterator	oaux1 = ov1.begin();
-
-	std::vector<int>::iterator	eaux = ev.begin();
-	ft::vector<int>::iterator	eaux1 = ev1.begin();
-
-	std::string					res[2] = {"✅", "FAIL"};
+	std::string	res[2] = {"✅", "FAIL"};
 
 	/**
 	 * 
@@ -1012,9 +1017,41 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator== tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		std::vector<int>::iterator	aux = v.begin();
+		ft::vector<int>::iterator	aux1 = v1.begin();
+
+		std::vector<std::string>::iterator	saux = s.begin();
+		ft::vector<std::string>::iterator	saux1 = s1.begin();
+
+		std::vector<int>::iterator	oaux = ov.begin();
+		ft::vector<int>::iterator	oaux1 = ov1.begin();
+
+		std::vector<int>::iterator	eaux = ev.begin();
+		ft::vector<int>::iterator	eaux1 = ev1.begin();
+
+		usleep(4242);
+		std::cout << WHITE << "operator==: \t\t\t";
+		usleep(4242);
 
 		std::cout << res[((it == end) != (it1 == end1))] << " ";
 		std::cout << res[((it == aux) != (it1 == aux1))] << " ";
@@ -1051,9 +1088,41 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator!= tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		std::vector<int>::iterator	aux = v.begin();
+		ft::vector<int>::iterator	aux1 = v1.begin();
+
+		std::vector<std::string>::iterator	saux = s.begin();
+		ft::vector<std::string>::iterator	saux1 = s1.begin();
+
+		std::vector<int>::iterator	oaux = ov.begin();
+		ft::vector<int>::iterator	oaux1 = ov1.begin();
+
+		std::vector<int>::iterator	eaux = ev.begin();
+		ft::vector<int>::iterator	eaux1 = ev1.begin();
+
+		usleep(4242);
+		std::cout << WHITE << "operator!=: \t\t\t";
+		usleep(4242);
 
 		std::cout << res[((it != end) != (it1 != end1))] << " ";
 		std::cout << res[((it != aux) != (it1 != aux1))] << " ";
@@ -1090,9 +1159,41 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator< tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		std::vector<int>::iterator	aux = v.begin();
+		ft::vector<int>::iterator	aux1 = v1.begin();
+
+		std::vector<std::string>::iterator	saux = s.begin();
+		ft::vector<std::string>::iterator	saux1 = s1.begin();
+
+		std::vector<int>::iterator	oaux = ov.begin();
+		ft::vector<int>::iterator	oaux1 = ov1.begin();
+
+		std::vector<int>::iterator	eaux = ev.begin();
+		ft::vector<int>::iterator	eaux1 = ev1.begin();
+
+		usleep(4242);
+		std::cout << WHITE << "operator<: \t\t\t";
+		usleep(4242);
 
 		std::cout << res[((it < end) != (it1 < end1))] << " ";
 		std::cout << res[((it < aux) != (it1 < aux1))] << " ";
@@ -1129,9 +1230,41 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator<= tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		std::vector<int>::iterator	aux = v.begin();
+		ft::vector<int>::iterator	aux1 = v1.begin();
+
+		std::vector<std::string>::iterator	saux = s.begin();
+		ft::vector<std::string>::iterator	saux1 = s1.begin();
+
+		std::vector<int>::iterator	oaux = ov.begin();
+		ft::vector<int>::iterator	oaux1 = ov1.begin();
+
+		std::vector<int>::iterator	eaux = ev.begin();
+		ft::vector<int>::iterator	eaux1 = ev1.begin();
+
+		usleep(4242);
+		std::cout << WHITE << "operator<=: \t\t\t";
+		usleep(4242);
 
 		std::cout << res[((it <= end) != (it1 <= end1))] << " ";
 		std::cout << res[((it <= aux) != (it1 <= aux1))] << " ";
@@ -1168,9 +1301,41 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator> tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		std::vector<int>::iterator	aux = v.begin();
+		ft::vector<int>::iterator	aux1 = v1.begin();
+
+		std::vector<std::string>::iterator	saux = s.begin();
+		ft::vector<std::string>::iterator	saux1 = s1.begin();
+
+		std::vector<int>::iterator	oaux = ov.begin();
+		ft::vector<int>::iterator	oaux1 = ov1.begin();
+
+		std::vector<int>::iterator	eaux = ev.begin();
+		ft::vector<int>::iterator	eaux1 = ev1.begin();
+
+		usleep(4242);
+		std::cout << WHITE << "operator>: \t\t\t";
+		usleep(4242);
 
 		std::cout << res[((it > end) != (it1 > end1))] << " ";
 		std::cout << res[((it > aux) != (it1 > aux1))] << " ";
@@ -1207,9 +1372,41 @@ void	iteratorsTest( void )
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator>= tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		std::vector<int>::iterator	end = v.end();
+		ft::vector<int>::iterator	it1 = v1.begin();
+		ft::vector<int>::iterator	end1 = v1.end();
+
+		std::vector<std::string>::iterator	sit = s.begin();
+		std::vector<std::string>::iterator	send = s.end();
+		ft::vector<std::string>::iterator	sit1 = s1.begin();
+		ft::vector<std::string>::iterator	send1 = s1.end();
+
+		std::vector<int>::iterator	oit = ov.begin();
+		std::vector<int>::iterator	oend = ov.end();
+		ft::vector<int>::iterator	oit1 = ov1.begin();
+		ft::vector<int>::iterator	oend1 = ov1.end();
+
+		std::vector<int>::iterator	eit = ev.begin();
+		std::vector<int>::iterator	eend = ev.end();
+		ft::vector<int>::iterator	eit1 = ev1.begin();
+		ft::vector<int>::iterator	eend1 = ev1.end();
+
+		std::vector<int>::iterator	aux = v.begin();
+		ft::vector<int>::iterator	aux1 = v1.begin();
+
+		std::vector<std::string>::iterator	saux = s.begin();
+		ft::vector<std::string>::iterator	saux1 = s1.begin();
+
+		std::vector<int>::iterator	oaux = ov.begin();
+		ft::vector<int>::iterator	oaux1 = ov1.begin();
+
+		std::vector<int>::iterator	eaux = ev.begin();
+		ft::vector<int>::iterator	eaux1 = ev1.begin();
+
+		usleep(4242);
+		std::cout << WHITE << "operator>=: \t\t\t";
+		usleep(4242);
 		
 		std::cout << res[((it >= end) != (it1 >= end1))] << " ";
 		std::cout << res[((it >= aux) != (it1 >= aux1))] << " ";
@@ -1240,18 +1437,22 @@ void	iteratorsTest( void )
 		std::cout << res[((eit-- >= eaux) != (eit1-- >= eaux1))] << std::endl;
 	}
 
-	aux = v.begin();
-	aux1 = v1.begin();
-
 	/**
 	 * 
 	 * @brief In this section it will perform multiple testes to ensure that the operator= works as expected.
 	 * 
 	 */
 	{
-		usleep(244242);
-		std::cout << WHITE << "operator= tests: ";
-		usleep(244242);
+		std::vector<int>::iterator	it = v.begin();
+		ft::vector<int>::iterator	it1 = v1.begin();
+
+		std::vector<int>::iterator	aux = v.begin();
+		ft::vector<int>::iterator	aux1 = v1.begin();
+
+
+		usleep(4242);
+		std::cout << WHITE << "operator=: \t\t\t";
+		usleep(4242);
 		if ((aux == it) != (aux1 == it1))
 			std::cout << RED << "FAIL" << RESET << std::endl;
 		else

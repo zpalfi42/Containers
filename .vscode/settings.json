@@ -76,7 +76,11 @@
 		"numeric": "cpp",
 		"random": "cpp",
 		"numbers": "cpp",
-		"__functional_03": "cpp"
+		"__functional_03": "cpp",
+		"set": "cpp",
+		"iomanip": "cpp",
+		"queue": "cpp",
+		"filesystem": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled",
 	"C_Cpp.intelliSenseEngineFallback": "enabled"
