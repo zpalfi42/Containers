@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <nullptr_t.hpp>
+# include <node.hpp>
 
 /**
  * Iterators have some special things:
@@ -279,6 +280,121 @@ namespace	ft
 		return (rhs.base() - lhs.base());
 	};
 
+	template< class T >
+	class bidirectional_iterator: public ft::iterator<ft::bidirectional_iterator_tag, T>
+	{
+		public:
+			typedef	typename	ft::iterator<ft::random_access_iterator_tag, T>	base_it;
+			typedef	typename	base_it::value_type								value_type;
+			typedef	typename	base_it::difference_type						difference_type;
+			typedef	typename	base_it::pointer								pointer;
+			typedef	typename	base_it::reference								reference;
+			typedef	typename	base_it::iterator_category						iterator_category;
+			typedef				node<value_type>								node_type;
+
+		private:
+			node_type	*_node;
+
+		public:
+			
+			bidirectional_iterator(node_type *node=NULL): _node(node)
+			{
+			};
+
+			bidirectional_iterator(const bidirectional_iterator &other): _node(other._node)
+			{
+			};
+
+			bidirectional_iterator	&operator=(const bidirectional_iterator &other)
+			{
+				if (this!=&other)
+				{
+					this->_node = other._node;
+				}
+				return(*this);
+			}
+
+			~bidirectional_iterator( void )
+			{
+			};
+
+			bool operator==(const bidirectional_iterator& other) const
+			{
+				return (this->_node == other._node);
+			};
+
+    		bool operator!=(const bidirectional_iterator& other) const
+			{
+				return (this->_node != other._node);
+			};
+
+			bidirectional_iterator	&operator++( void )
+			{
+				// If the current node has a right node, then go to the leftest node of the right node.
+				// We do this because if the current niode has a right node it means that is smaller than the parent node.
+				if (this->_node->_rigth != ft::nullptr_t)
+				{
+					this->_node = this->_node->_rigth;
+					while (this->_node->_left != ft::nullptr_t)
+						this->_node = this->_node->_left;
+				}
+				else
+				{
+					// Else we climb the tree until the root or until we get to the left of a node
+					node_type	*parent = this->_node->_parent;
+					while (parent != ft::nullptr_t && this->_node == parent->_rigth)
+					{
+						this->_node = parent;
+						parent = parent->_parent;
+					}
+					this->_node = parent;
+				}
+				return (*this);
+			};
+
+			bidirectional_iterator	operator++( int )
+			{
+				bidirectional_iterator	temp(*this);
+				++(*this);
+				return (temp);
+			};
+
+			bidirectional_iterator	&operator--( void )
+			{
+				// If the current node has a left node, then go to the rightest node of the left node.
+				// We do this because if the current node has a left node it means that is smaller than the parent node.
+				if (this->_node->_left != ft::nullptr_t)
+				{
+					this->_node = this->_node->_left;
+					while (this->_node->_rigth != ft::nullptr_t)
+						this->_node = this->_node->_rigth;
+				}
+				else
+				{
+					// Else we climb the tree until the root or until we get to the right of a node
+					node_type	*parent = this->_node->_parent;
+					while (parent != ft::nullptr_t && this->_node == parent->_left)
+					{
+						this->_node = parent;
+						parent = parent->_parent;
+					}
+					this->_node = parent;
+				}
+				return (*this);
+			};
+
+			bidirectional_iterator	operator--( int )
+			{
+				bidirectional_iterator	temp(*this);
+				--(*this)
+				return (temp);
+			};
+
+			reference	operator*( void ) const
+			{
+				return(this->_node->_data);
+			};
+	};
 }
 
 # include <iterator.ipp>
