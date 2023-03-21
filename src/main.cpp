@@ -6,6 +6,7 @@ int main( void )
 	// riteratorsTests();
 	// vectorsTest();
 	std::map<int, int>	m;
+	ft::map<int, int>	f;
 
 	m.insert(std::pair<int, int>(1, 1));
 	m.insert(std::pair<int, int>(0, 0));

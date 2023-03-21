@@ -386,7 +386,7 @@ namespace	ft
 			bidirectional_iterator	operator--( int )
 			{
 				bidirectional_iterator	temp(*this);
-				--(*this)
+				--(*this);
 				return (temp);
 			};
 
