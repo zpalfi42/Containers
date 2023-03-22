@@ -23,63 +23,65 @@ namespace ft
 			typedef const value_type&				const_reference;
 			typedef	typename Allocator::pointer			pointer;
 			typedef	typename Allocator::const_pointer		const_pointer;
-			typedef	ft::bidirectional_iterator<T>	iterator;
-			typedef	ft::bidirectional_iterator<T>	const_iterator;
+			typedef	ft::bidirectional_iterator<value_type>	iterator;
+			typedef	ft::bidirectional_iterator<value_type>	const_iterator;
 			typedef	ft::reverse_iterator<iterator>	reverse_iterator;
 			typedef	ft::reverse_iterator<iterator>	const_reverse_iterator;
 
 		private:
 
-			typedef	node<value_type>	node_type;
+			typedef		node<value_type>			node_type;
+			typename	allocator_type::template	rebind<node_type>::other _allocNode;
 
 			size_type		_size;
 			node_type*		_root;
 			allocator_type	_allocator;
 
-			ft::pair<iterator, bool>	nodeInsert( const value_type &val )
-			{
-				node_type n = new ft::node<ft::pair<Key, T> >(val);
 
-				if (this->_root == ft::nullptr_t)
-				{
-					this->_root = n;
-					this->_size++;
-					return (ft::make_pair(iterator(this->_root), true));
-				}
+			// ft::pair<iterator, bool>	nodeInsert( const value_type &val )
+			// {
+			// 	node_type n = new ft::node<ft::pair<Key, T> >(val);
 
-				node_type	current = this->_root;
-				while (current != ft::nullptr_t)
-				{
-					if (n->_data < current->_data)
-					{
-						if (current->_left == ft::nullptr_t)
-						{
-							current->_left = n;
-							n->_parent = current;
-							this->_size++;
-							return (ft::make_pair(iterator(n), true));
-						}
-						current = current->_left;
-					}
-					else if (n->_data > current->_data)
-					{
-						if (current->_right == ft::nullptr_t)
-						{
-							current->_right = n;
-							n->_parent = current;
-							this->_size++;
-							return (ft::make_pair(iterator(n), true));
-						}
-						current = current->_right;
-					}
-					else
-					{
-						delete n;
-						return (ft::make_pair(iterator(current), false));
-					}
-				}
-				return (ft::make_pair(iterator(), false));
-			};
+			// 	if (this->_root == ft::nullptr_t)
+			// 	{
+			// 		this->_root = n;
+			// 		this->_size++;
+			// 		return (ft::make_pair(iterator(this->_root), true));
+			// 	}
+
+			// 	node_type	current = this->_root;
+			// 	while (current != ft::nullptr_t)
+			// 	{
+			// 		if (n->_data < current->_data)
+			// 		{
+			// 			if (current->_left == ft::nullptr_t)
+			// 			{
+			// 				current->_left = n;
+			// 				n->_parent = current;
+			// 				this->_size++;
+			// 				return (ft::make_pair(iterator(n), true));
+			// 			}
+			// 			current = current->_left;
+			// 		}
+			// 		else if (n->_data > current->_data)
+			// 		{
+			// 			if (current->_right == ft::nullptr_t)
+			// 			{
+			// 				current->_right = n;
+			// 				n->_parent = current;
+			// 				this->_size++;
+			// 				return (ft::make_pair(iterator(n), true));
+			// 			}
+			// 			current = current->_right;
+			// 		}
+			// 		else
+			// 		{
+			// 			delete n;
+			// 			return (ft::make_pair(iterator(current), false));
+			// 		}
+			// 	}
+			// 	return (ft::make_pair(iterator(), false));
+			// };
 
 			ft::pair<iterator, bool>	min( void )
 			{
@@ -88,7 +90,7 @@ namespace ft
 				{
 					if (current->_left == ft::nullptr_t)
 					{
-						return (ft::make_pair(iterator(current), true));
+						return (ft::make_pair(iterator(current) , true));
 					}
 					current = current->_left;
 				}
@@ -97,7 +99,7 @@ namespace ft
 
 			ft::pair<iterator, bool>	max( void )
 			{
-				node_type	current = this->_root;
+				node_type	*current = this->_root;
 				while (current != ft::nullptr_t)
 				{
 					if (current->_right == ft::nullptr_t)
@@ -125,6 +127,16 @@ namespace ft
 					copyNodes(dest->_right, src->_right);
 				}
 			}
+
+			void	clearNodes( node_type *node )
+			{
+				if (node->_left != ft::nullptr_t)
+					clearNodes(node->_left);
+				if (node->_right != ft::nullptr_t)
+					clearNodes(node->_right);
+				this->_allocator.destroy(&node->_data);
+				this->_allocator.deallocate(node, 1);
+			};
 
 		public : 
 
@@ -158,30 +170,74 @@ namespace ft
 				return(this->_allocator);
 			};
 
-			mapped_type	&at( const Key &key )
-			{
-				
-			};
+			mapped_type	&at( const Key &key );
 
 			mapped_type	&operator[]( const Key &key );
 
-			iterator		begin( void );
-			const_iterator	cbegin( void );
-			iterator		end( void );
-			const_iterator	cend( void );
+			iterator		begin( void ){ return(this->min()._first); };
+			const_iterator		begin( void ) const { return(this->min()._first); };
+			iterator		end( void ){ return(this->max()._first); };
+			const_iterator		end( void ) const { return(this->max()._first); };
 
-			reverse_iterator		rbegin( void );
-			const_reverse_iterator	crbegin( void );
-			reverse_iterator		rend( void );
-			const_reverse_iterator	crend( void );
+			reverse_iterator		rbegin( void ){ return(reverse_iterator(this->end())); };
+			const_reverse_iterator	rbegin( void ) const { return(reverse_iterator(this->end())); };
+			reverse_iterator		rend( void ) { return(reverse_iterator(this->begin())); };
+			const_reverse_iterator	rend( void ) const { return(reverse_iterator(this->begin())); };
 
-			bool	empty( void ) const;
-			size_type	size( void ) const;
-			size_type	max_size( void ) const;
+			bool	empty( void ) const
+			{
+				return(this->_size == 0);
+			};
 
-			void	clear( void );
+			size_type	size( void ) const
+			{
+				return(this->_size);
+			};
 
-			ft::pair<iterator, bool>	insert( const value_type &val );
+			size_type	max_size( void ) const
+			{
+				return(this->_allocator.max_size());
+			};
+
+			void	clear( void )
+			{
+				if (this->_root == ft::nullptr_t)
+					return ;
+				clearNodes(this->_root);
+				this->_root == ft::nullptr_t;
+				this->_size = 0;
+			};
+
+			ft::pair<iterator, bool>	insert( const value_type &val )
+			{
+				node_type	*parent = ft::nullptr_t;
+				node_type	*node = this->_root;
+				while (node != ft::nullptr_t)
+				{
+					parent = node;
+					if (val._first < node->_data._first)
+						node = node->_left;
+					else if (val._first > node->_data._first)
+						node = node->_right;
+					else
+						return (ft::make_pair(iterator(node), false));
+				}
+
+				node_type	*new_node = this->_allocNode.allocate(1);
+				this->_allocNode.construct(new_node, node_type(val));
+
+				if (parent == ft::nullptr_t)
+					this->_root = new_node;
+				else if (val._first < parent->_data._first)
+					parent->_left = new_node;
+				else
+					parent->_right = new_node;
+
+				new_node->_parent = parent;
+				++this->_size;
+				return (ft::make_pair(iterator(new_node), true));
+			};
+
 			iterator					insert( iterator pos, const value_type &val );
 			template< class InputIt >
 			void						insert( InputIt first, InputIt last );

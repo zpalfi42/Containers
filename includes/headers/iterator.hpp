@@ -145,14 +145,13 @@ namespace	ft
 			reverse_iterator( void ): _current(){};
 			reverse_iterator( Iter x ): _current(x){};
 
-			reverse_iterator( const reverse_iterator &other )
-			{
-				this->_current = other._current;
-			};
+			template <class It>
+			reverse_iterator( const reverse_iterator<It> &other ): _current(other._current){};
 
-			~reverse_iterator(){};
+			virtual ~reverse_iterator(){};
 
-			reverse_iterator	&operator=( const reverse_iterator &other )
+			template <class It>
+			reverse_iterator	&operator=( const reverse_iterator<It> &other )
 			{
 				if (this != &other)
 				{
@@ -290,16 +289,14 @@ namespace	ft
 			typedef	typename	base_it::pointer								pointer;
 			typedef	typename	base_it::reference								reference;
 			typedef	typename	base_it::iterator_category						iterator_category;
-			typedef				node<value_type>								node_type;
+			typedef				ft::node<value_type>							node_type;
 
 		private:
 			node_type	*_node;
 
 		public:
 			
-			bidirectional_iterator(node_type *node=NULL): _node(node)
-			{
-			};
+			bidirectional_iterator(node_type *node=ft::nullptr_t): _node(node){};
 
 			bidirectional_iterator(const bidirectional_iterator &other): _node(other._node)
 			{

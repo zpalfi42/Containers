@@ -118,25 +118,25 @@ typename ft::vector<T, Alloc>::const_iterator	ft::vector<T, Alloc>::end( void ) 
 template< class T, class Alloc >
 typename ft::vector<T, Alloc>::reverse_iterator	ft::vector<T, Alloc>::rbegin( void )
 {
-	return (reverse_iterator(this->_end));
+	return (reverse_iterator(this->end()));
 }
 
 template< class T, class Alloc >
 typename ft::vector<T, Alloc>::const_reverse_iterator	ft::vector<T, Alloc>::rbegin( void ) const
 {
-	return (const_reverse_iterator(this->_end));
+	return (const_reverse_iterator(this->end()));
 }
 
 template< class T, class Alloc >
 typename ft::vector<T, Alloc>::reverse_iterator	ft::vector<T, Alloc>::rend( void )
 {
-	return (reverse_iterator(this->_begin));
+	return (reverse_iterator(this->begin()));
 }
 
 template< class T, class Alloc >
 typename ft::vector<T, Alloc>::const_reverse_iterator	ft::vector<T, Alloc>::rend( void ) const
 {
-	return (const_reverse_iterator(this->_begin));
+	return (const_reverse_iterator(this->begin()));
 }
 
 template< class T, class Alloc >

@@ -15,14 +15,22 @@ namespace ft
 			first_type	_first;
 			second_type	_second;
 
-			pair( void );
+			pair( void ): _first(NULL), _second(NULL){};
 
-			pair( const first_type &x, const second_type &y );
+			pair( const first_type &x, const second_type &y ): _first(x), _second(y){};
 
 			template< class U1, class U2 >
-			pair( const pair<U1, U2> &p );
+			pair( const pair<U1, U2> &p ): _first(p._first), _second(p._second){};
 
-			pair& operator=( const pair& other );
+			pair& operator=( const pair& other )
+			{
+				if (this!=&other)
+				{
+					this->_first = other._first;
+					this->_second = other._second;
+				}
+				return (*this);
+			};
 	};
 
 	template< class T1, class T2 >
