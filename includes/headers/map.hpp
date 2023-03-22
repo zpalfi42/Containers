@@ -5,6 +5,8 @@
 # include <iterator.hpp>
 # include <pair.hpp>
 # include <node.hpp>
+# include <enable_if.hpp>
+# include <is_integral.hpp>
 
 namespace ft
 {
@@ -35,6 +37,7 @@ namespace ft
 
 			size_type		_size;
 			node_type*		_root;
+			node_type*		_min;
 			allocator_type	_allocator;
 
 
@@ -85,7 +88,7 @@ namespace ft
 
 			ft::pair<iterator, bool>	min( void )
 			{
-				node_type	current = this->_root;
+				node_type	*current = this->_root;
 				while (current != ft::nullptr_t)
 				{
 					if (current->_left == ft::nullptr_t)
@@ -170,14 +173,38 @@ namespace ft
 				return(this->_allocator);
 			};
 
-			mapped_type	&at( const Key &key );
+			mapped_type	&at( const Key &key )
+			{
+				node_type	*node = this->_root;
+				while (node != ft::nullptr_t)
+				{
+					if (node->_data.first == key)
+						return (node->_data._second);
+					else if (key < node->_data.first)
+						node = node->_left;
+					else
+						node = node->_right;
+				}
+				throw(std::out_of_range("map::at:  key not found"));
+			};
 
-			mapped_type	&operator[]( const Key &key );
+			mapped_type	&operator[]( const Key &key )
+			{
+				iterator it = this->find(key);
+				if (it == this->end())
+				{
+					// The key doesn't exist, so insert a new element
+					value_type val = ft::make_pair(key, mapped_type());
+					it = insert(val).first;
+				}
+				// The key already exists, so return a reference to its value
+				return it->second;
+			};
 
-			iterator		begin( void ){ return(this->min()._first); };
-			const_iterator		begin( void ) const { return(this->min()._first); };
-			iterator		end( void ){ return(this->max()._first); };
-			const_iterator		end( void ) const { return(this->max()._first); };
+			iterator			begin( void ){ return(this->min().first); };
+			const_iterator		begin( void ) const { return(this->min()._irst); };
+			iterator			end( void ){ return(this->max().first); };
+			const_iterator		end( void ) const { return(this->max().first); };
 
 			reverse_iterator		rbegin( void ){ return(reverse_iterator(this->end())); };
 			const_reverse_iterator	rbegin( void ) const { return(reverse_iterator(this->end())); };
@@ -215,9 +242,9 @@ namespace ft
 				while (node != ft::nullptr_t)
 				{
 					parent = node;
-					if (val._first < node->_data._first)
+					if (val.first < node->_data.first)
 						node = node->_left;
-					else if (val._first > node->_data._first)
+					else if (val.first > node->_data.first)
 						node = node->_right;
 					else
 						return (ft::make_pair(iterator(node), false));
@@ -228,7 +255,7 @@ namespace ft
 
 				if (parent == ft::nullptr_t)
 					this->_root = new_node;
-				else if (val._first < parent->_data._first)
+				else if (val.first < parent->_data.first)
 					parent->_left = new_node;
 				else
 					parent->_right = new_node;
@@ -238,9 +265,50 @@ namespace ft
 				return (ft::make_pair(iterator(new_node), true));
 			};
 
-			iterator					insert( iterator pos, const value_type &val );
+			iterator					insert( iterator pos, const value_type &val )
+			{
+				node_type	*new_node = this->_allocNode.allocate(1);
+				this->_allocNode.construct(new_node, node_type(val));
+				new_node->_left = ft::nullptr_t;
+				new_node->_right = ft::nullptr_t;
+
+				if (this->_root == ft::nullptr_t)
+				{
+					this->_root = new_node;
+					++this->_size;
+					return (iterator(this->_root));
+				}
+
+				if (pos == this->end() || val.first > pos->first)
+				{
+					if (pos._node->_right != ft::nullptr_t)
+					{
+						new_node->_right = pos._node->_right;
+						pos._node->_right->_parent = new_node;
+					}
+					pos._node->_right = new_node;
+					new_node->_parent = pos._node;
+				}
+				else if (val.first < pos->first)
+				{
+					if (pos._node->_left != ft::nullptr_t)
+					{
+						new_node->_left = pos._node->_left;
+						pos._node->_left->_parent = new_node;
+					}
+					pos._node->_left = new_node;
+					new_node->_parent = pos._node;
+				}
+				else
+				{
+					pos->second = val.second;
+				}
+				std::cout << "BBB" << std::endl;
+				return (pos);
+			};
+
 			template< class InputIt >
-			void						insert( InputIt first, InputIt last );
+			void						insert( InputIt first, InputIt last, typename ft::enable_if<!ft::is_integral<InputIt>::value>::type * = 0 );
 
 			iterator	erase( iterator pos );
 			size_type	erase( const Key &key );
@@ -248,8 +316,39 @@ namespace ft
 			void	swap( map &other );
 
 			size_type	count( const Key &key ) const;
-			iterator	find( const Key &key );
-			const_iterator	find( const Key &key ) const;
+
+			iterator	find( const Key &key )
+			{
+				iterator	it = this->begin();
+				iterator	end = this->end();
+
+				while (it != end)
+				{
+					if (it->first == key)
+					{
+						return (it);
+					}
+					++it;
+				}
+				return it;
+			};
+
+			const_iterator	find( const Key &key ) const
+			{
+				const_iterator	it = this->begin();
+				const_iterator	end = this->end();
+
+				while (it != end)
+				{
+					if (it->first == key)
+					{
+						return (it);
+					}
+					++it;
+				}
+				return it;
+			};
+
 			ft::pair<iterator, iterator>	equal_range( const Key &key );
 			ft::pair<const_iterator, const_iterator>	equal_range( const Key &key ) const;
 			iterator	lower_bound( const Key &key );

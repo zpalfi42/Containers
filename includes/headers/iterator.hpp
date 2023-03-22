@@ -291,10 +291,7 @@ namespace	ft
 			typedef	typename	base_it::iterator_category						iterator_category;
 			typedef				ft::node<value_type>							node_type;
 
-		private:
 			node_type	*_node;
-
-		public:
 			
 			bidirectional_iterator(node_type *node=ft::nullptr_t): _node(node){};
 
@@ -329,9 +326,9 @@ namespace	ft
 			{
 				// If the current node has a right node, then go to the leftest node of the right node.
 				// We do this because if the current niode has a right node it means that is smaller than the parent node.
-				if (this->_node->_rigth != ft::nullptr_t)
+				if (this->_node->_right != ft::nullptr_t)
 				{
-					this->_node = this->_node->_rigth;
+					this->_node = this->_node->_right;
 					while (this->_node->_left != ft::nullptr_t)
 						this->_node = this->_node->_left;
 				}
@@ -339,7 +336,7 @@ namespace	ft
 				{
 					// Else we climb the tree until the root or until we get to the left of a node
 					node_type	*parent = this->_node->_parent;
-					while (parent != ft::nullptr_t && this->_node == parent->_rigth)
+					while (parent != ft::nullptr_t && this->_node == parent->_right)
 					{
 						this->_node = parent;
 						parent = parent->_parent;
@@ -363,8 +360,8 @@ namespace	ft
 				if (this->_node->_left != ft::nullptr_t)
 				{
 					this->_node = this->_node->_left;
-					while (this->_node->_rigth != ft::nullptr_t)
-						this->_node = this->_node->_rigth;
+					while (this->_node->_right != ft::nullptr_t)
+						this->_node = this->_node->_right;
 				}
 				else
 				{
@@ -390,6 +387,11 @@ namespace	ft
 			reference	operator*( void ) const
 			{
 				return(this->_node->_data);
+			};
+
+			pointer		operator->( void ) const
+			{
+				return (&(this->_node->_data));
 			};
 	};
 }
