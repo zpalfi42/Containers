@@ -40,52 +40,6 @@ namespace ft
 			node_type*		_min;
 			allocator_type	_allocator;
 
-
-			// ft::pair<iterator, bool>	nodeInsert( const value_type &val )
-			// {
-			// 	node_type n = new ft::node<ft::pair<Key, T> >(val);
-
-			// 	if (this->_root == ft::nullptr_t)
-			// 	{
-			// 		this->_root = n;
-			// 		this->_size++;
-			// 		return (ft::make_pair(iterator(this->_root), true));
-			// 	}
-
-			// 	node_type	current = this->_root;
-			// 	while (current != ft::nullptr_t)
-			// 	{
-			// 		if (n->_data < current->_data)
-			// 		{
-			// 			if (current->_left == ft::nullptr_t)
-			// 			{
-			// 				current->_left = n;
-			// 				n->_parent = current;
-			// 				this->_size++;
-			// 				return (ft::make_pair(iterator(n), true));
-			// 			}
-			// 			current = current->_left;
-			// 		}
-			// 		else if (n->_data > current->_data)
-			// 		{
-			// 			if (current->_right == ft::nullptr_t)
-			// 			{
-			// 				current->_right = n;
-			// 				n->_parent = current;
-			// 				this->_size++;
-			// 				return (ft::make_pair(iterator(n), true));
-			// 			}
-			// 			current = current->_right;
-			// 		}
-			// 		else
-			// 		{
-			// 			delete n;
-			// 			return (ft::make_pair(iterator(current), false));
-			// 		}
-			// 	}
-			// 	return (ft::make_pair(iterator(), false));
-			// };
-
 			ft::pair<iterator, bool>	min( void )
 			{
 				node_type	*current = this->_root;
@@ -202,9 +156,14 @@ namespace ft
 			};
 
 			iterator			begin( void ){ return(this->min().first); };
-			const_iterator		begin( void ) const { return(this->min()._irst); };
-			iterator			end( void ){ return(this->max().first); };
-			const_iterator		end( void ) const { return(this->max().first); };
+			const_iterator		begin( void ) const { return(this->min().first); };
+			iterator			end( void )
+			{
+				iterator	it = this->max().first;
+				++it;
+				return(it);
+			};
+			const_iterator		end( void ) const { return(this->max().first++); };
 
 			reverse_iterator		rbegin( void ){ return(reverse_iterator(this->end())); };
 			const_reverse_iterator	rbegin( void ) const { return(reverse_iterator(this->end())); };
@@ -239,6 +198,7 @@ namespace ft
 			{
 				node_type	*parent = ft::nullptr_t;
 				node_type	*node = this->_root;
+				
 				while (node != ft::nullptr_t)
 				{
 					parent = node;
@@ -267,44 +227,55 @@ namespace ft
 
 			iterator					insert( iterator pos, const value_type &val )
 			{
-				node_type	*new_node = this->_allocNode.allocate(1);
-				this->_allocNode.construct(new_node, node_type(val));
-				new_node->_left = ft::nullptr_t;
-				new_node->_right = ft::nullptr_t;
+				// node_type	*new_node = this->_allocNode.allocate(1);
+				// this->_allocNode.construct(new_node, node_type(val));
+				// new_node->_left = ft::nullptr_t;
+				// new_node->_right = ft::nullptr_t;
 
-				if (this->_root == ft::nullptr_t)
+				// if (this->_root == ft::nullptr_t)
+				// {
+				// 	new_node->_parent = ft::nullptr_t;
+				// 	this->_root = new_node;
+				// 	++this->_size;
+				// 	return (iterator(this->_root));
+				// }
+
+				(void) pos;
+
+				map::iterator	exist = this->find(val.first);
+
+				if (exist != NULL)
 				{
-					this->_root = new_node;
-					++this->_size;
-					return (iterator(this->_root));
+					exist->second = val.second;
+					return (exist);
 				}
 
-				if (pos == this->end() || val.first > pos->first)
-				{
-					if (pos._node->_right != ft::nullptr_t)
-					{
-						new_node->_right = pos._node->_right;
-						pos._node->_right->_parent = new_node;
-					}
-					pos._node->_right = new_node;
-					new_node->_parent = pos._node;
-				}
-				else if (val.first < pos->first)
-				{
-					if (pos._node->_left != ft::nullptr_t)
-					{
-						new_node->_left = pos._node->_left;
-						pos._node->_left->_parent = new_node;
-					}
-					pos._node->_left = new_node;
-					new_node->_parent = pos._node;
-				}
-				else
-				{
-					pos->second = val.second;
-				}
-				std::cout << "BBB" << std::endl;
-				return (pos);
+				return this->insert(val).first;
+				// if (pos == this->end() || val.first > pos->first)
+				// {
+				// 	if (pos._node->_right != ft::nullptr_t)
+				// 	{
+				// 		new_node->_right = pos._node->_right;
+				// 		pos._node->_right->_parent = new_node;
+				// 	}
+				// 	pos._node->_right = new_node;
+				// 	new_node->_parent = pos._node;
+				// }
+				// else if (val.first < pos->first)
+				// {
+				// 	if (pos._node->_left != ft::nullptr_t)
+				// 	{
+				// 		new_node->_left = pos._node->_left;
+				// 		pos._node->_left->_parent = new_node;
+				// 	}
+				// 	pos._node->_left = new_node;
+				// 	new_node->_parent = pos._node;
+				// }
+				// else
+				// {
+				// 	pos->second = val.second;
+				// }
+				// return (pos);
 			};
 
 			template< class InputIt >
@@ -325,12 +296,10 @@ namespace ft
 				while (it != end)
 				{
 					if (it->first == key)
-					{
 						return (it);
-					}
 					++it;
 				}
-				return it;
+				return NULL;
 			};
 
 			const_iterator	find( const Key &key ) const
@@ -341,12 +310,10 @@ namespace ft
 				while (it != end)
 				{
 					if (it->first == key)
-					{
 						return (it);
-					}
 					++it;
 				}
-				return it;
+				return NULL;
 			};
 
 			ft::pair<iterator, iterator>	equal_range( const Key &key );
