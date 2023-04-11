@@ -2,9 +2,9 @@
 
 int main( void )
 {
-	// iteratorsTest();
-	// riteratorsTests();
-	// vectorsTest();
+	iteratorsTest();
+	riteratorsTests();
+	vectorsTest();
 
 	std::map<int, int>	m;
 
