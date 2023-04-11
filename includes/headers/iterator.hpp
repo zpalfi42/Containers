@@ -169,7 +169,7 @@ namespace	ft
 			reference			operator*( void ) const
 			{
 				iterator_type	tmp = this->_current;
-				return (*(tmp - 1));
+				return (*(--tmp));
 			};
 
 			pointer				operator->( void ) const
@@ -190,6 +190,7 @@ namespace	ft
 
 			reverse_iterator	&operator--( void )
 			{
+				std::cout << "XD" << std::endl;
 				++this->_current;
 				return (*this);
 			};
@@ -292,10 +293,11 @@ namespace	ft
 			typedef				ft::node<value_type>							node_type;
 
 			node_type	*_node;
+			node_type	*_prev;
 			
-			bidirectional_iterator(node_type *node=ft::nullptr_t): _node(node){};
+			bidirectional_iterator(node_type *node=ft::nullptr_t): _node(node), _prev(ft::nullptr_t){};
 
-			bidirectional_iterator(const bidirectional_iterator &other): _node(other._node)
+			bidirectional_iterator(const bidirectional_iterator &other): _node(other._node), _prev(other._prev)
 			{
 			};
 
@@ -304,6 +306,7 @@ namespace	ft
 				if (this!=&other)
 				{
 					this->_node = other._node;
+					this->_prev = other._prev;
 				}
 				return(*this);
 			}
@@ -324,6 +327,10 @@ namespace	ft
 
 			bidirectional_iterator	&operator++( void )
 			{
+				if (this->_node == ft::nullptr_t)
+					return (*this);
+				std::cout << "A" << std::endl;	
+				this->_prev = this->_node;
 				// If the current node has a right node, then go to the leftest node of the right node.
 				// We do this because if the current niode has a right node it means that is smaller than the parent node.
 				if (this->_node->_right != ft::nullptr_t)
@@ -355,6 +362,10 @@ namespace	ft
 
 			bidirectional_iterator	&operator--( void )
 			{
+				if (this->_node == ft::nullptr_t)
+					this->_node = this->_prev;
+					return (*this);
+				this->_prev = this->_node;
 				// If the current node has a left node, then go to the rightest node of the left node.
 				// We do this because if the current node has a left node it means that is smaller than the parent node.
 				if (this->_node->_left != ft::nullptr_t)

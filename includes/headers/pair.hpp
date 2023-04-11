@@ -15,7 +15,7 @@ namespace ft
 			first_type	first;
 			second_type	second;
 
-			pair( void ): first(NULL), second(NULL){};
+			pair( void ): first(), second(){};
 
 			pair( const first_type &x, const second_type &y ): first(x), second(y){};
 
