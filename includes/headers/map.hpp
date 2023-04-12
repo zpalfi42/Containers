@@ -135,7 +135,7 @@ namespace ft
 					clearNodes(node->_left);
 				if (node->_right != ft::nullptr_t)
 					clearNodes(node->_right);
-				this->_allocator.destroy(&node->_data);
+				this->_allocNode.destroy(node);
 				this->_allocNode.deallocate(node, 1);
 			};
 
@@ -259,7 +259,7 @@ namespace ft
 
 			size_type	max_size( void ) const
 			{
-				return(this->_allocator.max_size());
+				return((this->_allocator.max_size()*2) / 10);
 			};
 
 			void	clear( void )
@@ -275,7 +275,6 @@ namespace ft
 			{
 				node_type	*parent = ft::nullptr_t;
 				node_type	*node = this->_root;
-				
 				while (node != ft::nullptr_t)
 				{
 					parent = node;
@@ -303,45 +302,51 @@ namespace ft
 			iterator					insert( iterator pos, const value_type &val )
 			{
 				(void) pos;
-
-				map::iterator	exist = this->find(val.first);
-
-				if (exist != NULL)
-				{
-					exist->second = val.second;
-					return (exist);
-				}
 				return this->insert(val).first;
 			};
 
 			template< class InputIt >
 			void						insert( InputIt first, InputIt last, typename ft::enable_if<!ft::is_integral<InputIt>::value>::type * = 0 )
 			{
-				while (first != last)
+				InputIt start = first;
+				size_t chunks = 100;
+				for (size_t i = 0; i < chunks; i++)
 				{
-					this->insert(*first);
-					first++;
+					first = start;
+					while (first != last)
+					{
+						insert(*first);
+						for (size_t i = 0; i < chunks && first != last; i++)
+						{
+							first++;
+							if (first == last)
+								break;
+						}
+					}
+					start++;
+					if (start == last)
+						break;
 				}
 			};
 
 			iterator	erase( iterator pos )
 			{
 				node_type	*curr = pos._node;
-				node_type	*tmp = ft::nullptr_t;
 
 				if (curr == ft::nullptr_t)
 					return pos;
+
+				node_type	*tmp = ft::nullptr_t;
+
 				if (curr->hasLeftChild())
 				{
 					tmp = curr->_left;
-					while (42)
+					while (tmp->_right)
 					{
-						if (tmp->_right == ft::nullptr_t)
-							break;
 						tmp = tmp->_right;
 					}
 					tmp->_right = curr->_right;
-					if (curr->_right != ft::nullptr_t)
+					if (curr->_right)
 						curr->_right->_parent = tmp;
 					tmp = curr->_left;
 					tmp->_parent = curr->_parent;
@@ -349,10 +354,10 @@ namespace ft
 				else if (curr->hasRightChild())
 				{
 					tmp = curr->_right;
-
 					tmp->_parent = curr->_parent;	
 				}
-				if (curr->_parent != ft::nullptr_t)
+
+				if (curr->_parent)
 				{
 					if (curr->_parent->_right == curr)
 						curr->_parent->_right = tmp;
@@ -362,7 +367,7 @@ namespace ft
 				else
 					this->_root = tmp;
 				this->_allocNode.deallocate(curr, 1);
-				this->_size--;
+				--this->_size;
 				return (iterator(tmp));
 			};
 
@@ -415,14 +420,17 @@ namespace ft
 
 			iterator	find( const Key &key )
 			{
-				iterator	it = this->begin();
-				iterator	end = this->end();
-
-				while (it != end)
+				node_type *found = this->_root;
+				if (!this->_root)
+					return NULL;
+				while (found)
 				{
-					if (it->first == key)
-						return (it);
-					++it;
+					if (found->_data.first == key)
+						return found;
+					if (key < found->_data.first)
+						found = found->_left;
+					else
+						found = found->_right;
 				}
 				return NULL;
 			};
@@ -550,24 +558,52 @@ namespace ft
 	};
 
 	template< class Key, class T, class Compare, class Alloc >
-	bool operator==( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+	bool operator==( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
+	{
+		(void) lhs;
+		(void) rhs;
+	};
 
 	template< class Key, class T, class Compare, class Alloc >
-	bool operator!=( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+	bool operator!=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
+	{
+		(void) lhs;
+		(void) rhs;
+	};
 
 	template< class Key, class T, class Compare, class Alloc >
-	bool operator<( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+	bool operator<( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
+	{
+		(void) lhs;
+		(void) rhs;
+	};
 
 	template< class Key, class T, class Compare, class Alloc >
-	bool operator<=( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+	bool operator<=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
+	{
+		(void) lhs;
+		(void) rhs;
+	};
 
 	template< class Key, class T, class Compare, class Alloc >
-	bool operator>( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+	bool operator>( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
+	{
+		(void) lhs;
+		(void) rhs;
+	};
 
 	template< class Key, class T, class Compare, class Alloc >
-	bool operator>=( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+	bool operator>=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
+	{
+		(void) lhs;
+		(void) rhs;
+	};
 
 	template< class Key, class T, class Compare, class Alloc >
-	void swap( std::map<Key, T, Compare, Alloc>& lhs, std::map<Key, T, Compare, Alloc>& rhs );
+	void swap( ft::map<Key, T, Compare, Alloc>& lhs, ft::map<Key, T, Compare, Alloc>& rhs )
+	{
+		(void) lhs;
+		(void) rhs;
+	};
 }
 #endif

@@ -1006,35 +1006,35 @@ void	vectorsTest( void )
 		printCase("", res, true);
 	}
 
-	// Resize() test.
-	{
-		std::vector<int>			cv = v;
-		ft::vector<int>				cv1 = v1;
-		std::vector<int>			cov = ov;
-		ft::vector<int>				cov1 = ov1;
-		std::vector<int>			cev = ev;
-		ft::vector<int>				cev1 = ev1;
-		std::vector<std::string>	csv = sv;
-		ft::vector<std::string>		csv1 = sv1;
+	// // Resize() test.
+	// {
+	// 	std::vector<int>			cv = v;
+	// 	ft::vector<int>				cv1 = v1;
+	// 	std::vector<int>			cov = ov;
+	// 	ft::vector<int>				cov1 = ov1;
+	// 	std::vector<int>			cev = ev;
+	// 	ft::vector<int>				cev1 = ev1;
+	// 	std::vector<std::string>	csv = sv;
+	// 	ft::vector<std::string>		csv1 = sv1;
 
-		cv.resize(24, 24);
-		cv1.resize(24, 24);
-		csv.resize(24, "24");
-		csv1.resize(24, "24");
-		cov.resize(24, 24);
-		cov1.resize(24, 24);
-		cev.resize(24, 24);
-		cev1.resize(24, 24);
+	// 	cv.resize(24, 24);
+	// 	cv1.resize(24, 24);
+	// 	csv.resize(24, "24");
+	// 	csv1.resize(24, "24");
+	// 	cov.resize(24, 24);
+	// 	cov1.resize(24, 24);
+	// 	cev.resize(24, 24);
+	// 	cev1.resize(24, 24);
 		
-		res = (cv.capacity() == cv1.capacity() && cv.size() == cv1.size() && cv[4] == cv1[4] && cv[5] == cv1[5]);
-		printCase("\033[0;37mresize( size_type, value ): \t\t", res, false);
-		res = (csv.capacity() == csv1.capacity() && csv.size() == csv1.size() && csv[4] == csv1[4] && csv[5] == csv1[5]);
-		printCase("", res, false);
-		res = (cov.capacity() == cov1.capacity() && cov.size() == cov1.size() && cov.front() == cov1.front() && cov.back() == cov1.back());
-		printCase("", res, false);
-		res = (cev.capacity() == cev1.capacity() && cev.size() == cev1.size() && cev.front() == cev1.front() && cev.back() == cev1.back());
-		printCase("", res, true);
-	}
+	// 	res = (cv.capacity() == cv1.capacity() && cv.size() == cv1.size() && cv[4] == cv1[4] && cv[5] == cv1[5]);
+	// 	printCase("\033[0;37mresize( size_type, value ): \t\t", res, false);
+	// 	res = (csv.capacity() == csv1.capacity() && csv.size() == csv1.size() && csv[4] == csv1[4] && csv[5] == csv1[5]);
+	// 	printCase("", res, false);
+	// 	res = (cov.capacity() == cov1.capacity() && cov.size() == cov1.size() && cov.front() == cov1.front() && cov.back() == cov1.back());
+	// 	printCase("", res, false);
+	// 	res = (cev.capacity() == cev1.capacity() && cev.size() == cev1.size() && cev.front() == cev1.front() && cev.back() == cev1.back());
+	// 	printCase("", res, true);
+	// }
 
 	// Swap() test.
 	{

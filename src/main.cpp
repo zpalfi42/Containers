@@ -101,7 +101,7 @@ void testMapSubject()
 	(void)sum2;
 
 	time_spent2 += (double)(end2 - begin2) / CLOCKS_PER_SEC;
-	std::cout << "time\t\t";
+	std::cout << "time\t\t\t\t\t";
 	(time_spent <= time_spent2 * 20) ? testOk() : testKo();
 	std::cout << "\n";
 	std::cout << "\n";
@@ -115,7 +115,24 @@ void testMapSubject()
 
 void mapTest()
 {
+	std::cout << RED << "  .--.     .-'.      .--.      .--.      .--.      .--.      .`-.      .--." << RESET << std::endl;
+	std::cout << RESET << ":::::." << RED << "\\" <<RESET << ":::::::." << RED << "\\" << RESET<< "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << std::endl;
+	std::cout << RED << "'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `" << RESET << std::endl;
+
+	std::cout << RED << " __  __               _            _       " << std::endl;
+	std::cout << " |  \\/  |             | |          | |      " << std::endl;
+	std::cout << " | \\  / | __ _ _ __   | |_ ___  ___| |_ ___ " << std::endl;
+	std::cout << " | |\\/| |/ _` | '_ \\  | __/ _ \\/ __| __/ __|" << std::endl;
+	std::cout << " | |  | | (_| | |_) | | ||  __/\\__ \\ |_\\__ \\" << std::endl;
+	std::cout << " |_|  |_|\\__,_| .__/   \\__\\___||___/\\__|___/" << std::endl;
+	std::cout << "              | |                           " << std::endl;
+	std::cout << "              |_|                           " << RESET << std::endl << std::endl;
+
+	std::cout << RED << "  .--.     .-'.      .--.      .--.      .--.      .--.      .`-.      .--." << RESET << std::endl;
+	std::cout << RESET << ":::::." << RED << "\\" <<RESET << ":::::::." << RED << "\\" << RESET<< "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << "::::::::." << RED << "\\" << RESET << std::endl;
+	std::cout << RED << "'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `" << RESET << std::endl;
 	std::cout << std::endl;
+	std::cout << std::endl << BLUE << "MEMBER FUNCTION TESTS:" << RESET << std::endl;
 	{
 		std::map<char, int> first;
 		ft::map<char, int> first2;
@@ -129,7 +146,7 @@ void mapTest()
 		first2['c'] = 50;
 		first2['d'] = 70;
 
-		std::cout << "empty\t\t";
+		std::cout << "\033[0;37mconstructor( void ):\t\t\t";
 		ft::map<char, int>::iterator it2 = first2.begin();
 		for (std::map<char, int>::iterator it = first.begin(); it != first.end(); ++it)
 		{
@@ -137,7 +154,7 @@ void mapTest()
 			++it2;
 		}
 		std::cout << std::endl;
-		std::cout << "range\t\t";
+		std::cout << "constructor( iterator, iterator ):\t";
 		std::map<char, int> second(first.begin(), first.end());
 		ft::map<char, int> second2(first2.begin(), first2.end());
 		ft::map<char, int>::iterator it3 = second2.begin();
@@ -174,7 +191,7 @@ void mapTest()
 			}
 		}
 		std::cout << std::endl;
-		std::cout << "copy\t\t";
+		std::cout << "constructor( map ):\t\t\t";
 		std::map<char, int> third(first);
 		ft::map<char, int> third2(first2);
 		ft::map<char, int>::iterator it5 = third2.begin();
@@ -185,7 +202,6 @@ void mapTest()
 		}
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test non-member functions" RESET << std::endl;
 	{
 		ft::map<char, int> first;
 		ft::map<char, int> second;
@@ -206,149 +222,37 @@ void mapTest()
 		second2 = first2;			   // second now contains 3 ints
 		first2 = ft::map<char, int>(); // and first is now empty
 
-		std::cout << "operator=\t";
+		std::cout << "operator=( map ):\t\t\t";
 		(first.size() == first2.size()) ? testOk() : testKo();
 		(second.size() == second2.size()) ? testOk() : testKo();
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test iterators" RESET << std::endl;
-
 	{
+		std::cout << "get_allocator( void ):\t\t\t";
+		int psize;
 		std::map<char, int> mymap;
+		std::pair<const char, int> *p;
+		int psize2;
 		ft::map<char, int> mymap2;
+		ft::pair<const char, int> *p2;
 
-		mymap['b'] = 100;
-		mymap['a'] = 200;
-		mymap['c'] = 300;
-		mymap2['b'] = 100;
-		mymap2['a'] = 200;
-		mymap2['c'] = 300;
+		// allocate an array of 5 elements using mymap's allocator:
+		p = mymap.get_allocator().allocate(5);
+		p2 = mymap2.get_allocator().allocate(5);
 
-		std::cout << "begin\t\t";
-		ft::map<char, int>::iterator it2 = mymap2.begin();
-		for (std::map<char, int>::iterator it = mymap.begin(); it != mymap.end(); ++it)
-		{
-			(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
-			++it2;
-		}
-		std::cout << std::endl;
-	}
-	{
-		std::map<char, int> mymap;
-		ft::map<char, int> mymap2;
+		// assign some values to array
+		psize = sizeof(std::map<char, int>::value_type) * 5;
+		psize2 = sizeof(ft::map<char, int>::value_type) * 5;
 
-		mymap['b'] = 100;
-		mymap['a'] = 200;
-		mymap['c'] = 300;
-		mymap2['b'] = 100;
-		mymap2['a'] = 200;
-		mymap2['c'] = 300;
+		(psize == psize2) ? testOk() : testKo();
 
-		std::cout << "end\t\t";
-		ft::map<char, int>::iterator it2 = mymap2.begin();
-		for (std::map<char, int>::iterator it = mymap.begin(); it != mymap.end(); ++it)
-		{
-			(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
-			++it2;
-		}
-		std::cout << std::endl;
-	}
-	{
-		std::map<char, int> mymap;
-		ft::map<char, int> mymap2;
-
-		mymap['x'] = 100;
-		mymap['y'] = 200;
-		mymap['z'] = 300;
-		mymap2['x'] = 100;
-		mymap2['y'] = 200;
-		mymap2['z'] = 300;
-
-		std::cout << "rbegin\t\t";
-		std::map<char, int>::reverse_iterator rit;
-		ft::map<char, int>::reverse_iterator rit2;
-		rit2 = mymap2.rbegin();
-		for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit)
-		{
-			(rit->first == rit2->first && rit->second == rit2->second) ? testOk() : testKo();
-            std::cout << rit->first << " == " << rit2->first << std::endl;
-			++rit2;
-		}
-		std::cout << std::endl;
-	}
-	{
-		std::map<char, int> mymap;
-		ft::map<char, int> mymap2;
-
-		mymap['x'] = 100;
-		mymap['y'] = 200;
-		mymap['z'] = 300;
-		mymap2['x'] = 100;
-		mymap2['y'] = 200;
-		mymap2['z'] = 300;
-
-		std::cout << "rend\t\t";
-		std::map<char, int>::reverse_iterator rit;
-		ft::map<char, int>::reverse_iterator rit2;
-		rit2 = mymap2.rbegin();
-		for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit)
-		{
-			(rit->first == rit2->first && rit->second == rit2->second) ? testOk() : testKo();
-			++rit2;
-		}
-		std::cout << std::endl;
-	}
-
-	std::cout << UCYN "Test capacity" RESET << std::endl;
-	{
-		std::map<char, int> mymap;
-		ft::map<char, int> mymap2;
-
-		mymap['a'] = 10;
-		mymap['b'] = 20;
-		mymap['c'] = 30;
-		mymap2['a'] = 10;
-		mymap2['b'] = 20;
-		mymap2['c'] = 30;
-		std::cout << "empty\t\t";
-		while (!mymap.empty() && !mymap2.empty())
-		{
-			(mymap.begin()->first == mymap2.begin()->first && mymap.begin()->second == mymap2.begin()->second) ? testOk() : testKo();
-			mymap.erase(mymap.begin());
-			mymap2.erase(mymap2.begin());
-		}
-		std::cout << std::endl;
-	}
-	{
-		std::map<char, int> mymap;
-		ft::map<char, int> mymap2;
-		mymap['a'] = 101;
-		mymap['b'] = 202;
-		mymap['c'] = 302;
-		mymap2['a'] = 101;
-		mymap2['b'] = 202;
-		mymap2['c'] = 302;
-		std::cout << "size\t\t";
-		(mymap.size() == mymap2.size()) ? testOk() : testKo();
-		std::map<char, int> mymap3;
-		ft::map<char, int> mymap4;
-		(mymap3.size() == mymap4.size()) ? testOk() : testKo();
-		std::map<int, int> mymap5;
-		ft::map<int, int> mymap6;
-		mymap5[2] = 435;
-		mymap6[2] = 435;
-		(mymap3.size() == mymap4.size()) ? testOk() : testKo();
+		mymap.get_allocator().deallocate(p, 5);
+		mymap2.get_allocator().deallocate(p2, 5);
 
 		std::cout << std::endl;
 	}
-	{
-		std::map<int, int> mymap;
-		ft::map<int, int> mymap2;
-		std::cout << "max_size\t";
-		(mymap.max_size() == mymap2.max_size()) ? testOk() : testKo();
-		std::cout << std::endl;
-	}
-	std::cout << UCYN "Test element access " RESET << std::endl;
+
+	std::cout << std::endl << BLUE << "ELEMENT ACCESS TESTS:" << RESET << std::endl;
 	{
 		std::map<char, std::string> mymap;
 		ft::map<char, std::string> mymap2;
@@ -359,7 +263,7 @@ void mapTest()
 		mymap2['a'] = "an element";
 		mymap2['b'] = "another element";
 		mymap2['c'] = mymap2['b'];
-		std::cout << "operator[]\t";
+		std::cout << "operator[]:\t\t\t\t";
 		(mymap['a'] == mymap2['a']) ? testOk() : testKo();
 		(mymap['b'] == mymap2['b']) ? testOk() : testKo();
 		(mymap['c'] == mymap2['c']) ? testOk() : testKo();
@@ -383,7 +287,7 @@ void mapTest()
 		mymap2.at("alpha") = 10;
 		mymap2.at("beta") = 20;
 		mymap2.at("gamma") = 30;
-		std::cout << "at\t\t";
+		std::cout << "at( key ):\t\t\t\t";
 		ft::map<std::string, int>::iterator it2 = mymap2.begin();
 		for (std::map<std::string, int>::iterator it = mymap.begin(); it != mymap.end(); ++it)
 		{
@@ -402,7 +306,144 @@ void mapTest()
 
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test modifiers" RESET << std::endl;
+	
+	std::cout << std::endl << BLUE << "ITERATORS TESTS:" << RESET << std::endl;
+	{
+		std::map<char, int> mymap;
+		ft::map<char, int> mymap2;
+
+		mymap['b'] = 100;
+		mymap['a'] = 200;
+		mymap['c'] = 300;
+		mymap2['b'] = 100;
+		mymap2['a'] = 200;
+		mymap2['c'] = 300;
+
+		std::cout << "begin( void ):\t\t\t\t";
+		ft::map<char, int>::iterator it2 = mymap2.begin();
+		for (std::map<char, int>::iterator it = mymap.begin(); it != mymap.end(); ++it)
+		{
+			(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
+			++it2;
+		}
+		std::cout << std::endl;
+	}
+	{
+		std::map<char, int> mymap;
+		ft::map<char, int> mymap2;
+
+		mymap['b'] = 100;
+		mymap['a'] = 200;
+		mymap['c'] = 300;
+		mymap2['b'] = 100;
+		mymap2['a'] = 200;
+		mymap2['c'] = 300;
+
+		std::cout << "end( void ):\t\t\t\t";
+		ft::map<char, int>::iterator it2 = mymap2.begin();
+		for (std::map<char, int>::iterator it = mymap.begin(); it != mymap.end(); ++it)
+		{
+			(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
+			++it2;
+		}
+		std::cout << std::endl;
+	}
+	{
+		std::map<char, int> mymap;
+		ft::map<char, int> mymap2;
+
+		mymap['x'] = 100;
+		mymap['y'] = 200;
+		mymap['z'] = 300;
+		mymap2['x'] = 100;
+		mymap2['y'] = 200;
+		mymap2['z'] = 300;
+
+		std::cout << "rbegin( void ):\t\t\t\t";
+		std::map<char, int>::reverse_iterator rit;
+		ft::map<char, int>::reverse_iterator rit2;
+		rit2 = mymap2.rbegin();
+		for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit)
+		{
+			(rit->first == rit2->first && rit->second == rit2->second) ? testOk() : testKo();
+			++rit2;
+		}
+		std::cout << std::endl;
+	}
+	{
+		std::map<char, int> mymap;
+		ft::map<char, int> mymap2;
+
+		mymap['x'] = 100;
+		mymap['y'] = 200;
+		mymap['z'] = 300;
+		mymap2['x'] = 100;
+		mymap2['y'] = 200;
+		mymap2['z'] = 300;
+
+		std::cout << "rend( void ):\t\t\t\t";
+		std::map<char, int>::reverse_iterator rit;
+		ft::map<char, int>::reverse_iterator rit2;
+		rit2 = mymap2.rbegin();
+		for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit)
+		{
+			(rit->first == rit2->first && rit->second == rit2->second) ? testOk() : testKo();
+			++rit2;
+		}
+		std::cout << std::endl;
+	}
+
+	std::cout << std::endl << BLUE << "CAPACITY TESTS:" << RESET << std::endl;
+	{
+		std::map<char, int> mymap;
+		ft::map<char, int> mymap2;
+
+		mymap['a'] = 10;
+		mymap['b'] = 20;
+		mymap['c'] = 30;
+		mymap2['a'] = 10;
+		mymap2['b'] = 20;
+		mymap2['c'] = 30;
+		std::cout << "empty( void ):\t\t\t\t";
+		while (!mymap.empty() && !mymap2.empty())
+		{
+			(mymap.begin()->first == mymap2.begin()->first && mymap.begin()->second == mymap2.begin()->second) ? testOk() : testKo();
+			mymap.erase(mymap.begin());
+			mymap2.erase(mymap2.begin());
+		}
+		std::cout << std::endl;
+	}
+	{
+		std::map<char, int> mymap;
+		ft::map<char, int> mymap2;
+		mymap['a'] = 101;
+		mymap['b'] = 202;
+		mymap['c'] = 302;
+		mymap2['a'] = 101;
+		mymap2['b'] = 202;
+		mymap2['c'] = 302;
+		std::cout << "size( void ):\t\t\t\t";
+		(mymap.size() == mymap2.size()) ? testOk() : testKo();
+		std::map<char, int> mymap3;
+		ft::map<char, int> mymap4;
+		(mymap3.size() == mymap4.size()) ? testOk() : testKo();
+		std::map<int, int> mymap5;
+		ft::map<int, int> mymap6;
+		mymap5[2] = 435;
+		mymap6[2] = 435;
+		(mymap3.size() == mymap4.size()) ? testOk() : testKo();
+
+		std::cout << std::endl;
+	}
+	{
+		std::map<int, int> mymap;
+		ft::map<int, int> mymap2;
+		std::cout << "max_size( void ):\t\t\t";
+		(mymap.max_size() == mymap2.max_size()) ? testOk() : testKo();
+		std::cout << std::endl;
+	}
+
+	std::cout << std::endl << BLUE << "MODIFIERS TESTS:" << RESET << std::endl;
 	{
 		std::map<char, int> mymap;
 		ft::map<char, int> mymap2;
@@ -418,17 +459,34 @@ void mapTest()
 		ret = mymap.insert(std::pair<char, int>('z', 500));
 		ret2 = mymap2.insert(ft::pair<char, int>('z', 500));
 
-		std::cout << "insert\t\t";
+		std::cout << "insert( val ):\t\t\t\t";
 
 		(ret.second == ret2.second) ? testOk() : testKo();
-
+		ret = mymap.insert(std::pair<char, int>('j', 900));
+		ret2 = mymap2.insert(ft::pair<char, int>('j', 900));
+		(ret.second == ret2.second) ? testOk() : testKo();
+		ret = mymap.insert(std::pair<char, int>('k', 900));
+		ret2 = mymap2.insert(ft::pair<char, int>('k', 900));
+		(ret.second == ret2.second) ? testOk() : testKo();
+		ret = mymap.insert(std::pair<char, int>('l', 900));
+		ret2 = mymap2.insert(ft::pair<char, int>('l', 900));
+		(ret.second == ret2.second) ? testOk() : testKo();
+		std::cout << std::endl;
+		std::cout << "insert( iterator, iterator ):\t\t";
 		// second insert function version (with hint position):
 		std::map<char, int>::iterator it = mymap.begin();
 		ft::map<char, int>::iterator it2 = mymap2.begin();
+		
 		mymap.insert(it, std::pair<char, int>('b', 300));  // max efficiency inserting
-		mymap.insert(it, std::pair<char, int>('c', 400));  // no max efficiency inserting
 		mymap2.insert(it2, ft::pair<char, int>('b', 300)); // max efficiency inserting
+		
+		mymap.insert(it, std::pair<char, int>('c', 400));  // no max efficiency inserting
 		mymap2.insert(it2, ft::pair<char, int>('c', 400)); // no max efficiency inserting
+
+		// std::cout << "insert( pos, val ):\t\t";
+		// (it->first == it2->first) ? testOk() : testKo();
+
+		std::cout << "insert( iterator, iterator ):\t\t";
 
 		// third insert function version (range insertion):
 		std::map<char, int> anothermap;
@@ -451,7 +509,7 @@ void mapTest()
 		std::cout << std::endl;
 	}
 	{
-		std::cout << "erease\t\t";
+		std::cout << "erease( iterator ):\t\t\t";
 		std::map<char, int> mymap;
 		std::map<char, int>::iterator it;
 		ft::map<char, int> mymap2;
@@ -492,7 +550,7 @@ void mapTest()
 		std::cout << std::endl;
 	}
 	{
-		std::cout << "swap\t\t";
+		std::cout << "swap( map ):\t\t\t\t";
 
 		std::map<char, int> foo, bar;
 		ft::map<char, int> foo2, bar2;
@@ -531,7 +589,7 @@ void mapTest()
 		std::cout << std::endl;
 	}
 	{
-		std::cout << "clear\t\t";
+		std::cout << "clear( void ):\t\t\t\t";
 		std::map<char, int> mymap;
 		ft::map<char, int> mymap2;
 
@@ -566,60 +624,10 @@ void mapTest()
 		}
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test observers" RESET << std::endl;
+	
+	std::cout << std::endl << BLUE << "LOOKUP TESTS:" << RESET << std::endl;
 	{
-		std::cout << "key_comp\t";
-		std::map<char, int> mymap;
-		ft::map<char, int> mymap2;
-
-		std::map<char, int>::key_compare mycomp = mymap.key_comp();
-		ft::map<char, int>::key_compare mycomp2 = mymap2.key_comp();
-
-		mymap['a'] = 100;
-		mymap['b'] = 200;
-		mymap['c'] = 300;
-		mymap2['a'] = 100;
-		mymap2['b'] = 200;
-		mymap2['c'] = 300;
-
-		char highest = mymap.rbegin()->first;	// key value of last element
-		char highest2 = mymap2.rbegin()->first; // key value of last element
-
-		std::map<char, int>::iterator it = mymap.begin();
-		ft::map<char, int>::iterator it2 = mymap2.begin();
-		do
-		{
-			(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
-		} while (mycomp((*it++).first, highest) && mycomp2((*it2++).first, highest2));
-		std::cout << std::endl;
-	}
-	{
-		std::cout << "value_comp\t";
-		std::map<char, int> mymap;
-		ft::map<char, int> mymap2;
-
-		mymap['x'] = 1001;
-		mymap['y'] = 2002;
-		mymap['z'] = 3003;
-		mymap2['x'] = 1001;
-		mymap2['y'] = 2002;
-		mymap2['z'] = 3003;
-
-		std::pair<char, int> highest = *mymap.rbegin();	 // last element
-		ft::pair<char, int> highest2 = *mymap2.rbegin(); // last element
-
-		std::map<char, int>::iterator it = mymap.begin();
-		ft::map<char, int>::iterator it2 = mymap2.begin();
-		do
-		{
-			(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
-
-		} while (mymap.value_comp()(*it++, highest) && mymap2.value_comp()(*it2++, highest2));
-		std::cout << std::endl;
-	}
-	std::cout << UCYN "Test operators" RESET << std::endl;
-	{
-		std::cout << "find\t\t";
+		std::cout << "find( value ):\t\t\t\t";
 		std::map<char, int> mymap;
 		std::map<char, int>::iterator it;
 		ft::map<char, int> mymap2;
@@ -648,7 +656,7 @@ void mapTest()
 		std::cout << std::endl;
 	}
 	{
-		std::cout << "count\t\t";
+		std::cout << "count( value ):\t\t\t\t";
 
 		std::map<char, int> mymap;
 		ft::map<char, int> mymap2;
@@ -668,7 +676,7 @@ void mapTest()
 		std::cout << std::endl;
 	}
 	{
-		std::cout << "lower_bound\t";
+		std::cout << "lower_bound( value ):\t\t\t";
 		std::map<char, int> mymap;
 		std::map<char, int>::iterator itlow, itup;
 		ft::map<char, int> mymap2;
@@ -703,7 +711,7 @@ void mapTest()
 		std::cout << std::endl;
 	}
 	{
-		std::cout << "upper_bound\t";
+		std::cout << "upper_bound( value ):\t\t\t";
 
 		std::map<char, int> mymap;
 		std::map<char, int>::iterator itlow, itup;
@@ -739,7 +747,7 @@ void mapTest()
 		std::cout << std::endl;
 	}
 	{
-		std::cout << "equal_range\t";
+		std::cout << "equal_range( value ):\t\t\t";
 		std::map<char, int> mymap;
 		ft::map<char, int> mymap2;
 
@@ -760,32 +768,60 @@ void mapTest()
 
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test allocators" RESET << std::endl;
+	
+	std::cout << std::endl << BLUE << "OBSERVERS TESTS:" << RESET << std::endl;
 	{
-		std::cout << "get_allocator\t";
-		int psize;
+		std::cout << "key_comp( void ):\t\t\t";
 		std::map<char, int> mymap;
-		std::pair<const char, int> *p;
-		int psize2;
 		ft::map<char, int> mymap2;
-		ft::pair<const char, int> *p2;
 
-		// allocate an array of 5 elements using mymap's allocator:
-		p = mymap.get_allocator().allocate(5);
-		p2 = mymap2.get_allocator().allocate(5);
+		std::map<char, int>::key_compare mycomp = mymap.key_comp();
+		ft::map<char, int>::key_compare mycomp2 = mymap2.key_comp();
 
-		// assign some values to array
-		psize = sizeof(std::map<char, int>::value_type) * 5;
-		psize2 = sizeof(ft::map<char, int>::value_type) * 5;
+		mymap['a'] = 100;
+		mymap['b'] = 200;
+		mymap['c'] = 300;
+		mymap2['a'] = 100;
+		mymap2['b'] = 200;
+		mymap2['c'] = 300;
 
-		(psize == psize2) ? testOk() : testKo();
+		char highest = mymap.rbegin()->first;	// key value of last element
+		char highest2 = mymap2.rbegin()->first; // key value of last element
 
-		mymap.get_allocator().deallocate(p, 5);
-		mymap2.get_allocator().deallocate(p2, 5);
-
+		std::map<char, int>::iterator it = mymap.begin();
+		ft::map<char, int>::iterator it2 = mymap2.begin();
+		do
+		{
+			(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
+		} while (mycomp((*it++).first, highest) && mycomp2((*it2++).first, highest2));
 		std::cout << std::endl;
 	}
-	std::cout << UCYN "Test rendiment" RESET << std::endl;
+	{
+		std::cout << "value_comp( void ):\t\t\t";
+		std::map<char, int> mymap;
+		ft::map<char, int> mymap2;
+
+		mymap['x'] = 1001;
+		mymap['y'] = 2002;
+		mymap['z'] = 3003;
+		mymap2['x'] = 1001;
+		mymap2['y'] = 2002;
+		mymap2['z'] = 3003;
+
+		std::pair<char, int> highest = *mymap.rbegin();	 // last element
+		ft::pair<char, int> highest2 = *mymap2.rbegin(); // last element
+
+		std::map<char, int>::iterator it = mymap.begin();
+		ft::map<char, int>::iterator it2 = mymap2.begin();
+		do
+		{
+			(it->first == it2->first && it->second == it2->second) ? testOk() : testKo();
+
+		} while (mymap.value_comp()(*it++, highest) && mymap2.value_comp()(*it2++, highest2));
+		std::cout << std::endl;
+	}
+
+	std::cout << std::endl << BLUE << "RENDIMENT TESTS:" << RESET << std::endl;
 	{
 		testMapSubject();
 	}
@@ -795,77 +831,8 @@ int main( void )
 {
 	// iteratorsTest();
 	// riteratorsTests();
-	// vectorsTest();
+	vectorsTest();
 
     // mapTest();
 
-	// std::map<int, std::string> myMap2;
-
-    // // Insert root node
-    // myMap2.insert(std::make_pair(5, "five"));
-
-    // // Insert child nodes
-    // myMap2.insert(std::make_pair(2, "two"));
-    // myMap2.insert(std::make_pair(8, "eight"));
-
-    // // Insert grandchild nodes
-    // myMap2.insert(std::make_pair(1, "one"));
-    // myMap2.insert(std::make_pair(4, "four"));
-    // myMap2.insert(std::make_pair(6, "six"));
-    // myMap2.insert(std::make_pair(7, "seven"));
-    // myMap2.insert(std::make_pair(3, "three"));
-
-    // // Insert new leaf node
-    // myMap2.insert(std::make_pair(0, "zero"));
-
-	// std::map<int, std::string> myMap4;
-	// myMap2.erase(++(++(myMap2.begin())));
-	// std::map<int, std::string>::iterator it2 = myMap2.begin();
-	// std::map<int, std::string>::iterator end2 = --myMap2.end();
-	// myMap4.insert(it2, end2);
-	// myMap4.erase(5);
-	// myMap4.erase(7);
-    // // Print out key-value pairs
-    // for (std::map<int, std::string>::iterator it = myMap4.begin(); it != myMap4.end(); ++it) {
-    //     std::cout << it->first << ": " << it->second << std::endl;
-    // }
-	// std::cout << "--> " << myMap4.upper_bound(-1)->first << std::endl;
-
-    // std::cout << "----------------------------" << std::endl;
-
-    ft::map<int, std::string> myMap;
-
-    // Insert root node
-    myMap.insert(ft::make_pair(5, "five"));
-
-    // Insert child nodes
-    myMap.insert(ft::make_pair(2, "two"));
-    myMap.insert(ft::make_pair(8, "eight"));
-
-    // Insert grandchild nodes
-    myMap.insert(ft::make_pair(1, "one"));
-    myMap.insert(ft::make_pair(4, "four"));
-    myMap.insert(ft::make_pair(6, "six"));
-    myMap.insert(ft::make_pair(7, "seven"));
-    myMap.insert(ft::make_pair(3, "three"));
-
-    // Insert new leaf node
-    myMap.insert(ft::make_pair(0, "zero"));
-
-    // Print out key-value pairs
-
-	ft::map<int, std::string> myMap3;
-	myMap.erase(++(++(myMap.begin())));
-	ft::map<int, std::string>::iterator it1 = myMap.begin();
-	ft::map<int, std::string>::iterator end1 = --myMap.end();
-	myMap3.insert(it1, end1);
-	myMap3.erase(5);
-	myMap3.erase(7);
-    std::cout << "-------------" << std::endl;
-    for (ft::map<int, std::string>::reverse_iterator it = myMap3.rbegin(); it != myMap3.rend(); ++it) {
-        std::cout << it->first << ": " << it->second << std::endl;
-        break;
-    }
-	std::cout << "--> " << myMap3.upper_bound(0)->first << std::endl;
-    std::cout << "FINISH" << std::endl;
 }

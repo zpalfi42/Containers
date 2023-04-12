@@ -190,7 +190,6 @@ namespace	ft
 
 			reverse_iterator	&operator--( void )
 			{
-				std::cout << "XD" << std::endl;
 				++this->_current;
 				return (*this);
 			};
@@ -329,7 +328,6 @@ namespace	ft
 			{
 				if (this->_node == ft::nullptr_t)
 					return (*this);
-				std::cout << "A" << std::endl;	
 				this->_prev = this->_node;
 				// If the current node has a right node, then go to the leftest node of the right node.
 				// We do this because if the current niode has a right node it means that is smaller than the parent node.
@@ -363,8 +361,10 @@ namespace	ft
 			bidirectional_iterator	&operator--( void )
 			{
 				if (this->_node == ft::nullptr_t)
+				{
 					this->_node = this->_prev;
 					return (*this);
+				}
 				this->_prev = this->_node;
 				// If the current node has a left node, then go to the rightest node of the left node.
 				// We do this because if the current node has a left node it means that is smaller than the parent node.
