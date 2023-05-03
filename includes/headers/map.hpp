@@ -560,50 +560,70 @@ namespace ft
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator==( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
 	{
-		(void) lhs;
-		(void) rhs;
+		//  If the sizes are different, the maps are not the same 
+		if  (lhs. size () != rhs. size ()) 
+			return   false  ; 
+		typename  map<Key, T>::const_iterator it1 = lhs.begin(); 
+		typename  map<Key, T>::const_iterator it2 = rhs.begin(); 
+
+		//  Loop through the maps to check if they are the same 
+		while  (it1 != lhs.end() && it2 != rhs.end()) 
+		{ 
+			if  (*it1 != *it2) 
+				return	false; 
+			it1++; 
+			it2++; 
+		} 
+		return  (it1 == lhs.end()) && (it2 == rhs.end());
 	};
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator!=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
 	{
-		(void) lhs;
-		(void) rhs;
+		return (!(lhs == rhs));
 	};
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator<( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
 	{
-		(void) lhs;
-		(void) rhs;
+		typename  map<Key, T>::const_iterator it1 = lhs.begin(); 
+		typename  map<Key, T>::const_iterator it2 = rhs.begin(); 
+
+		//  We traverse the tree to compare each element 
+		while  (it1 != lhs.end() && it2 != rhs.end()) 
+		{ 
+			if  (*it1 < *it2) 
+				return  true ; 
+			if  (*it1 > *it2) 
+				return   false  ; 
+			it1++; 
+			it2++; 
+		} 
+		return  (it1 == lhs.end()) && (it2 != rhs.end()); 
 	};
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator<=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
 	{
-		(void) lhs;
-		(void) rhs;
+		return (!(rhs < lhs));
 	};
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator>( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
 	{
-		(void) lhs;
-		(void) rhs;
+		return (rhs < lhs);
 	};
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator>=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs )
 	{
-		(void) lhs;
-		(void) rhs;
+		return (!(lhs < rhs));
 	};
 
 	template< class Key, class T, class Compare, class Alloc >
 	void swap( ft::map<Key, T, Compare, Alloc>& lhs, ft::map<Key, T, Compare, Alloc>& rhs )
 	{
-		(void) lhs;
-		(void) rhs;
+		lhs.swap(rhs);
 	};
 }
 #endif

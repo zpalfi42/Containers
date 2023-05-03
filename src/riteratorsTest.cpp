@@ -100,7 +100,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (end - it) == (end1 - it1))
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		/**
 		 * Test operator+ with vectors full of std::string
@@ -115,7 +115,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (send - sit) == (send1 - sit1))
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		/**
 		 * Test operator+ with vectors with only one int.
@@ -130,7 +130,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (oend - oit) == (oend1 - oit1))
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		/**
 		 * Test operator+ with empty vectors.
@@ -146,7 +146,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (eend - eit) == (eend1 - eit1))
-			std::cout << GREEN << "✅ " << std::endl;
+			std::cout << GREEN << "✅" << std::endl;
 	}
 
 	/**
@@ -172,7 +172,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (end - it) == (end1 - it1))
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		/**
 		 * Test operator+ with vectors full of std::strings.
@@ -187,7 +187,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (send - sit) == (send1 - sit1))
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		/**
 		 * Test operator+ with vectors with only one int.
@@ -202,7 +202,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (oend - oit) == (oend1 - oit1))
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		/**
 		 * Test operator+ with empty vectors.
@@ -217,7 +217,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (eend - eit) == (eend1 - eit1))
-			std::cout << GREEN << "✅ " << RESET << std::endl;
+			std::cout << GREEN << "✅" << RESET << std::endl;
 	}
 
 	/**
@@ -243,7 +243,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (end - it) == (end1 - it1))
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		/**
 		 * Test operator- with vectors full of std::strings.
@@ -258,7 +258,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (send - sit) == (send1 - sit1))
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		/**
 		 * Test operator- with vectors with only one int.
@@ -273,7 +273,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b && (oend - oit) == (oend1 - oit1))
-			std::cout << GREEN << "✅ " << std::endl;
+			std::cout << GREEN << "✅" << std::endl;
 	}
 
 	/**
@@ -299,7 +299,7 @@ void	riteratorsTests( void )
 			it1++;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = (send - sit);
@@ -314,7 +314,7 @@ void	riteratorsTests( void )
 			sit1++;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = (oend - oit);
@@ -329,7 +329,7 @@ void	riteratorsTests( void )
 			oit1++;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = (eend - eit);
@@ -394,7 +394,7 @@ void	riteratorsTests( void )
 			end1--;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = send - sit;
@@ -409,7 +409,7 @@ void	riteratorsTests( void )
 			send1--;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = oend - oit;
@@ -462,7 +462,7 @@ void	riteratorsTests( void )
 			++it1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = send - sit;
@@ -477,7 +477,7 @@ void	riteratorsTests( void )
 			++sit1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = oend - oit;
@@ -492,7 +492,7 @@ void	riteratorsTests( void )
 			++oit1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = eend - eit;
@@ -557,7 +557,7 @@ void	riteratorsTests( void )
 			--end1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = send - sit;
@@ -572,7 +572,7 @@ void	riteratorsTests( void )
 			--send1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = oend - oit;
@@ -587,7 +587,7 @@ void	riteratorsTests( void )
 			--oend1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << std::endl;
+			std::cout << GREEN << "✅" << std::endl;
 	}
 
 	end = v.rend();
@@ -625,7 +625,7 @@ void	riteratorsTests( void )
 			it1 += 1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = (send - sit);
@@ -640,7 +640,7 @@ void	riteratorsTests( void )
 			sit1 += 1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = (oend - oit);
@@ -655,7 +655,7 @@ void	riteratorsTests( void )
 			oit1 += 1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = (eend - eit);
@@ -720,7 +720,7 @@ void	riteratorsTests( void )
 			end1 -= 1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = send - sit;
@@ -735,7 +735,7 @@ void	riteratorsTests( void )
 			send1 -= 1;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = oend - oit;
@@ -778,14 +778,14 @@ void	riteratorsTests( void )
 		if ((end - it) != (end1 - it1))
 			std::cout << "FAIL ";
 		else
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		end--;
 		end1--;
 		if ((end - it) != (end1 - it1))
 			std::cout << "FAIL ";
 		else
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		end -= 42;
 		end1 -= 42;
@@ -794,7 +794,7 @@ void	riteratorsTests( void )
 		if ((end - it) != (end1 - it1))
 			std::cout << RED << "FAIL" << RESET << std::endl;
 		else
-			std::cout << GREEN << "✅ " << RESET << std::endl;
+			std::cout << GREEN << "✅" << RESET << std::endl;
 	}
 
 	it = v.rbegin();
@@ -842,7 +842,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = send - sit;
@@ -855,7 +855,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 		
 		b = true;
 		n = oend - oit;
@@ -868,7 +868,7 @@ void	riteratorsTests( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = eend - eit;
@@ -907,7 +907,7 @@ void	riteratorsTests( void )
 			it1++;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = send - sit;
@@ -922,7 +922,7 @@ void	riteratorsTests( void )
 			sit1++;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = oend - oit;
@@ -937,7 +937,7 @@ void	riteratorsTests( void )
 			oit1++;
 		}
 		if (b)
-			std::cout << GREEN << "✅ ";
+			std::cout << GREEN << "✅";
 
 		b = true;
 		n = eend - eit;
@@ -991,32 +991,32 @@ void	riteratorsTests( void )
 		std::cout << WHITE << "operator==: \t\t\t";
 		usleep(4242);
 
-		std::cout << res[((it == end) != (it1 == end1))] << " ";
-		std::cout << res[((it == aux) != (it1 == aux1))] << " ";
-		std::cout << res[((++it == aux) != (++it1 == aux1))] << " ";
-		std::cout << res[((--it == aux) != (--it1 == aux1))] << " ";
-		std::cout << res[((it++ == aux) != (it1++ == aux1))] << " ";
-		std::cout << res[((it-- == aux) != (it1-- == aux1))] << " ";
+		std::cout << res[((it == end) != (it1 == end1))] << "";
+		std::cout << res[((it == aux) != (it1 == aux1))] << "";
+		std::cout << res[((++it == aux) != (++it1 == aux1))] << "";
+		std::cout << res[((--it == aux) != (--it1 == aux1))] << "";
+		std::cout << res[((it++ == aux) != (it1++ == aux1))] << "";
+		std::cout << res[((it-- == aux) != (it1-- == aux1))] << "";
 
-		std::cout << res[((sit == send) != (sit1 == send1))] << " ";
-		std::cout << res[((sit == saux) != (sit1 == saux1))] << " ";
-		std::cout << res[((++sit == saux) != (++sit1 == saux1))] << " ";
-		std::cout << res[((--sit == saux) != (--sit1 == saux1))] << " ";
-		std::cout << res[((sit++ == saux) != (sit1++ == saux1))] << " ";
-		std::cout << res[((sit-- == saux) != (sit1-- == saux1))] << " ";
+		std::cout << res[((sit == send) != (sit1 == send1))] << "";
+		std::cout << res[((sit == saux) != (sit1 == saux1))] << "";
+		std::cout << res[((++sit == saux) != (++sit1 == saux1))] << "";
+		std::cout << res[((--sit == saux) != (--sit1 == saux1))] << "";
+		std::cout << res[((sit++ == saux) != (sit1++ == saux1))] << "";
+		std::cout << res[((sit-- == saux) != (sit1-- == saux1))] << "";
 
-		std::cout << res[((oit == oend) != (oit1 == oend1))] << " ";
-		std::cout << res[((oit == oaux) != (oit1 == oaux1))] << " ";
-		std::cout << res[((++oit == oaux) != (++oit1 == oaux1))] << " ";
-		std::cout << res[((--oit == oaux) != (--oit1 == oaux1))] << " ";
-		std::cout << res[((oit++ == oaux) != (oit1++ == oaux1))] << " ";
-		std::cout << res[((oit-- == oaux) != (oit1-- == oaux1))] << " ";
+		std::cout << res[((oit == oend) != (oit1 == oend1))] << "";
+		std::cout << res[((oit == oaux) != (oit1 == oaux1))] << "";
+		std::cout << res[((++oit == oaux) != (++oit1 == oaux1))] << "";
+		std::cout << res[((--oit == oaux) != (--oit1 == oaux1))] << "";
+		std::cout << res[((oit++ == oaux) != (oit1++ == oaux1))] << "";
+		std::cout << res[((oit-- == oaux) != (oit1-- == oaux1))] << "";
 
-		std::cout << res[((eit == eend) != (eit1 == eend1))] << " ";
-		std::cout << res[((eit == eaux) != (eit1 == eaux1))] << " ";
-		std::cout << res[((++eit == eaux) != (++eit1 == eaux1))] << " ";
-		std::cout << res[((--eit == eaux) != (--eit1 == eaux1))] << " ";
-		std::cout << res[((eit++ == eaux) != (eit1++ == eaux1))] << " ";
+		std::cout << res[((eit == eend) != (eit1 == eend1))] << "";
+		std::cout << res[((eit == eaux) != (eit1 == eaux1))] << "";
+		std::cout << res[((++eit == eaux) != (++eit1 == eaux1))] << "";
+		std::cout << res[((--eit == eaux) != (--eit1 == eaux1))] << "";
+		std::cout << res[((eit++ == eaux) != (eit1++ == eaux1))] << "";
 		std::cout << res[((eit-- == eaux) != (eit1-- == eaux1))] << std::endl;
 	}
 
@@ -1030,32 +1030,32 @@ void	riteratorsTests( void )
 		std::cout << WHITE << "operator!=: \t\t\t";
 		usleep(4242);
 
-		std::cout << res[((it != end) != (it1 != end1))] << " ";
-		std::cout << res[((it != aux) != (it1 != aux1))] << " ";
-		std::cout << res[((++it != aux) != (++it1 != aux1))] << " ";
-		std::cout << res[((--it != aux) != (--it1 != aux1))] << " ";
-		std::cout << res[((it++ != aux) != (it1++ != aux1))] << " ";
-		std::cout << res[((it-- != aux) != (it1-- != aux1))] << " ";
+		std::cout << res[((it != end) != (it1 != end1))] << "";
+		std::cout << res[((it != aux) != (it1 != aux1))] << "";
+		std::cout << res[((++it != aux) != (++it1 != aux1))] << "";
+		std::cout << res[((--it != aux) != (--it1 != aux1))] << "";
+		std::cout << res[((it++ != aux) != (it1++ != aux1))] << "";
+		std::cout << res[((it-- != aux) != (it1-- != aux1))] << "";
 
-		std::cout << res[((sit != send) != (sit1 != send1))] << " ";
-		std::cout << res[((sit != saux) != (sit1 != saux1))] << " ";
-		std::cout << res[((++sit != saux) != (++sit1 != saux1))] << " ";
-		std::cout << res[((--sit != saux) != (--sit1 != saux1))] << " ";
-		std::cout << res[((sit++ != saux) != (sit1++ != saux1))] << " ";
-		std::cout << res[((sit-- != saux) != (sit1-- != saux1))] << " ";
+		std::cout << res[((sit != send) != (sit1 != send1))] << "";
+		std::cout << res[((sit != saux) != (sit1 != saux1))] << "";
+		std::cout << res[((++sit != saux) != (++sit1 != saux1))] << "";
+		std::cout << res[((--sit != saux) != (--sit1 != saux1))] << "";
+		std::cout << res[((sit++ != saux) != (sit1++ != saux1))] << "";
+		std::cout << res[((sit-- != saux) != (sit1-- != saux1))] << "";
 
-		std::cout << res[((oit != oend) != (oit1 != oend1))] << " ";
-		std::cout << res[((oit != oaux) != (oit1 != oaux1))] << " ";
-		std::cout << res[((++oit != oaux) != (++oit1 != oaux1))] << " ";
-		std::cout << res[((--oit != oaux) != (--oit1 != oaux1))] << " ";
-		std::cout << res[((oit++ != oaux) != (oit1++ != oaux1))] << " ";
-		std::cout << res[((oit-- != oaux) != (oit1-- != oaux1))] << " ";
+		std::cout << res[((oit != oend) != (oit1 != oend1))] << "";
+		std::cout << res[((oit != oaux) != (oit1 != oaux1))] << "";
+		std::cout << res[((++oit != oaux) != (++oit1 != oaux1))] << "";
+		std::cout << res[((--oit != oaux) != (--oit1 != oaux1))] << "";
+		std::cout << res[((oit++ != oaux) != (oit1++ != oaux1))] << "";
+		std::cout << res[((oit-- != oaux) != (oit1-- != oaux1))] << "";
 
-		std::cout << res[((eit != eend) != (eit1 != eend1))] << " ";
-		std::cout << res[((eit != eaux) != (eit1 != eaux1))] << " ";
-		std::cout << res[((++eit != eaux) != (++eit1 != eaux1))] << " ";
-		std::cout << res[((--eit != eaux) != (--eit1 != eaux1))] << " ";
-		std::cout << res[((eit++ != eaux) != (eit1++ != eaux1))] << " ";
+		std::cout << res[((eit != eend) != (eit1 != eend1))] << "";
+		std::cout << res[((eit != eaux) != (eit1 != eaux1))] << "";
+		std::cout << res[((++eit != eaux) != (++eit1 != eaux1))] << "";
+		std::cout << res[((--eit != eaux) != (--eit1 != eaux1))] << "";
+		std::cout << res[((eit++ != eaux) != (eit1++ != eaux1))] << "";
 		std::cout << res[((eit-- != eaux) != (eit1-- != eaux1))] << std::endl;
 	}
 	
@@ -1069,32 +1069,32 @@ void	riteratorsTests( void )
 		std::cout << WHITE << "operator<: \t\t\t";
 		usleep(4242);
 
-		std::cout << res[((it < end) != (it1 < end1))] << " ";
-		std::cout << res[((it < aux) != (it1 < aux1))] << " ";
-		std::cout << res[((++it < aux) != (++it1 < aux1))] << " ";
-		std::cout << res[((--it < aux) != (--it1 < aux1))] << " ";
-		std::cout << res[((it++ < aux) != (it1++ < aux1))] << " ";
-		std::cout << res[((it-- < aux) != (it1-- < aux1))] << " ";
+		std::cout << res[((it < end) != (it1 < end1))] << "";
+		std::cout << res[((it < aux) != (it1 < aux1))] << "";
+		std::cout << res[((++it < aux) != (++it1 < aux1))] << "";
+		std::cout << res[((--it < aux) != (--it1 < aux1))] << "";
+		std::cout << res[((it++ < aux) != (it1++ < aux1))] << "";
+		std::cout << res[((it-- < aux) != (it1-- < aux1))] << "";
 
-		std::cout << res[((sit < send) != (sit1 < send1))] << " ";
-		std::cout << res[((sit < saux) != (sit1 < saux1))] << " ";
-		std::cout << res[((++sit < saux) != (++sit1 < saux1))] << " ";
-		std::cout << res[((--sit < saux) != (--sit1 < saux1))] << " ";
-		std::cout << res[((sit++ < saux) != (sit1++ < saux1))] << " ";
-		std::cout << res[((sit-- < saux) != (sit1-- < saux1))] << " ";
+		std::cout << res[((sit < send) != (sit1 < send1))] << "";
+		std::cout << res[((sit < saux) != (sit1 < saux1))] << "";
+		std::cout << res[((++sit < saux) != (++sit1 < saux1))] << "";
+		std::cout << res[((--sit < saux) != (--sit1 < saux1))] << "";
+		std::cout << res[((sit++ < saux) != (sit1++ < saux1))] << "";
+		std::cout << res[((sit-- < saux) != (sit1-- < saux1))] << "";
 
-		std::cout << res[((oit < oend) != (oit1 < oend1))] << " ";
-		std::cout << res[((oit < oaux) != (oit1 < oaux1))] << " ";
-		std::cout << res[((++oit < oaux) != (++oit1 < oaux1))] << " ";
-		std::cout << res[((--oit < oaux) != (--oit1 < oaux1))] << " ";
-		std::cout << res[((oit++ < oaux) != (oit1++ < oaux1))] << " ";
-		std::cout << res[((oit-- < oaux) != (oit1-- < oaux1))] << " ";
+		std::cout << res[((oit < oend) != (oit1 < oend1))] << "";
+		std::cout << res[((oit < oaux) != (oit1 < oaux1))] << "";
+		std::cout << res[((++oit < oaux) != (++oit1 < oaux1))] << "";
+		std::cout << res[((--oit < oaux) != (--oit1 < oaux1))] << "";
+		std::cout << res[((oit++ < oaux) != (oit1++ < oaux1))] << "";
+		std::cout << res[((oit-- < oaux) != (oit1-- < oaux1))] << "";
 
-		std::cout << res[((eit < eend) != (eit1 < eend1))] << " ";
-		std::cout << res[((eit < eaux) != (eit1 < eaux1))] << " ";
-		std::cout << res[((++eit < eaux) != (++eit1 < eaux1))] << " ";
-		std::cout << res[((--eit < eaux) != (--eit1 < eaux1))] << " ";
-		std::cout << res[((eit++ < eaux) != (eit1++ < eaux1))] << " ";
+		std::cout << res[((eit < eend) != (eit1 < eend1))] << "";
+		std::cout << res[((eit < eaux) != (eit1 < eaux1))] << "";
+		std::cout << res[((++eit < eaux) != (++eit1 < eaux1))] << "";
+		std::cout << res[((--eit < eaux) != (--eit1 < eaux1))] << "";
+		std::cout << res[((eit++ < eaux) != (eit1++ < eaux1))] << "";
 		std::cout << res[((eit-- < eaux) != (eit1-- < eaux1))] << std::endl;
 	}
 
@@ -1108,32 +1108,32 @@ void	riteratorsTests( void )
 		std::cout << WHITE << "operator<=: \t\t\t";
 		usleep(4242);
 
-		std::cout << res[((it <= end) != (it1 <= end1))] << " ";
-		std::cout << res[((it <= aux) != (it1 <= aux1))] << " ";
-		std::cout << res[((++it <= aux) != (++it1 <= aux1))] << " ";
-		std::cout << res[((--it <= aux) != (--it1 <= aux1))] << " ";
-		std::cout << res[((it++ <= aux) != (it1++ <= aux1))] << " ";
-		std::cout << res[((it-- <= aux) != (it1-- <= aux1))] << " ";
+		std::cout << res[((it <= end) != (it1 <= end1))] << "";
+		std::cout << res[((it <= aux) != (it1 <= aux1))] << "";
+		std::cout << res[((++it <= aux) != (++it1 <= aux1))] << "";
+		std::cout << res[((--it <= aux) != (--it1 <= aux1))] << "";
+		std::cout << res[((it++ <= aux) != (it1++ <= aux1))] << "";
+		std::cout << res[((it-- <= aux) != (it1-- <= aux1))] << "";
 
-		std::cout << res[((sit <= send) != (sit1 <= send1))] << " ";
-		std::cout << res[((sit <= saux) != (sit1 <= saux1))] << " ";
-		std::cout << res[((++sit <= saux) != (++sit1 <= saux1))] << " ";
-		std::cout << res[((--sit <= saux) != (--sit1 <= saux1))] << " ";
-		std::cout << res[((sit++ <= saux) != (sit1++ <= saux1))] << " ";
-		std::cout << res[((sit-- <= saux) != (sit1-- <= saux1))] << " ";
+		std::cout << res[((sit <= send) != (sit1 <= send1))] << "";
+		std::cout << res[((sit <= saux) != (sit1 <= saux1))] << "";
+		std::cout << res[((++sit <= saux) != (++sit1 <= saux1))] << "";
+		std::cout << res[((--sit <= saux) != (--sit1 <= saux1))] << "";
+		std::cout << res[((sit++ <= saux) != (sit1++ <= saux1))] << "";
+		std::cout << res[((sit-- <= saux) != (sit1-- <= saux1))] << "";
 
-		std::cout << res[((oit <= oend) != (oit1 <= oend1))] << " ";
-		std::cout << res[((oit <= oaux) != (oit1 <= oaux1))] << " ";
-		std::cout << res[((++oit <= oaux) != (++oit1 <= oaux1))] << " ";
-		std::cout << res[((--oit <= oaux) != (--oit1 <= oaux1))] << " ";
-		std::cout << res[((oit++ <= oaux) != (oit1++ <= oaux1))] << " ";
-		std::cout << res[((oit-- <= oaux) != (oit1-- <= oaux1))] << " ";
+		std::cout << res[((oit <= oend) != (oit1 <= oend1))] << "";
+		std::cout << res[((oit <= oaux) != (oit1 <= oaux1))] << "";
+		std::cout << res[((++oit <= oaux) != (++oit1 <= oaux1))] << "";
+		std::cout << res[((--oit <= oaux) != (--oit1 <= oaux1))] << "";
+		std::cout << res[((oit++ <= oaux) != (oit1++ <= oaux1))] << "";
+		std::cout << res[((oit-- <= oaux) != (oit1-- <= oaux1))] << "";
 
-		std::cout << res[((eit <= eend) != (eit1 <= eend1))] << " ";
-		std::cout << res[((eit <= eaux) != (eit1 <= eaux1))] << " ";
-		std::cout << res[((++eit <= eaux) != (++eit1 <= eaux1))] << " ";
-		std::cout << res[((--eit <= eaux) != (--eit1 <= eaux1))] << " ";
-		std::cout << res[((eit++ <= eaux) != (eit1++ <= eaux1))] << " ";
+		std::cout << res[((eit <= eend) != (eit1 <= eend1))] << "";
+		std::cout << res[((eit <= eaux) != (eit1 <= eaux1))] << "";
+		std::cout << res[((++eit <= eaux) != (++eit1 <= eaux1))] << "";
+		std::cout << res[((--eit <= eaux) != (--eit1 <= eaux1))] << "";
+		std::cout << res[((eit++ <= eaux) != (eit1++ <= eaux1))] << "";
 		std::cout << res[((eit-- <= eaux) != (eit1-- <= eaux1))] << std::endl;
 	}
 	
@@ -1147,32 +1147,32 @@ void	riteratorsTests( void )
 		std::cout << WHITE << "operator>: \t\t\t";
 		usleep(4242);
 
-		std::cout << res[((it > end) != (it1 > end1))] << " ";
-		std::cout << res[((it > aux) != (it1 > aux1))] << " ";
-		std::cout << res[((++it > aux) != (++it1 > aux1))] << " ";
-		std::cout << res[((--it > aux) != (--it1 > aux1))] << " ";
-		std::cout << res[((it++ > aux) != (it1++ > aux1))] << " ";
-		std::cout << res[((it-- > aux) != (it1-- > aux1))] << " ";
+		std::cout << res[((it > end) != (it1 > end1))] << "";
+		std::cout << res[((it > aux) != (it1 > aux1))] << "";
+		std::cout << res[((++it > aux) != (++it1 > aux1))] << "";
+		std::cout << res[((--it > aux) != (--it1 > aux1))] << "";
+		std::cout << res[((it++ > aux) != (it1++ > aux1))] << "";
+		std::cout << res[((it-- > aux) != (it1-- > aux1))] << "";
 
-		std::cout << res[((sit > send) != (sit1 > send1))] << " ";
-		std::cout << res[((sit > saux) != (sit1 > saux1))] << " ";
-		std::cout << res[((++sit > saux) != (++sit1 > saux1))] << " ";
-		std::cout << res[((--sit > saux) != (--sit1 > saux1))] << " ";
-		std::cout << res[((sit++ > saux) != (sit1++ > saux1))] << " ";
-		std::cout << res[((sit-- > saux) != (sit1-- > saux1))] << " ";
+		std::cout << res[((sit > send) != (sit1 > send1))] << "";
+		std::cout << res[((sit > saux) != (sit1 > saux1))] << "";
+		std::cout << res[((++sit > saux) != (++sit1 > saux1))] << "";
+		std::cout << res[((--sit > saux) != (--sit1 > saux1))] << "";
+		std::cout << res[((sit++ > saux) != (sit1++ > saux1))] << "";
+		std::cout << res[((sit-- > saux) != (sit1-- > saux1))] << "";
 
-		std::cout << res[((oit > oend) != (oit1 > oend1))] << " ";
-		std::cout << res[((oit > oaux) != (oit1 > oaux1))] << " ";
-		std::cout << res[((++oit > oaux) != (++oit1 > oaux1))] << " ";
-		std::cout << res[((--oit > oaux) != (--oit1 > oaux1))] << " ";
-		std::cout << res[((oit++ > oaux) != (oit1++ > oaux1))] << " ";
-		std::cout << res[((oit-- > oaux) != (oit1-- > oaux1))] << " ";
+		std::cout << res[((oit > oend) != (oit1 > oend1))] << "";
+		std::cout << res[((oit > oaux) != (oit1 > oaux1))] << "";
+		std::cout << res[((++oit > oaux) != (++oit1 > oaux1))] << "";
+		std::cout << res[((--oit > oaux) != (--oit1 > oaux1))] << "";
+		std::cout << res[((oit++ > oaux) != (oit1++ > oaux1))] << "";
+		std::cout << res[((oit-- > oaux) != (oit1-- > oaux1))] << "";
 
-		std::cout << res[((eit > eend) != (eit1 > eend1))] << " ";
-		std::cout << res[((eit > eaux) != (eit1 > eaux1))] << " ";
-		std::cout << res[((++eit > eaux) != (++eit1 > eaux1))] << " ";
-		std::cout << res[((--eit > eaux) != (--eit1 > eaux1))] << " ";
-		std::cout << res[((eit++ > eaux) != (eit1++ > eaux1))] << " ";
+		std::cout << res[((eit > eend) != (eit1 > eend1))] << "";
+		std::cout << res[((eit > eaux) != (eit1 > eaux1))] << "";
+		std::cout << res[((++eit > eaux) != (++eit1 > eaux1))] << "";
+		std::cout << res[((--eit > eaux) != (--eit1 > eaux1))] << "";
+		std::cout << res[((eit++ > eaux) != (eit1++ > eaux1))] << "";
 		std::cout << res[((eit-- > eaux) != (eit1-- > eaux1))] << std::endl;
 	}
 
@@ -1186,32 +1186,32 @@ void	riteratorsTests( void )
 		std::cout << WHITE << "operator>=: \t\t\t";
 		usleep(4242);
 		
-		std::cout << res[((it >= end) != (it1 >= end1))] << " ";
-		std::cout << res[((it >= aux) != (it1 >= aux1))] << " ";
-		std::cout << res[((++it >= aux) != (++it1 >= aux1))] << " ";
-		std::cout << res[((--it >= aux) != (--it1 >= aux1))] << " ";
-		std::cout << res[((it++ >= aux) != (it1++ >= aux1))] << " ";
-		std::cout << res[((it-- >= aux) != (it1-- >= aux1))] << " ";
+		std::cout << res[((it >= end) != (it1 >= end1))] << "";
+		std::cout << res[((it >= aux) != (it1 >= aux1))] << "";
+		std::cout << res[((++it >= aux) != (++it1 >= aux1))] << "";
+		std::cout << res[((--it >= aux) != (--it1 >= aux1))] << "";
+		std::cout << res[((it++ >= aux) != (it1++ >= aux1))] << "";
+		std::cout << res[((it-- >= aux) != (it1-- >= aux1))] << "";
 
-		std::cout << res[((sit >= send) != (sit1 >= send1))] << " ";
-		std::cout << res[((sit >= saux) != (sit1 >= saux1))] << " ";
-		std::cout << res[((++sit >= saux) != (++sit1 >= saux1))] << " ";
-		std::cout << res[((--sit >= saux) != (--sit1 >= saux1))] << " ";
-		std::cout << res[((sit++ >= saux) != (sit1++ >= saux1))] << " ";
-		std::cout << res[((sit-- >= saux) != (sit1-- >= saux1))] << " ";
+		std::cout << res[((sit >= send) != (sit1 >= send1))] << "";
+		std::cout << res[((sit >= saux) != (sit1 >= saux1))] << "";
+		std::cout << res[((++sit >= saux) != (++sit1 >= saux1))] << "";
+		std::cout << res[((--sit >= saux) != (--sit1 >= saux1))] << "";
+		std::cout << res[((sit++ >= saux) != (sit1++ >= saux1))] << "";
+		std::cout << res[((sit-- >= saux) != (sit1-- >= saux1))] << "";
 
-		std::cout << res[((oit >= oend) != (oit1 >= oend1))] << " ";
-		std::cout << res[((oit >= oaux) != (oit1 >= oaux1))] << " ";
-		std::cout << res[((++oit >= oaux) != (++oit1 >= oaux1))] << " ";
-		std::cout << res[((--oit >= oaux) != (--oit1 >= oaux1))] << " ";
-		std::cout << res[((oit++ >= oaux) != (oit1++ >= oaux1))] << " ";
-		std::cout << res[((oit-- >= oaux) != (oit1-- >= oaux1))] << " ";
+		std::cout << res[((oit >= oend) != (oit1 >= oend1))] << "";
+		std::cout << res[((oit >= oaux) != (oit1 >= oaux1))] << "";
+		std::cout << res[((++oit >= oaux) != (++oit1 >= oaux1))] << "";
+		std::cout << res[((--oit >= oaux) != (--oit1 >= oaux1))] << "";
+		std::cout << res[((oit++ >= oaux) != (oit1++ >= oaux1))] << "";
+		std::cout << res[((oit-- >= oaux) != (oit1-- >= oaux1))] << "";
 
-		std::cout << res[((eit >= eend) != (eit1 >= eend1))] << " ";
-		std::cout << res[((eit >= eaux) != (eit1 >= eaux1))] << " ";
-		std::cout << res[((++eit >= eaux) != (++eit1 >= eaux1))] << " ";
-		std::cout << res[((--eit >= eaux) != (--eit1 >= eaux1))] << " ";
-		std::cout << res[((eit++ >= eaux) != (eit1++ >= eaux1))] << " ";
+		std::cout << res[((eit >= eend) != (eit1 >= eend1))] << "";
+		std::cout << res[((eit >= eaux) != (eit1 >= eaux1))] << "";
+		std::cout << res[((++eit >= eaux) != (++eit1 >= eaux1))] << "";
+		std::cout << res[((--eit >= eaux) != (--eit1 >= eaux1))] << "";
+		std::cout << res[((eit++ >= eaux) != (eit1++ >= eaux1))] << "";
 		std::cout << res[((eit-- >= eaux) != (eit1-- >= eaux1))] << std::endl;
 	}
 
@@ -1230,7 +1230,7 @@ void	riteratorsTests( void )
 		if ((aux == it) != (aux1 == it1))
 			std::cout << RED << "FAIL" << RESET << std::endl;
 		else
-			std::cout << GREEN << "✅ " << RESET << std::endl;
+			std::cout << GREEN << "✅" << RESET << std::endl;
 		
 		std::cout << std::endl << std::endl;
 	}

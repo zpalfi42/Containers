@@ -42,7 +42,9 @@ ft::vector<T, Alloc>::vector( const ft::vector<T, Alloc> &x): _alloc(x._alloc), 
 	long	sc = x._capacity - x._begin;
 	long	se = x._end - x._begin;
 
-	this->_begin = this->_alloc.allocate(sc);
+
+	if (sc)
+		this->_begin = this->_alloc.allocate(sc);
 	for (long i = 0; i < se; i++)
 		this->_alloc.construct(this->_begin + i, *(x._begin + i));
 	this->_capacity = this->_begin + sc;
@@ -53,9 +55,8 @@ template< class T, class Alloc >
 ft::vector<T, Alloc>::~vector( void )
 {
 	long	sc = this->_capacity - this->_begin;
-
 	this->clear();
-	this->_alloc.deallocate(this->_begin, sc);
+	this->_alloc.deallocate(this->_begin, sc + 1);
 }
 
 template< class T, class Alloc >
@@ -176,11 +177,19 @@ void	ft::vector<T, Alloc>::reserve(size_type n)
 
 	if (n < sc)
 		return ;
+	if (sc == 0)
+	{
+		this->_begin = this->_alloc.allocate(n);
+		this->_end = this->_begin;
+		this->_capacity = this->_begin + n;
+		return ;
+	}
 	pointer	np = this->_alloc.allocate(n);
 	for (size_type i = 0; i < se; i++)
 		this->_alloc.construct(np + i, *(this->_begin + i));
-	this->clear();
-	if (sc)
+	if (n != 1)
+		this->clear();
+	if (sc > 0)
 		this->_alloc.deallocate(this->_begin, sc);
 	this->_begin = np;
 	this->_end = this->_begin + se;
@@ -480,7 +489,6 @@ typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator pos
 		throw(std::logic_error("Error: vector"));
 	
 	pointer	p = &(*position);
-
 	for (long i = 0; i < end - position - 1; i++)
 	{
 		this->_alloc.destroy(p + i);
@@ -499,10 +507,12 @@ typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator fir
 
 	if (first < it || first > end || last < it || last > end)
 		throw(std::logic_error("Error: vector"));
-	
 	pointer	p = &(*first);
 	pointer	l = &(*last);
 
+	if (first == last)
+		return (first);
+	this->_end = p;
 	int i = 0;
 	while ((first + i) != end)
 	{
@@ -516,22 +526,6 @@ typename ft::vector<T, Alloc>::iterator	ft::vector<T, Alloc>::erase(iterator fir
 	}
 
 	return (first);
-
-	// difference_type	diff = last - first;
-	// size_type		start = first - begin();
-
-	// for (iterator it = first; it != last; it++)
-	// 	this->_alloc.destroy(&(*it));
-	// this->_end = this->_end - diff + 1;
-	// if ( start < size_type(this->_end - this->_begin ))
-	// {
-	// 	for (size_type i = start; i < size_type(this->_end - this->_begin); i++)
-	// 	{
-	// 		this->_alloc.construct(&(*(this->_begin + i)), this->_begin + i - diff + 1);
-	// 		this->_alloc.destroy(&(*(this->_begin + i - diff + 1)));
-	// 	}
-	// }
-	// return (first);
 }
 
 template< class T, class Alloc >
@@ -555,7 +549,11 @@ void		ft::vector<T, Alloc>::swap( vector &x )
 template< class T, class Alloc >
 void	ft::vector<T, Alloc>::clear( void )
 {
-	this->erase(this->begin(), this->end());
+	size_type	se = this->_end - this->_begin;
+
+	for (size_type i = 0; i < se; i++)
+		this->_alloc.destroy(this->_begin + i);
+	this->_end = this->_begin;
 }
 
 #endif

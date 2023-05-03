@@ -12,7 +12,93 @@ void	printCase( std::string s, bool b , bool endl)
 	if (endl)
 		std::cout << std::endl;
 	else
-		std::cout << " ";
+		std::cout << "";
+}
+
+void testOk()
+{
+	// std::cout << GRN "[OK]" RESET;
+	std::cout << "✅";
+}
+
+void testKo()
+{
+	// std::cout << RED "[KO]" RESET;
+	std::cout << "❌";
+}
+
+void testVectorSubject()
+{
+
+	const int seed = atoi("1");
+	srand(seed);
+
+	ft::vector<std::string> vector_str;
+	ft::vector<int> vector_int;
+	ft::vector<Buffer> vector_buffer;
+
+	double time_spent = 0.0;
+
+	clock_t begin = clock();
+
+	for (int i = 0; i < COUNT; i++)
+	{
+		vector_buffer.push_back(Buffer());
+	}
+	for (int i = 0; i < COUNT; i++)
+	{
+		const int idx = rand() % COUNT;
+		vector_buffer[idx].idx = 5;
+	}
+	ft::vector<Buffer>().swap(vector_buffer);
+	std::cout << "empty\t\t";
+	try
+	{
+		for (int i = 0; i < COUNT; i++)
+		{
+			const int idx = rand() % COUNT;
+			vector_buffer.at(idx);
+			testKo();
+		}
+	}
+	catch (const std::exception &e)
+	{
+		testOk();
+	}
+
+	clock_t end = clock();
+
+	time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+
+	double time_spent2 = 0.0;
+
+	clock_t begin2 = clock();
+
+	std::vector<Buffer> vector_buffer2;
+
+	for (int i = 0; i < COUNT; i++)
+	{
+		vector_buffer2.push_back(Buffer());
+	}
+	for (int i = 0; i < COUNT; i++)
+	{
+		const int idx = rand() % COUNT;
+		vector_buffer2[idx].idx = 5;
+	}
+	std::vector<Buffer>().swap(vector_buffer2);
+	clock_t end2 = clock();
+
+	time_spent2 += (double)(end2 - begin2) / CLOCKS_PER_SEC;
+	std::cout << "\n";
+	std::cout << "time\t\t";
+	(time_spent <= time_spent2 * 20) ? testOk() : testKo();
+	std::cout << "\n";
+	std::cout << "\n";
+	std::cout << UMAG "Result Time" RESET << std::endl;
+	std::cout << YEL "Time ft::vector:\t" << time_spent << "s" RESET << std::endl;
+	std::cout << YEL "Time std::vector:\t" << time_spent2 << "s" RESET << std::endl;
+	if (time_spent > time_spent2 * 20)
+		std::cout << RED "ft::vector time must be less than " <<  time_spent2 * 20 << "s" RESET << std::endl;
 }
 
 void	vectorsTest( void )
@@ -323,7 +409,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < ov.size(); i++)
@@ -335,7 +421,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < sv.size(); i++)
@@ -347,7 +433,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < ev.size(); i++)
@@ -359,7 +445,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET << std::endl;
+			std::cout << GREEN << "✅" << RESET << std::endl;
 	}
 
 	// Operator[] tests.
@@ -377,7 +463,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < sv.size(); i++)
@@ -389,7 +475,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < ov.size(); i++)
@@ -401,7 +487,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < ev.size(); i++)
@@ -413,7 +499,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET << std::endl;
+			std::cout << GREEN << "✅" << RESET << std::endl;
 	}
 
 	// Front() tests.
@@ -480,7 +566,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < sv.size(); i++)
@@ -492,7 +578,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < ov.size(); i++)
@@ -504,7 +590,7 @@ void	vectorsTest( void )
 			}
 		}
 		if (b)
-			std::cout << GREEN << "✅ " << RESET;
+			std::cout << GREEN << "✅" << RESET;
 
 		b = true;
 		for (size_t i = 0; i < ev.size(); i++)
@@ -947,6 +1033,7 @@ void	vectorsTest( void )
 		res = (cev.capacity() == cev1.capacity() && cev.size() == cev1.size());
 		printCase("", res, true);
 	}
+
 
 	// Push_back() test.
 	{
@@ -1414,4 +1501,8 @@ void	vectorsTest( void )
 		printCase("", res, true);
 	}
 
+	std::cout << std::endl << BLUE << "RENDIMENT TESTS:" << RESET << std::endl;
+	{
+		testVectorSubject();
+	}
 }
