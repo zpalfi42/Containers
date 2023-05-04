@@ -1,8 +1,6 @@
 #ifndef	VECTOR_HPP
 # define VECTOR_HPP
 
-# include <iostream>
-# include <iterator>
 # include <enable_if.hpp>
 # include <is_integral.hpp>
 # include <nullptr_t.hpp>

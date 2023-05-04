@@ -1,7 +1,7 @@
-#ifndef	ITERATOR_IPP
-# define ITERATOR_IPP
+#ifndef	RANDOM_ACCESS_ITERATOR_IPP
+# define RANDOM_ACCESS_ITERATOR_IPP
 
-# include <iterator.hpp>
+# include <random_access_iterator.hpp>
 
 template< class T >
 ft::random_access_iterator<T>::random_access_iterator( void ): _ptr(ft::nullptr_t)
@@ -17,6 +17,17 @@ template< class T >
 ft::random_access_iterator<T>::random_access_iterator( const ft::random_access_iterator<T> &r ): _ptr(r._ptr)
 {
 };
+
+template <class T>
+ft::random_access_iterator<T>::~random_access_iterator()
+{
+};
+
+template <class T>
+typename ft::random_access_iterator<T>::pointer	ft::random_access_iterator<T>::base( void )
+{
+	return (this->_ptr);
+}
 
 template< class T>
 typename ft::random_access_iterator<T>::reference ft::random_access_iterator<T>::operator[]( ft::random_access_iterator<T>::difference_type n )

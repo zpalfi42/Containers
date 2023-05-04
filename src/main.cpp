@@ -5,6 +5,5 @@ int main( void )
 	iteratorsTest();
 	riteratorsTests();
 	vectorsTest();
-
     mapTest();
 }
